@@ -1,0 +1,612 @@
+
+\documentclass[12pt,a4paper,twoside]{article}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{times}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[polish]{babel}
+
+
+\RequirePackage{comment}
+
+
+\RequirePackage{a4wide}
+\RequirePackage{longtable}
+\RequirePackage{multicol}
+\RequirePackage{url}
+\RequirePackage{enumitem}
+
+
+\begin{document}
+    
+    
+    \section{Pierwsze uruchomienie aplikacji}
+    
+    
+    \subsection{Krótki opis}
+    Gdy użytkownik pierwszy raz uruchamia aplikację, następuje ``przywitanie'', wyświetlenie podstawowych informacji o aplikacji oraz zadanie pytania o najważniejsze ustawienia.
+    
+    
+    \subsection{Cele}
+    \begin{itemize}
+        \item Zachęcenie użytkownika do korzystania z aplikacji.
+        \item Pomoc użytkownikowi w szybkim opanowaniu funkcji aplikacji.
+        \item Uzyskanie informacji koniecznych do poprawnego działania aplikacji.
+    \end{itemize}
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik jeszcze nie uruchamiał aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    
+    \subsection{Czynności}
+    
+    \subsubsection{Czynności podstawowe}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik uruchamia aplikację.
+        \item Aplikacja wyświetla logo.
+        \item Aplikacja wyświetla krótki film instruktażowy.
+        \item Aplikacja pyta użytkownika, czy chce korzystać z geolokalizacji.
+        \item Użytkownik zgadza się na korzystanie z geolokalizacji.
+        \item Aplikacja wyświetla listę ogłoszeń posortowaną względem odległości od użytkownika.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności alternatywne}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik nie zgadza się na korzystanie z geolokalizacji.
+        \item Aplikacja pyta użytkownika, względem którego miejsca ma sortować ogłoszenia i wyświetla interaktywną mapę.
+        \item Użytkownik wybiera miejsce na mapie.
+        \item Aplikacja wyświetla listę ogłoszeń posortowaną względem odległości od miejsca wybranego przez użytkownika.
+    \end{enumerate}
+    
+    
+    \subsection{Możliwe rozwinięcia}
+    \subsubsection{Dodanie interaktywnego samouczka}
+    Po (lub zamiast) wyświetlania filmu instruktażowego użytkownik dostanie możliwość przejścia samouczka.
+    
+    
+    \section{Rejestracja}
+    
+    
+    \subsection{Krótki opis}
+    Utworzenie konta użytkownika w aplikacji.
+    
+    
+    \subsection{Cele}
+    Umożliwienie aplikacji identyfikacji użytkowników w celu dostarczenia im określonych funkcjonalności.
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik przeszedł przez ``Pierwsze uruchomienie aplikacji''.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    
+    \subsection{Czynności}
+    
+    
+    \subsubsection{Czynności podstawowe}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik naciska przycisk ``Załóż konto''.
+        \item Aplikacja wyświetla użytkownikowi formularz rejestracyjny.
+        \item Użytkownik wprowadza swoje imię, nazwisko (lub nazwę firmy), numer telefonu, adres e-mail, hasło.
+        \item W polu ``Potwierdź hasło'' użytkownik wpisuje drugi raz to samo hasło.
+        \item Użytkownik akceptuje regulamin.
+        \item Użytkownik naciska przycisk ``Zarejestruj''.
+        \item Aplikacja wysyła użytkownikowi wiadomość e-mail z linkiem aktywacyjnym.
+        \item Użytkownik odbiera wiadomość e-mail i uruchamia stronę wskazaną linkiem aktywacyjnym.
+        \item Aplikacja potwierdza poprawną rejestrację.
+     \item Użytkownik jest domyślnie zalogowany do aplikacji na danym urządzeniu.
+     \item Użytkownik może nacisnąć przycisk ``Wyloguj’’, aby się wylogować.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności alternatywne}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik:
+        \begin{itemize}
+            \item wprowadza drugi raz inne hasło.
+            \item nie wypełnia któregoś z pól.
+            \item wprowadza niepoprawny składniowo adres e-mail.
+            \item nie akceptuje regulaminu.
+        \end{itemize}
+        \item Użytkownik naciska przycisk ``Zarejestruj''.
+        \item Aplikacja powiadamia użytkownika o popełnionym błędzie i odsyła go z powrotem do edycji formularza.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności niepoprawne}
+    \begin{enumerate}
+        \item Użytkownik wprowadza niepoprawny adres e-mail.
+        \item Wiadomość e-mail nie przychodzi i użytkownik musi wypełnić formularz od początku.
+    \end{enumerate}
+    
+    
+    \subsection{Możliwe rozwinięcia}
+    
+    
+    \subsubsection{Rejestracja przez Facebook}
+    Dodanie przycisku umożliwiającego utworzenie konta za pomocą konta Facebook.
+
+
+    \section{Logowanie}
+    
+    
+    \subsection{Krótki opis}
+    Zalogowanie się do swojego konta w aplikacji.
+    
+    
+    \subsection{Cele}
+    Umożliwienie aplikacji identyfikacji użytkowników w celu dostarczenia im określonych funkcjonalności.
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik przeszedł przez ``Pierwsze uruchomienie aplikacji''.
+     \item Użytkownik posiada potwierdzone konto w aplikacji.
+ \item Użytkownik nie jest zalogowany w aplikacji.    
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    
+    \subsection{Czynności}
+    
+    
+    \subsubsection{Czynności podstawowe}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik naciska przycisk ``Zaloguj’’.
+        \item Aplikacja wyświetla użytkownikowi formularz logowania.
+        \item Użytkownik wprowadza adres email i hasło, których użył przy zakładaniu konta.
+        \item Użytkownik naciska przycisk ``Zaloguj’’.
+        \item Aplikacja potwierdza poprawne logowanie.
+     \item Użytkownik jest domyślnie zalogowany do aplikacji na danym urządzeniu.
+     \item Użytkownik może nacisnąć przycisk ``Wyloguj’’, aby się wylogować.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności alternatywne}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik wprowadza błędny email lub hasło.
+        \item Użytkownik naciska przycisk ``Zaloguj’’.
+        \item Aplikacja powiadamia użytkownika o popełnionym błędzie i odsyła go z powrotem do formularza.
+    \end{enumerate}
+
+
+    \section{Filtrowanie i sortowanie listy ogłoszeń}
+    
+    
+    \subsection{Krótki opis}
+    Zmiana przez użytkownika ustawień regulujących, które wpisy pojawiają się na liście oraz w jakiej kolejności.
+    
+    
+    \subsection{Cele}
+    Zapewnienie możliwości łatwiejszego i szybszego znalezienia interesujących ogłoszeń.
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik przeszedł przez ``Pierwsze uruchomienie aplikacji''.
+        \item Użytkownik znajduje się na ekranie z listą ogłoszeń.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    
+    \subsection{Czynności}
+    
+    
+    \subsubsection{Filtrowanie}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik naciska przycisk ``\#'' lub ``kategoria'' (znajdujące się nad listą ogłoszeń i podpisane ``Filtruj:'').
+        \item Wyświetla się menu z listą i polem tekstowym.
+        \item Użytkownik wpisuje pewien ciąg znaków.
+        \item Lista aktualizuje się w czasie wpisywania tekstu.
+        \item Użytkownik wybiera pole z listy.
+        \item Nazwa pola (poprzedzona znakiem $\times$) zaczyna się wyświetlać pod odpowiednim przyciskiem.
+        \item Lista automatycznie się aktualizuje, wyświetlając obiekty spełniające jakiś filtr każdego typu (\# i kategoria) - gdy nie ma żadnego filtru danego typu, aplikacja traktuje to tak, jakby były wszystkie możliwe.
+        \item Użytkownik może nacisnąć na nazwę któregoś z aktywnych filtrów, aby go usunąć.
+    \end{enumerate}
+    
+    
+    \subsubsection{Sortowanie}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik naciska przycisk ``Odległość'', ``Data przydatności'', ``Data dodania''.
+        \item Lista aktualizuje kolejność wyświetlanych ogłoszeń, ale wyświetla tylko te, które nie są zbyt daleko od użytkownika. Użytkownik może zmienić maksymalną odległość wyświetlanych ogłoszeń.
+    \end{enumerate}
+    
+    
+    \subsection{Możliwe rozwinięcia}
+    \subsubsection{Preferowane ogłoszenia}
+    Dodanie zalogowanemu użytkownikowi możliwości wyspecyfikowania, jakie ogłoszenia go bardziej interesują (w zależności od np.\ osoby oferującej). Takim użytkownikom będzie się wyświetlał dodatkowy przycisk sortujący ogłoszenia preferując te wyspecyfikowane.
+    
+    
+    \section{Dodawanie nowego ogłoszenia}
+    
+    
+    \subsection{Krótki opis}
+    Wprowadzenie przez użytkownika informacji potrzebnych do stworzenia nowego ogłoszenia oraz opublikowanie go na liście aktualnie dostępnych
+    ogłoszeń.
+    
+    
+    \subsection{Cele}
+    Zapewnienie możliwości przeglądania nowo utworzonego ogłoszenia innym użytkownikom aplikacji.
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik posiada poprawnie założone oraz potwierdzone konto.
+        \item Użytkownik jest zalogowany w aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    
+    \subsection{Czynności}
+    
+    
+    \subsubsection{Czynności podstawowe}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik naciska oznaczony przycisk, który rozwija szufladkowe menu.
+        \item Użytkownik wskazuje w menu pozycję ``Dodaj nowe ogłoszenie''.
+        \item Na ekranie pojawia się formularz dodawania ogłoszenia z podpisanymi polami.
+        \item Użytkownik wprowadza (w dowolnej kolejności) wymagane informacje:
+        \begin{itemize}
+            \item Kategoria ogłoszenia (np.\ pieczywo, mięso, przetwory, wyroby cukiernicze\ldots)
+            \begin{itemize}
+                \item Użytkownik rozwija przewijalną listę dostępnych kategorii.
+                \item Użytkownik wskazuje kategorię, która wydaje się najbardziej odpowiednia do zawartości ogłoszenia.
+            \end{itemize}
+            \item Tytuł ogłoszenia, który będzie widoczny na liście ogłoszeń
+            \item Właściwa treść ogłoszenia
+            \item Sugerowana data przydatności do spożycia
+            \begin{itemize}
+                \item Użytkownik otwiera okienko kalendarza z graficznym rozkładem dni bieżącego miesiąca.
+                \item W razie potrzeby użytkownik przechodzi za pomocą przycisków-strzałek do dalszych miesięcy.
+                \item Użytkownik wskazuje konkretny dzień w kalendarzu.
+            \end{itemize}
+        \end{itemize}
+        \item Użytkownik przesuwa widok ekranu na koniec formularza i naciska przycisk ``Wyślij''.
+        \item Aplikacja komunikuje się z serwerem, wysyłając prośbę o dodanie wprowadzonego ogłoszenia do bazy danych.
+        \item Aplikacja otrzymuje odpowiedź od serwera --- ogłoszenie zostało dodane pomyślnie.
+        \item Użytkownik dostaje informację zwrotną: aplikacja wyświetla na ekranie okienko o pomyślnym dodaniu nowego ogłoszenia.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności alternatywne}
+    Użytkownik może opcjonalnie dodać zdjęcia artykułu żywnościowego, opakowania, etykiet.
+    \begin{enumerate}
+        \item Użytkownik wskazuje przycisk ``Dodaj nowe zdjęcie''.
+        \item Aplikacja wyświetla okienko z prośbą o wskazanie źródła zdjęcia, do wyboru: załączenie zdjęcia z pamięci urządzenia (galerii)
+        lub utworzenie aparatem nowego zdjęcia.
+        \begin{enumerate}
+            \item Jeżeli użytkownik wyrazi chęć dodania istniejącego zdjęcia, aplikacja uruchamia klasyczny interfejs przeglądania galerii
+            systemu operacyjnego.
+            \item Wybór opcji zrobienia nowego zdjęcia przekazuje sterowanie wbudowanej w system operacyjny aplikacji obsługującej aparat.
+        \end{enumerate}
+        \item Jeżeli zdjęcie ma zbyt duży rozmiar, następuje jego kompresja (po stronie aplikacji).
+        \item Na ekranie formularza pojawia się miniaturka dodanego zdjęcia.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat. Użytkownik zostaje
+    przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
+    \begin{enumerate}
+        \item Użytkownik nie wprowadził kompletu wymaganych informacji.
+        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji (np.\ zbyt długa treść ogłoszenia)
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie ogłoszenia nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji dodawania ogłoszenia do bazy danych.
+    \end{enumerate}
+    
+    
+    \subsection{Możliwe rozwinięcia}
+    \subsubsection{Automatyczna klasyfikacja ogłoszeń}
+    Wyświetlenie podpowiedzi co do wyboru odpowiedniej kategorii na podstawie analizy słownictwa użytego w treści ogłoszenia.
+    
+    
+    \section{Konwersacja (czat) z innym użytkownikiem}
+    
+    
+    \subsection{Krótki opis}
+    Wykorzystanie funkcji czatu do komunikacji z innym użytkownikiem aplikacji.
+    
+    
+    \subsection{Cele}
+    \begin{itemize}
+        \item Możliwość zadawania wystawcy ogłoszenia dodatkowych pytań.
+        \item Udostępnienie prywatnego kanału do ustalania szczegółów odbioru produktu.
+        \item Zachęcenie użytkowników aplikacji do współtworzenia aktywnej społeczności.
+    \end{itemize}
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik posiada poprawnie założone oraz potwierdzone konto.
+        \item Użytkownik jest zalogowany w aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    
+    \subsection{Czynności}
+    
+    
+    \subsubsection{Czynności podstawowe}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik A otwiera ekran czatu z użytkownikiem B. Może to zrobić na kilka sposobów:
+        \begin{itemize}
+            \item Bezpośrednio ze strony profilowej użytkownika B.
+            \item Naciskając przycisk ``Zadaj pytanie'' widocznego na ekranie ogłoszenia wystawionego przez B.
+            \item Wybierając pseudonim użytkownika B z zakładki ``Moje konwersacje'' w menu szufladkowym.
+        \end{itemize}
+        \item W dolnej części ekranu pojawia się pole tekstowe do wpisania wiadomości oraz przycisk służący do jej wysłania. Jeżeli użytkownicy A i B rozmawiali ze sobą wcześniej, na ekranie będzie także widoczna przewijana lista poprzednich wiadomości, uporządkowana chronologicznie.
+        \item Użytkownik A wpisuje treść wiadomości i wysyła ją.
+        \item Nowa wiadomość zostaje dopisana do prowadzonej historii konwersacji.
+        \item Użytkownik A oczekuje na odpowiedź użytkownika B:\@
+        \begin{itemize}
+            \item Jeżeli osoba B udzieli odpowiedzi od razu, jej treść pojawi się na ekranie użytkownika A w czasie rzeczywistym.
+            \item W przypadku, gdy użytkownik A nie korzysta w danej chwili z aplikacji ``Podziel się'', otrzyma powiadomienie (notyfikację) systemu operacyjnego o nowej wiadomości od użytkownika B.
+        \end{itemize}
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się okienko ze stosownym komunikatem.
+    \begin{enumerate}
+        \item Osoba A znajduje się na ``czarnej liście'' użytkownika B (tzn. B zablokował możliwość interakcji z użytkownikiem A)
+        \item Nastąpił błąd komunikacji z serwerem --- nie udało się wysłać wiadomości.
+        \item Serwer zasygnalizował błąd podczas dopisywania wiadomości do historii konwersacji.
+    \end{enumerate}
+    
+    
+    \subsection{Możliwe rozwinięcia}
+    \subsubsection{Przesyłanie obrazów}
+    Umożliwienie przesyłania wiadomości w formie zdjęć. W tym celu użytkownik wysyłający wiadomość wybiera piktogram ``prześlij obraz''. Dalszy scenariusz jest analogiczny do opisanego w punkcie 5.4.2.
+    
+    \section{Ocena innego użytkownika}
+    
+    \subsection{Krótki opis}
+    Wystawienie innemu użytkownikowi oceny w skali od 1 do 5 oraz możliwość napisania krótkiego komentarza dotyczącego współpracy z nim.
+    
+    
+    \subsection{Cele}
+    Informowanie innych osób o jakości współpracy z daną osobą, w szczególności ostrzeganie innych przed nierzetelnymi użytkownikami.
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik posiada poprawnie założone oraz potwierdzone konto.
+        \item Użytkownik jest zalogowany w aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    \subsection{Czynności}
+    
+    
+    \subsubsection{Czynności podstawowe}
+    
+    
+    \begin{enumerate}
+        \item Użytkownik A otwiera ekran, na którym znajduje się publiczny profil użytkownika B. Może to zrobić na kilka sposobów:
+        \begin{itemize}
+            \item W oknie konwersacji z użytkownikiem B, poprzez kliknięcie na jego imię lub zdjęcie w lewym górnym rogu ekranu.
+            \item Naciskając przycisk ``Pokaż profil użytkownika’’ na ekranie ogłoszenia, które użytkownik B wystawił.
+            \item Wpisując: imię, nazwisko lub nazwę użytkownika B w polu tekstowym znajdującym się na samej górze ekranu prostej wyszukiwarki.
+        \end{itemize}
+        \item Wyświetla się ekran z profilem użytkownika B, a w nim następujące elementy:
+        \begin{itemize}
+            \item Imię, nazwisko oraz nazwa użytkownika.
+            \item Zdjęcie profilowe.
+            \item Zbiorcza ocena innych użytkowników w skali od 1 do 5.
+            \item Przycisk ``Rozpocznij czat’’.
+            \item Przycisk ``Dodaj ocenę’’.
+            \item Lista z ocenami i komentarzami innych osób.
+        \end{itemize}
+        \item Użytkownik A naciska przycisk ``Dodaj ocenę’’.
+        \item Wyświetla mu się ekran z formularzem dodawania oceny.
+        \item Użytkownik A ocenia użytkownika B w skali od 1 do 5.
+        \item Użytkownik A wpisuje krótki komentarz odnośnie użytkownika B.
+        \item Użytkownik A naciska przycisk ``Dodaj ocenę’’.
+    \end{enumerate}
+    
+    
+    
+    \subsubsection{Czynności alternatywne}
+    Użytkownika A może co najwyżej raz ocenić użytkownika B. Jeśli miało już to miejsce, użytkownik A może edytować swoją opinię:
+    \begin{enumerate}
+        \item Zamiast przycisku ``Dodaj ocenę’’ na ekranie z profilem użytkownika B będzie widoczny przycisk ``Edytuj ocenę’’.
+        \item Formularz dodawania oceny będzie uzupełniony o poprzednią ocenę i komentarz.
+        \item Użytkownik po edycji formularza klika przycisk ``Zapisz ocenę’’.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat. Użytkownik zostaje
+    przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
+    \begin{enumerate}
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie / edycję opinii nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji dodawania / edycji opinii do bazy danych.
+    \end{enumerate}
+    
+    
+    \subsection{Możliwe rozwinięcia}
+    Blokada możliwości oceny danego użytkownika do momentu, w którym odbierzemy od niego (lub on od nas) pożywienie z przynajmniej jednego ogłoszenia.
+    
+    
+    \section{Wyświetlenie oraz edycja własnego profilu publicznego}
+    
+    \subsection{Krótki opis}
+    Wyświetlenie ekranu ze swoim profilem publicznym, tak jak widzą go inni użytkownicy.
+    
+    
+    \subsection{Cele}
+    Umożliwienie użytkownikowi zapoznanie się z ocenami wystawionymi przez inne osoby oraz możliwość zmiany swojego zdjęcia profilowego.
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik posiada poprawnie założone oraz potwierdzone konto.
+        \item Użytkownik jest zalogowany w aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    \subsection{Czynności}
+    
+    \subsubsection{Czynności podstawowe}
+    
+    \begin{enumerate}
+        \item Użytkownik naciska oznaczony przycisk, który rozwija szufladkowe menu.
+        \item Użytkownik wskazuje w menu pozycję ``Mój profil''.
+        \item Na ekranie wyświetlają się następujące elementy:
+        \begin{itemize}
+            \item Imię, nazwisko oraz nazwa użytkownika.
+            \item Zdjęcie profilowe.
+            \item Przycisk ``Zmień zdjęcie’’
+            \item Zbiorcza ocena innych użytkowników w skali od 1 do 5.
+            \item Lista z ocenami i komentarzami innych osób.
+        \end{itemize}
+        \item Użytkownik A przewija ekran w dół, aby zapoznać się ze wszystkimi opiniami.
+    \end{enumerate}
+    
+    \subsubsection{Czynności alternatywne}
+    Użytkownika może zmienić swoje zdjęcie profilowe:
+    \begin{enumerate}
+        \item Użytkownik naciska przycisk ``Zmień zdjęcie’’
+        \item Aplikacja wyświetla okienko z prośbą o wskazanie źródła zdjęcia, do wyboru: załączenie zdjęcia z pamięci urządzenia (galerii)
+        lub utworzenie aparatem nowego zdjęcia.
+        \begin{enumerate}
+            \item Jeżeli użytkownik wyrazi chęć dodania istniejącego zdjęcia, aplikacja uruchamia klasyczny interfejs przeglądania galerii
+            systemu operacyjnego.
+            \item Wybór opcji zrobienia nowego zdjęcia przekazuje sterowanie wbudowanej w system operacyjny aplikacji obsługującej aparat.
+        \end{enumerate}
+        \item Jeżeli zdjęcie ma zbyt duży rozmiar, następuje jego kompresja (po stronie aplikacji).
+        \item Na ekranie profilu pojawi się nowo zmienione zdjęcie.
+        \item Użytkownik naciska przycisk ``Zapisz zmiany’’ w prawym górnym rogu ekranu.
+        \item Zdjęcie zostaje wysłane na serwer.
+    \end{enumerate}
+    
+    
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat. Użytkownik zostaje
+    przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
+    \begin{enumerate}
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie zdjęcia nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji dodawania zdjęcia.
+    \end{enumerate}
+    
+    \subsection{Możliwe rozwinięcia}
+    Możliwość dodania innych informacji do publicznego profilu, na przykład:
+    \begin{itemize}
+        \item Link do profilu na Facebooku, Instagramie itp.
+        \item Numer telefonu.
+        \item Adres e-mail.
+        \item Krótkiego komentarza o sobie.
+    \end{itemize}
+    
+    
+    
+    
+        \section{Odbiór przedmiotów oferowanych w liście ogłoszeń}
+    
+    \subsection{Krótki opis}
+    
+    Umożliwienie użytkownikowi, który wystawił ogłoszenie (A) i użytkownikowi, który jest zainteresowany odbiorem przedmiotu z ogłoszenia (B) ustalenia szczegółów odbioru.
+    
+    
+    \subsection{Cele}
+    \begin{itemize}
+        \item Umożliwienie użytkownikom ustalenia szczegółów odbioru przedmiotu (np. czas odbioru, miejsce odbioru).
+        \item Umożliwienie użytkownikowi zarządzania statusem swoich ogłoszeń.
+    \end{itemize}
+    
+    
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniach użytkowników A i B.
+        \item Użytkownicy posiadają poprawnie założone oraz potwierdzone konta.
+        \item Użytkownicy są zalogowani w aplikacji.
+        \item Użytkownik B dodał ogłoszenie.
+        \item Użytkownicy dysponują stabilnym połączeniem internetowym.
+    \end{itemize}
+    
+    \subsection{Czynności}
+    
+    \subsubsection{Czynności podstawowe}
+    
+    \paragraph{Użytkownik A}
+    
+    \begin{enumerate}
+        \item Użytkownik naciska oznaczony przycisk ``Szczegóły ogłoszenia'' przy ogłoszeniu na liście ogłoszeń.
+        \item Na ekranie ze szczegółami ogłoszenia użytkownik naciska przycisk ``Zadaj pytanie''.
+        \item Użytkownikowi otwiera się ekran czatu z autorem ogłoszenia.
+        \item Użytkownik wysyła wiadomość, w której wyraża chęć odbioru przedmiotu z ogłoszenia.
+        \item Jeżeli użytkownik otrzyma odpowiedź pozytywną, użytkownicy ustalają między sobą szczegóły odbioru.
+    \end{enumerate}
+
+    \paragraph{Użytkownik B}
+    
+    \begin{enumerate}
+        \item Użytkownik otrzymuje nową wiadomość na czacie z chęcią odbioru oferowanego przedmiotu.
+        \item Użytkownik decyduje, czy chce oddać oferowany produkt użytkownikowi A
+        \begin{enumerate}
+            \item Jeżeli użytkownik nie chce oddać produktu użytkownikowi A, wysyła wiadomość odmowną i interakcja się kończy.
+            \item Jeżeli użytkownik chce oddać produkt, wysyła wiadomość pozytywną, interakcja trwa dalej.
+        \end{enumerate}
+        \item Na ekranie szczegółów swojego ogłoszenia użytkownik naciska przycisk ``Oznacz jako zarezerwowane''
+        \item Użytkownicy ustalają między sobą szczegóły odbioru.
+        \item Po oddaniu oferowanego przedmiotu, użytkownik naciska przycisk ``Oznacz jako oddane'' na ekranie szczegółów swojego ogłoszenia, przez co ogłoszenie znika z listy ogłoszeń.
+    \end{enumerate}
+    
+    \subsubsection{Czynności alternatywne}
+    Jeżeli po oznaczeniu ogłoszenia jako zarezerwowane, użytkownik A albo B zmieni zdanie co do chęci odbioru/oddania produktu, użytkownik B może odznaczyć ogłoszenie jako zarezerwowane poprzez ponowne kliknięcie w przycisk ``oznacz jako zarezerwowane'' na ekranie szczegółów swojego ogłoszenia.
+    
+    
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat.
+    \begin{enumerate}
+        \item Czynności niepoprawne z podpunktu 6.4.2 dotyczące funkcjonalności czatu
+        \item Nastąpił błąd komunikacji z serwerem - prośba o oznaczenie jako zarezerwowane/oddane nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji związanych z oznaczeniem ogłoszenia jako zarezerwowane/oddane.
+    \end{enumerate}
+
+    \subsection{Możliwe rozwinięcia}
+    Podczas oznaczania ogłoszenia jako zarezerwowane użytkownik może oznaczyć, dla którego użytkownika dokonywana jest rezerwacja.
+
+    
+    
+\end{document}
+
+
+
+
+
+

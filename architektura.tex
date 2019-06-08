@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.04in]{geometry}
+\usepackage{titling}
+\usepackage{hyperref}
+
+\setlength{\droptitle}{-4em}
+\author{\vspace{-5ex}}
+\date{\vspace{-11ex}}
+\title{\textbf{Architektura systemu \textit{"Podziel się"}}}
+
+\begin{document}
+\maketitle
+
+\section*{Aplikacja mobilna}
+Aplikacja \textit{"Podziel się"} przeznaczona jest dla użytkowników dwóch najpopularniejszych mobilnych systemów operacyjnych: Androida oraz iOS. Interfejs aplikacji powstał z wykorzystaniem nowoczesnego frameworka React Native, pozwalającego opisać graficzne rozmieszczenie elementów na ekranie w składni zbliżonej do arkuszy stylów CSS, zaś logikę działania aplikacji w kodzie JavaScriptu. W React Native, przy użyciu specjalnego języka znaczników JSX, zostały zdefiniowane tzw. komponenty (lista ogłoszeń, przycisk wysyłania wiadomości, menu szufladkowe, okienko z komunikatem itp.), na bazie których React Native buduje komponenty natywne dla Androida oraz iOS. Pozwala to na ujednolicenie wyglądu interfejsu graficznego dla użytkowników różnych systemów i architektur - aplikacja nie odbiega wyglądem od rozwiązań natywnych, projektowanych specjalnie z myślą~o~konkretnej platformie. Filozofia React Native polega na stosowaniu schematów tworzenia aplikacji webowych przy projektowaniu aplikacji działających w środowisku mobilnym, w szczególności możliwe jest korzystanie z rozmaitych pomocniczych bibliotek JavaScriptu.
+\vspace{4mm}\\Ważnym elementem React Native jest moduł pośredniczący (ang. \textit{bridge}), który tłumaczy wywołania pochodzące z wątków JavaScriptu na polecenia skierowane do systemu operacyjnego. Komunikaty opisujące akcje do wykonania są przesyłane w formacie JSON do modułu pośredniczącego, a po ich otrzymaniu \textit{bridge} wywołuje odpowiednie funkcje systemowe. Wymiana komunikatów jest asynchroniczna oraz nieblokująca, zatem React Native nie ingeruje nadmiernie w pracę systemu operacyjnego oraz umożliwia sprawne renderowanie widoków na ekranie. Co więcej, aplikacja ma możliwość swobodnej komunikacji ze środowiskiem wykonania; w razie potrzeby może uzyskać dostęp do modułu GPS, aparatu, pamięci wewnętrznej urządzenia itp.
+
+\section*{Google Maps Platform}
+Aplikacja wykorzystuje Maps API firmy Google do wyświetlania interaktywnych map z~możliwością obliczania odległości, wyznaczania najkrótszej trasy oraz etykietowania punktów charakterystycznych. Jeżeli użytkownik wyrazi na to zgodę, Google Maps API udostępnia również usługę geolokalizacji, pozwalającej z dużą dokładnością określić położenie geograficzne urządzenia.
+
+\section*{Powiadomienia push}
+Aplikacja \textit{"Podziel się"} wspiera użytkowników w zarządzaniu licznymi ogłoszeniami wykorzystując mechanizm tzw. powiadomień push. Wspomniana funkcjonalność pozwala na wyświetlanie użytkownikom krótkich komunikatów o zajściu zdarzeń wymagających uwagi (zwykle będzie to otrzymanie nowej wiadomości na czacie). Ze względu na ograniczenia technologii React Native obsługa notyfikacji wykorzystuje różne usługi w zależności od systemu operacyjnego: dla Androida - Firebase Cloud Messaging firmy Google, dla systemu iOS - dedykowane Apple Push Notification.
+\vspace{4mm}\\Schemat przepływu powiadomień w obu przypadkach wygląda następująco: serwer przygotowuje stosowne powiadomienie o zajściu określonego zdarzenia, a następnie wysyła prośbę o dodanie wiadomości do kolejki oczekujących komunikatów. Serwer usługi (FCM lub APN) przekierowuje notyfikacje do konkretnych użytkowników na podstawie wartości tokena unikalnego dla każdego urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika - może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
+
+\section*{Infrastruktura serwera}
+Serwer projektu został wdrożony na platformie AWS (Amazon Web Services). Decyzja o~wybraniu chmury AWS została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. AWS udostępnia widoczny globalnie w Internecie klaster komputerów w chmurze obliczeniowej. Wspomniane klastry emulują zachowanie prawdziwego komputera, począwszy od wirtualizacji sprzętu (procesora, pamięci RAM, dysku twardego), poprzez infrastrukturę sieciową i system operacyjny, skończywszy na wirtualnej konsoli umożliwiającej połączenie się oraz sterowanie klastrem z poziomu przeglądarki. Wirtualne maszyny AWS udostępniają gotowe rozwiązania serwerowe i oprogramowanie do specjalistycznych zastosowań.
+\vspace{4mm}\\Projekt wykorzystuje także usługi pokrewne firmy Amazon, w szczególności Amazon Simple Storage Service (Amazon S3) do przechowywania zdjęć użytkowników aplikacji w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący; koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych. Transfer plików z platformy hostingowej jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
+\vspace{4mm}\\W dalszej perspektywie, w miarę rozwoju projektu, Amazon S3 oferuje rozszerzone plany wykorzystania oraz opcję archiwizacji danych z możliwością łatwego odtworzenia w przypadku nadpisania, usunięcia lub utracenia plików.
+
+\section*{Część serwerowa}
+Część serwerowa aplikacji \textit{"Podziel się"} oparta jest na frameworku Django działającym pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
+\vspace{4mm}\\Część serwerowa projektu udostępnia API do komunikacji z aplikacją, które obsługuje typowe zapytania potrzebne podczas sesji użytkownika z \textit{"Podziel się"}. Serwer przyjmuje zapytanie wraz z tokenem autoryzującym klienta i odpowiada wyłącznie w przypadku pozytywnej weryfikacji poprawności tokena. Zarządzanie kontami użytkowników zostało zlecone rozbudowanym mechanizmom autentykacji zaimplementowanym w Django.
+\vspace{4mm}\\Większość danych zwracanych przez serwer jest konwertowana z wbudowanych typów języka Python do formatu JSON i w takiej postaci odsyłana (wyjątkiem jest przesyłanie plików graficznych jako danych binarnych) za pośrednictwem bezpiecznego połączenia HTTPS.
+\vspace{4mm}\\Projekt wykorzystuje również pomocniczy framework o nazwie GeoDjango do przechowywania danych związanych z położeniem geograficznym oraz łatwiejszej obsługi złożonych zapytań o charakterze lokalizacyjnym, typu  \textit{"znajdź oferty położone najbliżej punktu o danej szerokości i wysokości geograficznej"}.
+
+\section*{Baza danych}
+\textit{"Podziel się"} korzysta z PostgreSQL - systemu zarządzania relacyjną bazą danych. Django udostępnia mechanizm mapowania obiektowo-relacyjnego (ORM) polegający na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer. Silnik bazodanowy sprawnie obsługuje równoczesne transakcje, zapewniając wysoki stopień współbieżności w dostępie do danych.
+
+\section*{Bibliografia}
+Oficjalne strony internetowe dostawców wymienionych technologii i usług:
+\begin{itemize}
+\setlength\itemsep{-0.1em}
+\item \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
+\item \href{https://developers.google.com/maps/documentation/}{\texttt{developers.google.com/maps/documentation}}
+\item \href{https://firebase.google.com/docs/cloud-messaging/}{\texttt{firebase.google.com/docs/cloud-messaging}}
+\item \href{https://developer.apple.com/notifications/}{\texttt{developer.apple.com/notifications}}
+\item \href{https://aws.amazon.com/}{\texttt{aws.amazon.com}}
+\item \href{https://www.djangoproject.com/}{\texttt{djangoproject.com}}
+\item \href{https://gunicorn.org/}{\texttt{gunicorn.org}}
+\item \href{https://www.nginx.com/}{\texttt{nginx.com}}
+\item \href{https://www.postgresql.org/}{\texttt{postgresql.org}}
+\end{itemize}
+
+\end{document}
