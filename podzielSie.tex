@@ -78,6 +78,8 @@
 
 % Tu jest dobre miejsce na Twoje własne makra i~środowiska:
 \newtheorem{defi}{Definicja}[section]
+\usepackage{hyperref}
+\usepackage{graphicx}
 
 % koniec definicji
 
@@ -87,7 +89,7 @@
 
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS.\ Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W niniejszej pracy przedstawiono szczegółowy opis aplikacji i jej architektury, oraz przybliżono proces jej powstawania.
+\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS\@. Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W niniejszej pracy przedstawiono szczegółowy opis aplikacji i jej architektury, oraz przybliżono proces jej powstawania.
 \end{abstract}
 
 \tableofcontents
@@ -100,7 +102,7 @@
 Obecnie w Polsce istnieją liczne grupy entuzjastów wymiany żywności funkcjonujące na portalach społecznościowych (przeważnie na Facebooku), jednak duża liczebność tych grup uniemożliwia skuteczną organizację wymiany jedzenia w satysfakcjonujący sposób. Aplikacja \textit{``Podziel się''} będzie wspierać dalsze funkcjonowanie tej inicjatywy oraz zapewni zwolennikom idei food sharingu platformę do efektywnej wymiany żywności, także w znacznie większej skali.
 
 \section*{Kontekst społeczny}
-Według współczesnych szacunków, około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu, z których wynika, że w Polsce marnuje się około 9 milionów ton żywności rocznie. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie Millward Brown wykazało, że do wyrzucania jedzenia przyznaje się 35\% Polaków, podczas gdy wyrzucane produkty mogłyby przyczynić się do zaspokojenia podstawowych potrzeb żywieniowych niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
+Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu, z których wynika, że w Polsce marnuje się około 9 milionów ton żywności rocznie. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie Millward Brown wykazało, że do wyrzucania jedzenia przyznaje się 35\% Polaków, podczas gdy wyrzucane produkty mogłyby przyczynić się do zaspokojenia podstawowych potrzeb żywieniowych niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
 
 W krajach rozwiniętych około 50\% wyrzucanego jedzenia pochodzi z gospodarstw domowych, w których na skutek nierozważnego planowania zakupów jedzenie ulega zepsuciu i~trafia do śmietnika. Wierzymy, że~możliwe jest przeciwdziałanie temu zjawisku na poziomie lokalnym.
 
@@ -142,13 +144,304 @@ Aplikacja \textit{``Podziel się''} umożliwia:
 Aplikację wyróżnia nowoczesny interfejs graficzny, zaprojektowany specjalnie na potrzeby projektu.
 
 %cytowanie: \cite
-\subsection*{Zawartość pracy}
+\section*{Zawartość pracy}
 W rozdziale~\ref{r:konkurencja} przedstawiono przegląd i analizę konkurencyjnych rozwiązań. Rozdział~\ref{r:arch} zawiera opis użytych technologi i architektury systemu. W kolejnych rozdziałach opisano implementację aplikacji i wybrane przypadki użycia. Rozdział~\ref{r:problem} opisuje problemy i trudności które napotkaliśmy podczas tworzenia aplikacji oraz jak sobie z nim poradziliśmy. Ostatnie rozdziały zawierają instrukcje budowania aplikacji i zawartość płytki dołączonej do pracy, podział pracy w zespole i krótkie podsumowanie pracy.
 
 \chapter{Przegląd konkurencyjnych rozwiązań}\label{r:konkurencja}
-\chapter{Użyte technologie i architektura systemu}\label{r:arch}
+\chapter{Wykorzystane technologie i architektura systemu}\label{r:arch}
+
+\section{Aplikacja mobilna}
+Aplikacja \textit{``Podziel się''} przeznaczona jest dla użytkowników dwóch najpopularniejszych mobilnych systemów operacyjnych: Androida oraz iOS\@. Interfejs aplikacji powstał z wykorzystaniem nowoczesnego frameworka React Native, pozwalającego opisać graficzne rozmieszczenie elementów na ekranie w składni zbliżonej do arkuszy stylów CSS, zaś logikę działania aplikacji w kodzie JavaScriptu. W React Native, przy użyciu specjalnego języka znaczników JSX, zostały zdefiniowane tzw.\ komponenty (lista ogłoszeń, przycisk wysyłania wiadomości, menu szufladkowe, okienko z komunikatem itp.), na bazie których React Native buduje komponenty natywne dla Androida oraz iOS\@. Pozwala to na ujednolicenie wyglądu interfejsu graficznego dla użytkowników różnych systemów i architektur --- aplikacja nie odbiega wyglądem od rozwiązań natywnych, projektowanych specjalnie z myślą~o~konkretnej platformie. Filozofia React Native polega na stosowaniu schematów tworzenia aplikacji webowych przy projektowaniu aplikacji działających w środowisku mobilnym, w szczególności możliwe jest korzystanie z rozmaitych pomocniczych bibliotek JavaScriptu.
+
+Ważnym elementem React Native jest moduł pośredniczący (ang. \textit{bridge}), który tłumaczy wywołania pochodzące z wątków JavaScriptu na polecenia skierowane do systemu operacyjnego. Komunikaty opisujące akcje do wykonania są przesyłane w formacie JSON do modułu pośredniczącego, a po ich otrzymaniu \textit{bridge} wywołuje odpowiednie funkcje systemowe. Wymiana komunikatów jest asynchroniczna oraz nieblokująca, zatem React Native nie ingeruje nadmiernie w pracę systemu operacyjnego oraz umożliwia sprawne renderowanie widoków na ekranie. Co więcej, aplikacja ma możliwość swobodnej komunikacji ze środowiskiem wykonania; w razie potrzeby może uzyskać dostęp do modułu GPS, aparatu, pamięci wewnętrznej urządzenia itp.
+
+\section{Google Maps Platform}
+Aplikacja wykorzystuje Maps API firmy Google do wyświetlania interaktywnych map z~możliwością obliczania odległości, wyznaczania najkrótszej trasy oraz etykietowania punktów charakterystycznych. Jeżeli użytkownik wyrazi na to zgodę, Google Maps API udostępnia również usługę geolokalizacji, pozwalającej z dużą dokładnością określić położenie geograficzne urządzenia.
+
+\section{Powiadomienia push}
+Aplikacja \textit{``Podziel się''} wspiera użytkowników w zarządzaniu licznymi ogłoszeniami wykorzystując mechanizm tzw.\ powiadomień push. Wspomniana funkcjonalność pozwala na wyświetlanie użytkownikom krótkich komunikatów o zajściu zdarzeń wymagających uwagi (zwykle będzie to otrzymanie nowej wiadomości na czacie). Ze względu na ograniczenia technologii React Native obsługa notyfikacji wykorzystuje różne usługi w zależności od systemu operacyjnego: dla Androida --- Firebase Cloud Messaging firmy Google, dla systemu iOS --- dedykowane Apple Push Notification.
+
+Schemat przepływu powiadomień w obu przypadkach wygląda następująco: serwer przygotowuje stosowne powiadomienie o zajściu określonego zdarzenia, a następnie wysyła prośbę o dodanie wiadomości do kolejki oczekujących komunikatów. Serwer usługi (FCM lub APN) przekierowuje notyfikacje do konkretnych użytkowników na podstawie wartości tokena unikalnego dla każdego urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika --- może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
+
+\section{Infrastruktura serwera}
+Serwer projektu został wdrożony na platformie AWS (Amazon Web Services). Decyzja o~wybraniu chmury AWS została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. AWS udostępnia widoczny globalnie w Internecie klaster komputerów w chmurze obliczeniowej. Wspomniane klastry emulują zachowanie prawdziwego komputera, począwszy od wirtualizacji sprzętu (procesora, pamięci RAM, dysku twardego), poprzez infrastrukturę sieciową i system operacyjny, skończywszy na wirtualnej konsoli umożliwiającej połączenie się oraz sterowanie klastrem z poziomu przeglądarki. Wirtualne maszyny AWS udostępniają gotowe rozwiązania serwerowe i oprogramowanie do specjalistycznych zastosowań.
+
+Projekt wykorzystuje także usługi pokrewne firmy Amazon, w szczególności Amazon Simple Storage Service (Amazon S3) do przechowywania zdjęć użytkowników aplikacji w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący; koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych. Transfer plików z platformy hostingowej jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
+
+W dalszej perspektywie, w miarę rozwoju projektu, Amazon S3 oferuje rozszerzone plany wykorzystania oraz opcję archiwizacji danych z możliwością łatwego odtworzenia w przypadku nadpisania, usunięcia lub utracenia plików.
+
+\section{Część serwerowa}
+Część serwerowa aplikacji \textit{``Podziel się''} oparta jest na frameworku Django działającym pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. Nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
+
+Część serwerowa projektu udostępnia API do komunikacji z aplikacją, które obsługuje typowe zapytania potrzebne podczas sesji użytkownika z \textit{``Podziel się''}. Serwer przyjmuje zapytanie wraz z tokenem autoryzującym klienta i odpowiada wyłącznie w przypadku pozytywnej weryfikacji poprawności tokena. Zarządzanie kontami użytkowników zostało zlecone rozbudowanym mechanizmom autentykacji zaimplementowanym w Django.
+
+Większość danych zwracanych przez serwer jest konwertowana z wbudowanych typów języka Python do formatu JSON i w takiej postaci odsyłana (wyjątkiem jest przesyłanie plików graficznych jako danych binarnych) za pośrednictwem bezpiecznego połączenia HTTPS\@.
+
+Projekt wykorzystuje również pomocniczy framework o nazwie GeoDjango do przechowywania danych związanych z położeniem geograficznym oraz łatwiejszej obsługi złożonych zapytań o charakterze lokalizacyjnym, typu  \textit{``znajdź oferty położone najbliżej punktu o danej szerokości i wysokości geograficznej''}.
+
+\section{Baza danych}
+\textit{``Podziel się''} korzysta z PostgreSQL --- systemu zarządzania relacyjną bazą danych. Django udostępnia mechanizm mapowania obiektowo-relacyjnego (ORM) polegający na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer. Silnik bazodanowy sprawnie obsługuje równoczesne transakcje, zapewniając wysoki stopień współbieżności w dostępie do danych.
+
+\section{Wizualizacja}
+\includegraphics[width=\linewidth]{architektura.png}
+
 \chapter{Implementacja}\label{r:impl}
 \chapter{Przypadki użycia}\label{r:usecase}
+Zaprezentowane są tu przykładowe przypadki użycia.
+\section{Rejestracja}
+    \subsection{Krótki opis}
+    Utworzenie konta użytkownika w aplikacji.
+    \subsection{Cele}
+    Umożliwienie aplikacji identyfikacji użytkowników w celu dostarczenia im określonych funkcjonalności.
+    \subsection{Warunki wstępne}
+    \begin{enumerate}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik dysponuje stałym połączeniem internetowym.
+    \end{enumerate}
+    \subsection{Czynności}
+    \subsubsection{Czynności podstawowe}
+    \begin{enumerate}
+        \item Użytkownik naciska przycisk ``Załóż konto''.
+        \item Aplikacja wyświetla użytkownikowi formularz rejestracyjny.
+        \item Użytkownik wprowadza swoje imię, nazwisko (lub nazwę firmy), numer telefonu, adres e-mail, hasło.
+        \item W polu ``Potwierdź hasło'' użytkownik wpisuje drugi raz to samo hasło.
+        \item Użytkownik akceptuje regulamin.
+        \item Użytkownik naciska przycisk ``Zarejestruj''.
+        \item Aplikacja potwierdza poprawną rejestrację.
+     \item Użytkownik jest domyślnie zalogowany do aplikacji na danym urządzeniu.
+     \item Użytkownik może nacisnąć przycisk ``Wyloguj'', aby się wylogować.
+    \end{enumerate}
+    \subsubsection{Czynności alternatywne}
+    \begin{enumerate}
+        \item Użytkownik:
+        \begin{itemize}
+            \item wprowadza drugi raz inne hasło.
+            \item nie wypełnia któregoś z pól.
+            \item wprowadza niepoprawny składniowo adres e-mail.
+            \item nie akceptuje regulaminu.
+        \end{itemize}
+        \item Użytkownik naciska przycisk ``Zarejestruj''.
+        \item Aplikacja powiadamia użytkownika o popełnionym błędzie i odsyła go z powrotem do edycji formularza.
+    \end{enumerate}
+
+\section{Dodawanie nowego ogłoszenia}
+    \subsection{Krótki opis}
+    Wprowadzenie przez użytkownika informacji potrzebnych do stworzenia nowego ogłoszenia oraz opublikowanie go na liście aktualnie dostępnych
+    ogłoszeń.
+    \subsection{Cele}
+    Zapewnienie możliwości przeglądania nowo utworzonego ogłoszenia innym użytkownikom aplikacji.
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik posiada poprawnie założone konto.
+        \item Użytkownik jest zalogowany w aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    \subsection{Czynności}
+    \subsubsection{Czynności podstawowe}
+    \begin{enumerate}
+        \item Użytkownik naciska oznaczony przycisk, który rozwija szufladkowe menu.
+        \item Użytkownik wskazuje w menu pozycję ``Dodaj nowe ogłoszenie''.
+        \item Na ekranie pojawia się formularz dodawania ogłoszenia z podpisanymi polami.
+        \item Użytkownik wprowadza (w dowolnej kolejności) wymagane informacje:
+        \begin{itemize}
+            \item Kategorie ogłoszenia (np.\ pieczywo, mięso, przetwory, wyroby cukiernicze\ldots)
+            \begin{itemize}
+                \item Użytkownik rozwija przewijalną listę dostępnych kategorii.
+                \item Użytkownik wskazuje kategorie, które wydają się najbardziej odpowiednie do zawartości ogłoszenia.
+            \end{itemize}
+            \item Tytuł ogłoszenia, który będzie widoczny na liście ogłoszeń
+            \item Właściwa treść ogłoszenia
+            \item Sugerowana data przydatności do spożycia
+            \begin{itemize}
+                \item Użytkownik otwiera okienko kalendarza z graficznym rozkładem dni bieżącego miesiąca.
+                \item W razie potrzeby użytkownik przechodzi za pomocą przycisków-strzałek do dalszych miesięcy.
+                \item Użytkownik wskazuje konkretny dzień w kalendarzu.
+            \end{itemize}
+            \item Preferowane miejsce odbioru (z rozwijanej listy uprzednio wgranych miejsc odbioru)
+        \end{itemize}
+        \item Użytkownik przesuwa widok ekranu na koniec formularza i naciska przycisk ``Wyślij''.
+        \item Aplikacja komunikuje się z serwerem, wysyłając prośbę o dodanie wprowadzonego ogłoszenia do bazy danych.
+        \item Aplikacja otrzymuje odpowiedź od serwera --- ogłoszenie zostało dodane pomyślnie.
+        \item Użytkownik dostaje informację zwrotną: aplikacja wyświetla na ekranie okienko o pomyślnym dodaniu nowego ogłoszenia.
+    \end{enumerate}
+    \subsubsection{Czynności alternatywne}
+    Użytkownik może opcjonalnie dodać zdjęcia artykułu żywnościowego, opakowania, etykiet.
+    \begin{enumerate}
+        \item Użytkownik wskazuje przycisk ``Dodaj nowe zdjęcie''.
+        \item Aplikacja wyświetla okienko z prośbą o wskazanie źródła zdjęcia, do wyboru: załączenie zdjęcia z pamięci urządzenia (galerii)
+        lub utworzenie aparatem nowego zdjęcia.
+        \begin{enumerate}
+            \item Jeżeli użytkownik wyrazi chęć dodania istniejącego zdjęcia, aplikacja uruchamia klasyczny interfejs przeglądania galerii
+            systemu operacyjnego.
+            \item Wybór opcji zrobienia nowego zdjęcia przekazuje sterowanie wbudowanej w system operacyjny aplikacji obsługującej aparat.
+        \end{enumerate}
+        \item Jeżeli zdjęcie ma zbyt duży rozmiar, następuje jego kompresja (po stronie aplikacji).
+        \item Na ekranie formularza pojawia się miniaturka dodanego zdjęcia.
+    \end{enumerate}
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat. Użytkownik zostaje
+    przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
+    \begin{enumerate}
+        \item Użytkownik nie wprowadził kompletu wymaganych informacji.
+        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji (np.\ zbyt długa treść ogłoszenia)
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie ogłoszenia nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji dodawania ogłoszenia do bazy danych.
+    \end{enumerate}
+    \subsection{Możliwe rozwinięcia}
+    \subsubsection{Automatyczna klasyfikacja ogłoszeń}
+    Wyświetlenie podpowiedzi co do wyboru odpowiedniej kategorii na podstawie analizy słownictwa użytego w treści ogłoszenia.
+
+\section{Konwersacja (czat) z innym użytkownikiem}
+    \subsection{Krótki opis}
+    Wykorzystanie funkcji czatu do komunikacji z innym użytkownikiem aplikacji.
+    \subsection{Cele}
+    \begin{itemize}
+        \item Możliwość zadawania wystawcy ogłoszenia dodatkowych pytań.
+        \item Udostępnienie prywatnego kanału do ustalania szczegółów odbioru produktu.
+        \item Zachęcenie użytkowników aplikacji do współtworzenia aktywnej społeczności.
+    \end{itemize}
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik posiada poprawnie założone konto.
+        \item Użytkownik jest zalogowany w aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    \subsection{Czynności}
+    \subsubsection{Czynności podstawowe}
+    \begin{enumerate}
+        \item Użytkownik A otwiera ekran czatu z użytkownikiem B. Może to zrobić na kilka sposobów:
+        \begin{itemize}
+            \item Bezpośrednio ze strony profilowej użytkownika B.
+            \item Naciskając przycisk ``Zadaj pytanie'' widocznego na ekranie ogłoszenia wystawionego przez B.
+            \item Wybierając pseudonim użytkownika B z zakładki ``Moje konwersacje'' w menu szufladkowym.
+        \end{itemize}
+        \item W dolnej części ekranu pojawia się pole tekstowe do wpisania wiadomości oraz przycisk służący do jej wysłania. Jeżeli użytkownicy A i B rozmawiali ze sobą wcześniej, na ekranie będzie także widoczna przewijana lista poprzednich wiadomości, uporządkowana chronologicznie.
+        \item Użytkownik A wpisuje treść wiadomości i wysyła ją.
+        \item Nowa wiadomość zostaje dopisana do prowadzonej historii konwersacji.
+        \item Użytkownik A oczekuje na odpowiedź użytkownika B:\@
+        \begin{itemize}
+            \item Jeżeli osoba B udzieli odpowiedzi od razu, jej treść pojawi się na ekranie użytkownika A w czasie rzeczywistym.
+            \item W przypadku, gdy użytkownik A nie korzysta w danej chwili z aplikacji ``Podziel się'', oraz kożysta z systemu Android, otrzyma powiadomienie (notyfikację) systemu operacyjnego o nowej wiadomości od użytkownika B.
+        \end{itemize}
+    \end{enumerate}
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się okienko ze stosownym komunikatem.
+    \begin{enumerate}
+        %TODO tego chyba nie ma
+        \item Osoba A znajduje się na ``czarnej liście'' użytkownika B (tzn. B zablokował możliwość interakcji z użytkownikiem A)
+        \item Nastąpił błąd komunikacji z serwerem --- nie udało się wysłać wiadomości.
+        \item Serwer zasygnalizował błąd podczas dopisywania wiadomości do historii konwersacji.
+    \end{enumerate}
+    \subsection{Możliwe rozwinięcia}
+    %TODO to chyba jest
+    \subsubsection{Przesyłanie obrazów}
+    Umożliwienie przesyłania wiadomości w formie zdjęć. W tym celu użytkownik wysyłający wiadomość wybiera piktogram ``prześlij obraz''. Dalszy scenariusz jest analogiczny do opisanego w punkcie 5.4.2.
+
+\section{Ocena innego użytkownika}
+    \subsection{Krótki opis}
+    Wystawienie innemu użytkownikowi oceny w skali od 1 do 5 oraz możliwość napisania krótkiego komentarza dotyczącego współpracy z nim.
+    \subsection{Cele}
+    Informowanie innych osób o jakości współpracy z daną osobą, w szczególności ostrzeganie innych przed nierzetelnymi użytkownikami.
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
+        \item Użytkownik posiada poprawnie założone konto.
+        \item Użytkownik jest zalogowany w aplikacji.
+        \item Użytkownik dysponuje stabilnym połączeniem internetowym.
+    \end{itemize}
+    \subsection{Czynności}
+    \subsubsection{Czynności podstawowe}
+    \begin{enumerate}
+        \item Użytkownik A otwiera ekran, na którym znajduje się publiczny profil użytkownika B. Może to zrobić na kilka sposobów:
+        \begin{itemize}
+            \item W oknie konwersacji z użytkownikiem B, poprzez kliknięcie na jego imię lub zdjęcie w lewym górnym rogu ekranu.
+            \item Naciskając przycisk ``Pokaż profil użytkownika’’ na ekranie ogłoszenia, które użytkownik B wystawił.
+            \item Wpisując: imię, nazwisko lub nazwę użytkownika B w polu tekstowym znajdującym się na samej górze ekranu prostej wyszukiwarki.
+        \end{itemize}
+        \item Wyświetla się ekran z profilem użytkownika B, a w nim następujące elementy:
+        \begin{itemize}
+            \item Imię, nazwisko oraz nazwa użytkownika.
+            \item Zdjęcie profilowe.
+            \item Zbiorcza ocena innych użytkowników w skali od 1 do 5.
+            \item Przycisk ``Rozpocznij czat’’.
+            \item Przycisk ``Dodaj ocenę’’.
+            \item Lista z ocenami i komentarzami innych osób.
+        \end{itemize}
+        \item Użytkownik A naciska przycisk ``Dodaj ocenę’’.
+        \item Wyświetla mu się ekran z formularzem dodawania oceny.
+        \item Użytkownik A ocenia użytkownika B w skali od 1 do 5.
+        \item Użytkownik A wpisuje krótki komentarz odnośnie użytkownika B.
+        \item Użytkownik A naciska przycisk ``Dodaj ocenę’’.
+    \end{enumerate}
+    \subsubsection{Czynności alternatywne}
+    Użytkownika A może co najwyżej raz ocenić użytkownika B. Jeśli miało już to miejsce, użytkownik A może edytować swoją opinię:
+    \begin{enumerate}
+        \item Zamiast przycisku ``Dodaj ocenę’’ na ekranie z profilem użytkownika B będzie widoczny przycisk ``Edytuj ocenę’’.
+        \item Formularz dodawania oceny będzie uzupełniony o poprzednią ocenę i komentarz.
+        \item Użytkownik po edycji formularza klika przycisk ``Zapisz ocenę’’.
+    \end{enumerate}
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat. Użytkownik zostaje
+    przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
+    \begin{enumerate}
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie / edycję opinii nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji dodawania / edycji opinii do bazy danych.
+    \end{enumerate}
+    \subsection{Możliwe rozwinięcia}
+    Blokada możliwości oceny danego użytkownika do momentu, w którym odbierzemy od niego (lub on od nas) pożywienie z przynajmniej jednego ogłoszenia.
+
+\section{Odbiór przedmiotów oferowanych w liście ogłoszeń}
+    \subsection{Krótki opis}
+    Umożliwienie użytkownikowi, który wystawił ogłoszenie (A) i użytkownikowi, który jest zainteresowany odbiorem przedmiotu z ogłoszenia (B) ustalenia szczegółów odbioru.
+    \subsection{Cele}
+    \begin{itemize}
+        \item Umożliwienie użytkownikom ustalenia szczegółów odbioru przedmiotu (np.\ czas odbioru, miejsce odbioru).
+        \item Umożliwienie użytkownikowi zarządzania statusem swoich ogłoszeń.
+    \end{itemize}
+    \subsection{Warunki wstępne}
+    \begin{itemize}
+        \item Aplikacja jest zainstalowana na urządzeniach użytkowników A i B.
+        \item Użytkownicy posiadają poprawnie założone konta.
+        \item Użytkownicy są zalogowani w aplikacji.
+        \item Użytkownik B dodał ogłoszenie.
+        \item Użytkownicy dysponują stabilnym połączeniem internetowym.
+    \end{itemize}
+    \subsection{Czynności}
+    \subsubsection{Czynności podstawowe}
+    \paragraph{Użytkownik A}
+    \begin{enumerate}
+        \item Użytkownik naciska oznaczony przycisk ``Szczegóły ogłoszenia'' przy ogłoszeniu na liście ogłoszeń.
+        \item Na ekranie ze szczegółami ogłoszenia użytkownik naciska przycisk ``Zadaj pytanie''.
+        \item Użytkownikowi otwiera się ekran czatu z autorem ogłoszenia.
+        \item Użytkownik wysyła wiadomość, w której wyraża chęć odbioru przedmiotu z ogłoszenia.
+        \item Jeżeli użytkownik otrzyma odpowiedź pozytywną, użytkownicy ustalają między sobą szczegóły odbioru.
+    \end{enumerate}
+    \paragraph{Użytkownik B}
+    \begin{enumerate}
+        \item Użytkownik otrzymuje nową wiadomość na czacie z chęcią odbioru oferowanego przedmiotu.
+        \item Użytkownik decyduje, czy chce oddać oferowany produkt użytkownikowi A
+        \begin{enumerate}
+            \item Jeżeli użytkownik nie chce oddać produktu użytkownikowi A, wysyła wiadomość odmowną i interakcja się kończy.
+            \item Jeżeli użytkownik chce oddać produkt, wysyła wiadomość pozytywną, interakcja trwa dalej.
+        \end{enumerate}
+        \item Na ekranie szczegółów swojego ogłoszenia użytkownik naciska przycisk ``Oznacz jako zarezerwowane''
+        \item Użytkownicy ustalają między sobą szczegóły odbioru.
+        \item Po oddaniu oferowanego przedmiotu, użytkownik naciska przycisk ``Oznacz jako oddane'' na ekranie szczegółów swojego ogłoszenia, przez co ogłoszenie znika z listy ogłoszeń.
+    \end{enumerate}
+    \subsubsection{Czynności alternatywne}
+    Jeżeli po oznaczeniu ogłoszenia jako zarezerwowane, użytkownik A albo B zmieni zdanie co do chęci odbioru/oddania produktu, użytkownik B może odznaczyć ogłoszenie jako zarezerwowane poprzez ponowne kliknięcie w przycisk ``oznacz jako zarezerwowane'' na ekranie szczegółów swojego ogłoszenia.
+    \subsubsection{Czynności niepoprawne}
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat.
+    \begin{enumerate}
+        \item Czynności niepoprawne z podpunktu 6.4.2 dotyczące funkcjonalności czatu
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o oznaczenie jako zarezerwowane / oddane nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji związanych z oznaczeniem ogłoszenia jako zarezerwowane / oddane.
+    \end{enumerate}
+    \subsection{Możliwe rozwinięcia}
+    Podczas oznaczania ogłoszenia jako zarezerwowane użytkownik może oznaczyć, dla którego użytkownika dokonywana jest rezerwacja.
+
 \chapter{Problemy i trudności podczas tworzenia aplikacji}\label{r:problem}
 \chapter{Instrukcja budowania aplikacji i zawartość płytki}\label{r:build}
 \chapter{Podział pracy}\label{r:podzial}
@@ -156,45 +449,36 @@ W rozdziale~\ref{r:konkurencja} przedstawiono przegląd i analizę konkurencyjny
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
-\bibitem[Bea65]{beaman} Juliusz Beaman, \textit{Morbidity of the Jolly
-    function}, Mathematica Absurdica, 117 (1965) 338--9.
+\bibitem[podzielmysie.pl]{podzielmysie} Strona akcji społecznej ``Podzielmy się'', \href{www.podzielmysie.pl}{\texttt{podzielmysie.pl}}
 
-\bibitem[Blar16]{eb1} Elizjusz Blarbarucki, \textit{O pewnych
-    aspektach pewnych aspektów}, Astrolog Polski, Zeszyt 16, Warszawa
-  1916.
+\bibitem[FAO]{fao} Food and Agriculture Organization of the United Nations,\\
+    \href{http://www.fao.org/save-food/resources/keyfindings/en/}{\texttt{http://www.fao.org/save-food/resources/keyfindings/en/}}
 
-\bibitem[Fif00]{ffgg} Filigran Fifak, Gizbert Gryzogrzechotalski,
-  \textit{O blabalii fetorycznej}, Materiały Konferencji Euroblabal
-  2000.
+\bibitem[Buissness Insider]{buissins} Artykuł prasowy portalu Business Insider \href{https://businessinsider.com.pl/lifestyle/jedzenie/marnowanie-zywnosci-ile-ton-jedzenia-wyrzucaja-polacy/5wnn8yt}{``Polacy rocznie marnują 9 mln ton jedzenia''}
 
-\bibitem[Fif01]{ff-sr} Filigran Fifak, \textit{O fetorach
-    $\sigma$-$\rho$}, Acta Fetorica, 2001.
+\bibitem[Olioex.com]{olio} Statystyki dotyczące wykorzystania żywności na świecie z oficjalnej strony aplikacji  \textit{Olio}, \href{https://olioex.com}{\texttt{olioex.com}}
 
-\bibitem[Głomb04]{grglo} Gryzybór Głombaski, \textit{Parazytonikacja
-    blabiczna fetorów --- nowa teoria wszystkiego}, Warszawa 1904.
+\bibitem[reducefoodwaste.eu]{rfw} Oficjalna strona internetowa projektu Reduce Food Waste,\\
+    \href{www.reducefoodwaste.eu}{\texttt{reducefoodwaste.eu}}
 
-\bibitem[Hopp96]{hopp} Claude Hopper, \textit{On some $\Pi$-hedral
-    surfaces in quasi-quasi space}, Omnius University Press, 1996.
+\bibitem[ReactNative]{reactnative} \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
 
-\bibitem[Leuk00]{leuk} Lechoslav Leukocyt, \textit{Oval mappings ab ovo},
-  Materiały Białostockiej Konferencji Hodowców Drobiu, 2000.
+\bibitem[GoogleMaps]{googlemaps} \href{https://developers.google.com/maps/documentation/}{\texttt{developers.google.com/maps/documentation}}
 
-\bibitem[Rozk93]{JR} Josip A.~Rozkosza, \textit{O pewnych własnościach
-    pewnych funkcji}, Północnopomorski Dziennik Matematyczny 63491
-  (1993).
+\bibitem[Firebase]{firebase} \href{https://firebase.google.com/docs/cloud-messaging/}{\texttt{firebase.google.com/docs/cloud-messaging}}
 
-\bibitem[Spy59]{spyrpt} Mrowclaw Spyrpt, \textit{A matrix is a matrix
-    is a matrix}, Mat. Zburp., 91 (1959) 28--35.
+\bibitem[Notifications]{nots} \href{https://developer.apple.com/notifications/}{\texttt{developer.apple.com/notifications}}
 
-\bibitem[Sri64]{srinis} Rajagopalachari Sriniswamiramanathan,
-  \textit{Some expansions on the Flausgloten Theorem on locally
-    congested lutches}, J. Math.  Soc., North Bombay, 13 (1964) 72--6.
+\bibitem[AWS]{amazonaws} \href{https://aws.amazon.com/}{\texttt{aws.amazon.com}}
 
-\bibitem[Whi25]{russell} Alfred N. Whitehead, Bertrand Russell,
-  \textit{Principia Mathematica}, Cambridge University Press, 1925.
+\bibitem[Django]{django} \href{https://www.djangoproject.com/}{\texttt{djangoproject.com}}
 
-\bibitem[Zen69]{heu} Zenon Zenon, \textit{Użyteczne heurystyki
-    w~blabalizie}, Młody Technik, nr~11, 1969.
+\bibitem[Gunicorn]{gunicorn} \href{https://gunicorn.org/}{\texttt{gunicorn.org}}
+
+\bibitem[NginX]{nginx} \href{https://www.nginx.com/}{\texttt{nginx.com}}
+
+\bibitem[PostgreSQL]{postgresql} \href{https://www.postgresql.org/}{\texttt{postgresql.org}}
+
 
 \end{thebibliography}
 
