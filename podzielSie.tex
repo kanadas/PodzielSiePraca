@@ -143,11 +143,27 @@ Aplikacja \textit{``Podziel się''} umożliwia:
 \end{itemize}
 Aplikację wyróżnia nowoczesny interfejs graficzny, zaprojektowany specjalnie na potrzeby projektu.
 
-%cytowanie: \cite
 \section*{Zawartość pracy}
 W rozdziale~\ref{r:konkurencja} przedstawiono przegląd i analizę konkurencyjnych rozwiązań. Rozdział~\ref{r:arch} zawiera opis użytych technologi i architektury systemu. W kolejnych rozdziałach opisano implementację aplikacji i wybrane przypadki użycia. Rozdział~\ref{r:problem} opisuje problemy i trudności które napotkaliśmy podczas tworzenia aplikacji oraz jak sobie z nim poradziliśmy. Ostatnie rozdziały zawierają instrukcje budowania aplikacji i zawartość płytki dołączonej do pracy, podział pracy w zespole i krótkie podsumowanie pracy.
 
 \chapter{Przegląd konkurencyjnych rozwiązań}\label{r:konkurencja}
+
+\section{Sytuacja na rynku}
+Od paru lat można zaobserwować ciągły wzrost zainteresowania tematyką marnowania żywności wśród społeczeństwa. Przejawia się to na przykład w rosnącym zainteresowaniu polityków i władz, w tym Komisji Europejskiej (patrz~\cite{ec}), bardzo licznym publikacjom na ten temat, a także w rosnącej popularności ruchów społecznych takich ``freeganizm'', czy ``zero waste''. Zainteresowanie tym tematem przejawia się też w licznych aplikacjach pomagających wymieniać się jedzeniem które inaczej by się zmarnowało. Co ciekawe w różnych państwach popularne są różne aplikacje. Na przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Zachodniej Europie \textit{Too Good To Go}, a w Stanach Zjednoczonych ``Unsung''. W Polsce nie ma jeszcze żadnej popularnej aplikacji, chociaż funkcjonują grupy na portalach społecznościowych spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione wybrane z konkurencyjnych rozwiązań.
+
+\section{Olio}
+Z wymienionych w tym rozdziale aplikacji \textit{Olio} jest najbardziej podobne do \textit{Podziel Się}. Posiada bardzo prosty interfejs, pozwalający już kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy znaleźć z listy ogłoszeń (która może być sortowana po odległości, lub czasie dodania ogłoszenia) produkt na który mamy ochotę. \textit{Olio} tak samo jak \textit{Podziel Się} jest zintegrowane z Mapami Google i lokalizacją telefonu (choć można ją wyłączyć). \textit{Olio} posiada też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie posiada natomiast podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.), w \textit{Olio} specyfikuje się tylko czy produkt jest żywnością czy nie.
+
+\textit{Olio} jest bardzo popularną aplikacją. Na chwilę obecną posiada ponad milion użytkowników i ponad półtora miliona ogłoszeń (\cite{olio}). Jest najbardziej popularna w Wielkiej Brytanii, w Polsce praktycznie nie funkcjonuje.
+
+\section{Too Good To Go}
+Ta aplikacja reprezentuje zupełnie inne podejście niż \textit{Podziel Się}. Służy do umożliwienia restauracjom i jadłodajnią do odsprzedania niesprzedanych posiłków po znacznie niższych cenach niedługo przed zamknięciem. Oznacza, to że oferty są zwykle płatne, w przeciwieństwie do \textit{Podziel Się}, gdzie wszystkie oferty są darmowe. \textit{Too Good To Go} ma trochę bardziej skomplikowany interfejs niż \textit{Olio}, czy Podziel się. Tak jak poprzednie aplikacje jest zintegrowana z Mapami Google i lokalizacją telefonu, umożliwia też przeglądanie mapy z zaznaczonymi wszystkimi dostępnymi jadłodajniami, oraz dodawania jadłodajni do listy swoich ulubionych.
+
+\textit{Too Good To Go} jest popularna w praktycznie całej Zachodniej Europie, posiadając obecnie prawie 25.000 współpracujących jadłodajni (\cite{tgtg}). W Warszawie jest tylko \~20 jadłodajni.
+
+\section{Grupa ``Freeganism, dumpster diving, food sharing --- Warszawa''}
+Jest to grupa funkcjonująca na portalu społecznościowym Facebook. Nie jest to co prawda aplikacja, jednak służy do tego samego celu i jest największą lokalną konkurencją. Grup tego rodzaju jest wiele zarówno w Polsce jak i w samej Warszawie, ta została wybrana jako przykładowa głównie ze względu na największą popularność, ponieważ w chwili obecnej liczy prawie 9 tysięcy członków i publikowanych na niej jest około 700 postów miesięcznie. Główny problem takich grup wynika z niedostosowania platformy --- portalu Facebook. Nie posiada on narzędzi umożliwiających wygodne przeglądanie listy aktualnych ofert, nie pozwala filtrować, ani sortować ogłoszeń po odległości, ani nawet łatwo odfiltrować już wygasłe ogłoszenia. Bardzo ogranicza to rozrost takich grup. Z ciekawych rozwiązań z których ta grupa korzysta jest koncept jadłodzielni. Są to zwykle ogólnodostępne lodówki i szafki na żywność w których można umieszczać produkty których się nie spożyje. Udostępniane są one zwykle przez różne jednostki jak: urząd miasta, uniwersytet, czy centrum kultury. Jest to szczególnie wygodne w odbiorze, ponieważ nie trzeba nawet wiedzieć, że ktoś ma coś do oddania, wystarczy jak się jest w pobliżu sprawdzić, czy nie ma w niej akurat czegoś na co ma się ochotę.
+
 \chapter{Wykorzystane technologie i architektura systemu}\label{r:arch}
 
 \section{Aplikacja mobilna}
@@ -247,7 +263,7 @@ Zaprezentowane są tu przykładowe przypadki użycia.
         \begin{itemize}
             \item Kategorie ogłoszenia (np.\ pieczywo, mięso, przetwory, wyroby cukiernicze\ldots)
             \begin{itemize}
-                \item Użytkownik rozwija przewijalną listę dostępnych kategorii.
+                \item Użytkownik rozwija listę dostępnych kategorii.
                 \item Użytkownik wskazuje kategorie, które wydają się najbardziej odpowiednie do zawartości ogłoszenia.
             \end{itemize}
             \item Tytuł ogłoszenia, który będzie widoczny na liście ogłoszeń
@@ -323,7 +339,7 @@ Zaprezentowane są tu przykładowe przypadki użycia.
         \item Użytkownik A oczekuje na odpowiedź użytkownika B:\@
         \begin{itemize}
             \item Jeżeli osoba B udzieli odpowiedzi od razu, jej treść pojawi się na ekranie użytkownika A w czasie rzeczywistym.
-            \item W przypadku, gdy użytkownik A nie korzysta w danej chwili z aplikacji ``Podziel się'', oraz kożysta z systemu Android, otrzyma powiadomienie (notyfikację) systemu operacyjnego o nowej wiadomości od użytkownika B.
+            \item W przypadku, gdy użytkownik A nie korzysta w danej chwili z aplikacji ``Podziel się'', oraz korzysta z systemu Android, otrzyma powiadomienie (notyfikację) systemu operacyjnego o nowej wiadomości od użytkownika B.
         \end{itemize}
     \end{enumerate}
     \subsubsection{Czynności niepoprawne}
@@ -458,8 +474,12 @@ Zaprezentowane są tu przykładowe przypadki użycia.
 
 \bibitem[Olioex.com]{olio} Statystyki dotyczące wykorzystania żywności na świecie z oficjalnej strony aplikacji  \textit{Olio}, \href{https://olioex.com}{\texttt{olioex.com}}
 
+\bibitem[toogoodtogo.com]{tgtg} Oficjalna strona aplikacji \textit{Too Good To Go}, \href{https://toogoodtogo.com}{\texttt{toogoodtogo.com}}.
+
 \bibitem[reducefoodwaste.eu]{rfw} Oficjalna strona internetowa projektu Reduce Food Waste,\\
     \href{www.reducefoodwaste.eu}{\texttt{reducefoodwaste.eu}}
+
+\bibitem[ec.europa.eu]{ec} Działania KE ws.\ marnowania żywności\\ \href{https://ec.europa.eu/food/safety/food_waste_en}{\texttt{https://ec.europa.eu/food/safety/food\_waste\_en}}
 
 \bibitem[ReactNative]{reactnative} \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
 
