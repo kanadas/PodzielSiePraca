@@ -126,20 +126,18 @@ Aplikacja \textit{``Podziel się''} umożliwia:
 \item dodawanie nowego ogłoszenia (opisu produktu wraz z preferowaną lokalizacją miejsca odbioru),
 \item zamieszczenie w ogłoszeniu zdjęć produktu, opakowania, etykiet itp.,
 \item przeglądanie dostępnych do odebrania posiłków w okolicy aktualnej lokalizacji użytkownika,
-\item filtrowanie dostępnych ogłoszeń w oparciu o wprowadzone przez użytkownika kryteria i preferencje,
+\item sortowanie dostępnych ogłoszeń w oparciu o wprowadzone przez użytkownika kryteria i preferencje,
 \item funkcję czatu między odbiorcą a darczyńcą w celu ustalenia szczegółów odbioru, zadawania pytań,
 \item przechowywanie historii konwersacji z innymi użytkownikami,
 \item wskazanie użytkownika (ze zbiorczej listy osób zainteresowanych ogłoszeniem), która otrzyma wystawiony~produkt/artykuł żywnościowy,
 \item pośrednictwo w procesie przekazania żywności,
-%TODO czy to jest zrobione?
+%TODO czy to jest zrobione? chyba tak
 \item usuwanie ogłoszeń zrealizowanych pomyślnie lub ogłoszeń, dla których minęła data przydatności do~spożycia,
 \item system recenzji/ocen użytkowników,
 %TODO tego nie ma nie?
-\item wyróżnianie wybranych użytkowników jako ``ulubionych'', dzięki czemu ich nowe ogłoszenia będą dodatkowo eksponowane na liście dostępnych ogłoszeń,
+\item oznaczanie wybranych użytkowników jako ``obserwowanych'', dzięki czemu ich nowe ogłoszenia będą dodatkowo eksponowane na liście dostępnych ogłoszeń,
 %TODO czy to jest zrobione?
 \item flagowanie ogłoszeń o nieodpowiedniej zawartości, co skutkuje powiadomieniem moderatora o~konieczności~weryfikacji zamieszczonej treści,
-%TODO tego nie ma nie?
-\item personalizację wyglądu aplikacji (np.\ kolor elementów interfejsu).
 \end{itemize}
 Aplikację wyróżnia nowoczesny interfejs graficzny, zaprojektowany specjalnie na potrzeby projektu.
 
@@ -164,44 +162,62 @@ Ta aplikacja reprezentuje zupełnie inne podejście niż \textit{Podziel Się}. 
 \section{Grupa ``Freeganism, dumpster diving, food sharing --- Warszawa''}
 Jest to grupa funkcjonująca na portalu społecznościowym Facebook. Nie jest to co prawda aplikacja, jednak służy do tego samego celu i jest największą lokalną konkurencją. Grup tego rodzaju jest wiele zarówno w Polsce jak i w samej Warszawie, ta została wybrana jako przykładowa głównie ze względu na największą popularność, ponieważ w chwili obecnej liczy prawie 9 tysięcy członków i publikowanych na niej jest około 700 postów miesięcznie. Główny problem takich grup wynika z niedostosowania platformy --- portalu Facebook. Nie posiada on narzędzi umożliwiających wygodne przeglądanie listy aktualnych ofert, nie pozwala filtrować, ani sortować ogłoszeń po odległości, ani nawet łatwo odfiltrować już wygasłe ogłoszenia. Bardzo ogranicza to rozrost takich grup. Z ciekawych rozwiązań z których ta grupa korzysta jest koncept jadłodzielni. Są to zwykle ogólnodostępne lodówki i szafki na żywność w których można umieszczać produkty których się nie spożyje. Udostępniane są one zwykle przez różne jednostki jak: urząd miasta, uniwersytet, czy centrum kultury. Jest to szczególnie wygodne w odbiorze, ponieważ nie trzeba nawet wiedzieć, że ktoś ma coś do oddania, wystarczy jak się jest w pobliżu sprawdzić, czy nie ma w niej akurat czegoś na co ma się ochotę.
 
-\chapter{Wykorzystane technologie i architektura systemu}\label{r:arch}
+\chapter{Implementacja}\label{r:arch}
 
-\section{Aplikacja mobilna}
+\section{Architektóra systemu}
+Architektóra aplikacji \textit{``Podziel się''} składa się z dwóch głównych komponentów: aplikacji mobilnej oraz części serwerowej. Wykorzystywane są również zewnętrzne usługi takie jak Firebase, Facebook, GoogleMaps, AmazonS3.
+
+\includegraphics[width=\linewidth]{architektura.png}
+
+\subsection{Aplikacja mobilna}
 Aplikacja \textit{``Podziel się''} przeznaczona jest dla użytkowników dwóch najpopularniejszych mobilnych systemów operacyjnych: Androida oraz iOS\@. Interfejs aplikacji powstał z wykorzystaniem nowoczesnego frameworka React Native, pozwalającego opisać graficzne rozmieszczenie elementów na ekranie w składni zbliżonej do arkuszy stylów CSS, zaś logikę działania aplikacji w kodzie JavaScriptu. W React Native, przy użyciu specjalnego języka znaczników JSX, zostały zdefiniowane tzw.\ komponenty (lista ogłoszeń, przycisk wysyłania wiadomości, menu szufladkowe, okienko z komunikatem itp.), na bazie których React Native buduje komponenty natywne dla Androida oraz iOS\@. Pozwala to na ujednolicenie wyglądu interfejsu graficznego dla użytkowników różnych systemów i architektur --- aplikacja nie odbiega wyglądem od rozwiązań natywnych, projektowanych specjalnie z myślą~o~konkretnej platformie. Filozofia React Native polega na stosowaniu schematów tworzenia aplikacji webowych przy projektowaniu aplikacji działających w środowisku mobilnym, w szczególności możliwe jest korzystanie z rozmaitych pomocniczych bibliotek JavaScriptu.
+
 
 Ważnym elementem React Native jest moduł pośredniczący (ang. \textit{bridge}), który tłumaczy wywołania pochodzące z wątków JavaScriptu na polecenia skierowane do systemu operacyjnego. Komunikaty opisujące akcje do wykonania są przesyłane w formacie JSON do modułu pośredniczącego, a po ich otrzymaniu \textit{bridge} wywołuje odpowiednie funkcje systemowe. Wymiana komunikatów jest asynchroniczna oraz nieblokująca, zatem React Native nie ingeruje nadmiernie w pracę systemu operacyjnego oraz umożliwia sprawne renderowanie widoków na ekranie. Co więcej, aplikacja ma możliwość swobodnej komunikacji ze środowiskiem wykonania; w razie potrzeby może uzyskać dostęp do modułu GPS, aparatu, pamięci wewnętrznej urządzenia itp.
 
-\section{Google Maps Platform}
-Aplikacja wykorzystuje Maps API firmy Google do wyświetlania interaktywnych map z~możliwością obliczania odległości, wyznaczania najkrótszej trasy oraz etykietowania punktów charakterystycznych. Jeżeli użytkownik wyrazi na to zgodę, Google Maps API udostępnia również usługę geolokalizacji, pozwalającej z dużą dokładnością określić położenie geograficzne urządzenia.
+\subsection{Część Serwerowa} 
 
-\section{Powiadomienia push}
+Cześć serwerowa została stworza w języku Python, w oparciu o framework django. Pozwala on na szybkie tworzenie RESTowych endpointów oraz łatwy dostęp do relacyjnych baz danych dzięki rozbudowanemu mechanizmowi mapowania obiektowo-relacyjnego (ORM). Polega ono na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer.
+
+Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyjnego. Wybrany framework posiada wbudowany moduł administracyjny, wystarczy dopisać kilka linijek kodu do każdej encji by powstał w pełni użyteczny panel adminstratora, pozwalający na wykonywanie podstawowych operacji: pobierz, dodaj, usuń, modyfikuj na danych znajdujących się w bazie.
+
+%Nie wiedziałem jak napisać to zdanie: 
+PostegreSQL wraz wtyczką PostGis odpowiada za przechowywanie relacyjnych danych.
+
+\subsection{Komunikacja Klient - Serwer} 
+%json, https,
+
+\section{Postgis}
+%liczenie odległosci itd.
+
+\section{Przechowywanie zdjęć} 
+%tutaj pasowało by napisać dlaczego nie składowanie danych na dysku
+
+Projekt wykorzystuje usługę pokrewną firmy Amazon, Amazon Simple Storage Service (Amazon S3) do przechowywania zdjęć użytkowników aplikacji w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący; koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych. Transfer plików z platformy hostingowej jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
+
+W dalszej perspektywie, w miarę rozwoju projektu, Amazon S3 oferuje rozszerzone plany wykorzystania oraz opcję archiwizacji danych z możliwością łatwego odtworzenia w przypadku nadpisania, usunięcia lub utracenia plików.
+
+\section{Powiadomienia}
+%tutaj dlaczego nie odpytywanie serwera non stop co jakiś czas
+
 Aplikacja \textit{``Podziel się''} wspiera użytkowników w zarządzaniu licznymi ogłoszeniami wykorzystując mechanizm tzw.\ powiadomień push. Wspomniana funkcjonalność pozwala na wyświetlanie użytkownikom krótkich komunikatów o zajściu zdarzeń wymagających uwagi (zwykle będzie to otrzymanie nowej wiadomości na czacie). Ze względu na ograniczenia technologii React Native obsługa notyfikacji wykorzystuje różne usługi w zależności od systemu operacyjnego: dla Androida --- Firebase Cloud Messaging firmy Google, dla systemu iOS --- dedykowane Apple Push Notification.
 
 Schemat przepływu powiadomień w obu przypadkach wygląda następująco: serwer przygotowuje stosowne powiadomienie o zajściu określonego zdarzenia, a następnie wysyła prośbę o dodanie wiadomości do kolejki oczekujących komunikatów. Serwer usługi (FCM lub APN) przekierowuje notyfikacje do konkretnych użytkowników na podstawie wartości tokena unikalnego dla każdego urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika --- może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
 
-\section{Infrastruktura serwera}
+\section{Logowanie za pomocą Facebooka}
+%dlaczego to jest wygodne, jak działa itd...
+
+\section{Działanie aplikacji na dwóch systemach} 
+%opis że było wszystko działa na ios i że ogóle spoko
+%nie wiem jak to ładnie nazwać
+
+\section{Infrastruktura serwera} 
+%to można trochę jeszcze rozbudować
+
 Serwer projektu został wdrożony na platformie AWS (Amazon Web Services). Decyzja o~wybraniu chmury AWS została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. AWS udostępnia widoczny globalnie w Internecie klaster komputerów w chmurze obliczeniowej. Wspomniane klastry emulują zachowanie prawdziwego komputera, począwszy od wirtualizacji sprzętu (procesora, pamięci RAM, dysku twardego), poprzez infrastrukturę sieciową i system operacyjny, skończywszy na wirtualnej konsoli umożliwiającej połączenie się oraz sterowanie klastrem z poziomu przeglądarki. Wirtualne maszyny AWS udostępniają gotowe rozwiązania serwerowe i oprogramowanie do specjalistycznych zastosowań.
 
-Projekt wykorzystuje także usługi pokrewne firmy Amazon, w szczególności Amazon Simple Storage Service (Amazon S3) do przechowywania zdjęć użytkowników aplikacji w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący; koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych. Transfer plików z platformy hostingowej jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
+Część serwerowa aplikacji działa pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. Nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
 
-W dalszej perspektywie, w miarę rozwoju projektu, Amazon S3 oferuje rozszerzone plany wykorzystania oraz opcję archiwizacji danych z możliwością łatwego odtworzenia w przypadku nadpisania, usunięcia lub utracenia plików.
-
-\section{Część serwerowa}
-Część serwerowa aplikacji \textit{``Podziel się''} oparta jest na frameworku Django działającym pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. Nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
-
-Część serwerowa projektu udostępnia API do komunikacji z aplikacją, które obsługuje typowe zapytania potrzebne podczas sesji użytkownika z \textit{``Podziel się''}. Serwer przyjmuje zapytanie wraz z tokenem autoryzującym klienta i odpowiada wyłącznie w przypadku pozytywnej weryfikacji poprawności tokena. Zarządzanie kontami użytkowników zostało zlecone rozbudowanym mechanizmom autentykacji zaimplementowanym w Django.
-
-Większość danych zwracanych przez serwer jest konwertowana z wbudowanych typów języka Python do formatu JSON i w takiej postaci odsyłana (wyjątkiem jest przesyłanie plików graficznych jako danych binarnych) za pośrednictwem bezpiecznego połączenia HTTPS\@.
-
-Projekt wykorzystuje również pomocniczy framework o nazwie GeoDjango do przechowywania danych związanych z położeniem geograficznym oraz łatwiejszej obsługi złożonych zapytań o charakterze lokalizacyjnym, typu  \textit{``znajdź oferty położone najbliżej punktu o danej szerokości i wysokości geograficznej''}.
-
-\section{Baza danych}
-\textit{``Podziel się''} korzysta z PostgreSQL --- systemu zarządzania relacyjną bazą danych. Django udostępnia mechanizm mapowania obiektowo-relacyjnego (ORM) polegający na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer. Silnik bazodanowy sprawnie obsługuje równoczesne transakcje, zapewniając wysoki stopień współbieżności w dostępie do danych.
-
-\section{Wizualizacja}
-\includegraphics[width=\linewidth]{architektura.png}
-
-\chapter{Implementacja}\label{r:impl}
 \chapter{Przypadki użycia}\label{r:usecase}
 Zaprezentowane są tu przykładowe przypadki użycia.
 \section{Rejestracja}
@@ -458,9 +474,12 @@ Zaprezentowane są tu przykładowe przypadki użycia.
     \subsection{Możliwe rozwinięcia}
     Podczas oznaczania ogłoszenia jako zarezerwowane użytkownik może oznaczyć, dla którego użytkownika dokonywana jest rezerwacja.
 
-\chapter{Problemy i trudności podczas tworzenia aplikacji}\label{r:problem}
+\chapter{Zarządzanie projektem}
+
+\section{Zbieranie wymagań}
+\section{Podział obowiązków}
+
 \chapter{Instrukcja budowania aplikacji i zawartość płytki}\label{r:build}
-\chapter{Podział pracy}\label{r:podzial}
 \chapter{Podsumowanie}\label{r:pods}
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
