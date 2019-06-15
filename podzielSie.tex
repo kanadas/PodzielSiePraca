@@ -191,8 +191,11 @@ Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą b
 
 Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast za pośrednictwem usługi Firebase.
 
-\section{Postgis}
+\section{PostGIS}
 %liczenie odległosci itd.
+Jedną z funkcjonalności naszej aplikacji jest prezentowanie użytkownikowi ofert z adresem odbioru w pobliżu jego aktualnej lokalizacji. Żeby to osiągnąć musieliśmy po stronie serwera być w stanie wyznaczyć wszystkie ogłoszenia z bazy danych, które są oddalone od zadanej lokalizacji nie więcej niż pewna wartość otrzymana w zapytaniu użytkownika. Pierwszym podejściem do rozwiązania tego problemu było wyznaczanie dla każdego zapytania wszystkich odległości pomiędzy adresem odbioru ogłoszeń a otrzymaną lokalizacją i wybranie tych, które są bliżej niż maksymalna odległość, którą wybrał użytkownik. Byłoby to jednak rozwiązanie bardzo nieefektywne, ponieważ dla każdego zapytania wymaga przejrzenia wszystkich ofert z bazy co przy większej ilości użytkowników i ofert może powodować problemy z wydajnością całego systemu. 
+
+Rozwiązaniem, na które ostatecznie się zdecydowaliśmy jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS. Pozwala ono na wprowadzanie danych geograficznych do bazy i ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa używa R-drzewa, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego powyżej. 
 
 \section{Przechowywanie zdjęć} 
 %tutaj pasowało by napisać dlaczego nie składowanie danych na dysku
