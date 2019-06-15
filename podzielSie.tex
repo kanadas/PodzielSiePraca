@@ -19,11 +19,11 @@
 %\autor{Autor Zerowy}{342007}
 \autori{Paweł Giżka}{TODO}
 \autorii{Szymon Gajda}{TODO}
-\autoriii{Kamil Ćwintal}{TODO}
+\autoriii{Kamil Ćwintal}{385369}
 \autoriv{Tomasz Kanas}{385674}
 %\autorv{Autor nr Pięć}{342011}
 
-\title{Mobilna aplikacja do dzielenia się żywnością ``Podziel się''}
+\title{Aplikacja mobilna "Podziel się"}
 
 
 %\tytulang{An implementation of a difference blabalizer based on the theory of $\sigma$ -- $\rho$ phetors}
@@ -70,11 +70,12 @@
 }
 
 %Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
-\klasyfikacja{D. Software\\
+\klasyfikacja{Software and its engineering\\
+Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociology\\
 }
 
 % Słowa kluczowe:
-\keywords{aplikacja mobilna, żywność, ReactNative}
+\keywords{informatyka, aplikacja mobilna, żywność, foodsharing, React Native}
 
 % Tu jest dobre miejsce na Twoje własne makra i~środowiska:
 \newtheorem{defi}{Definicja}[section]
@@ -91,7 +92,7 @@
 
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS\@. Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W niniejszej pracy przedstawiono szczegółowy opis aplikacji i jej architektury, oraz przybliżono proces jej powstawania.
+\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS\@. Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W niniejszej pracy przedstawiono szczegółowy opis aplikacji i jej architektury, a także przybliżono proces jej powstawania.
 \end{abstract}
 
 \tableofcontents
@@ -152,7 +153,7 @@ W rozdziale~\ref{r:konkurencja} przedstawiono przegląd i analizę konkurencyjny
 Od paru lat można zaobserwować ciągły wzrost zainteresowania tematyką marnowania żywności wśród społeczeństwa. Przejawia się to na przykład w rosnącym zainteresowaniu polityków i władz, w tym Komisji Europejskiej (patrz~\cite{ec}), bardzo licznym publikacjom na ten temat, a także w rosnącej popularności ruchów społecznych takich ``freeganizm'', czy ``zero waste''. Zainteresowanie tym tematem przejawia się też w licznych aplikacjach pomagających wymieniać się jedzeniem które inaczej by się zmarnowało. Co ciekawe w różnych państwach popularne są różne aplikacje. Na przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Zachodniej Europie \textit{Too Good To Go}, a w Stanach Zjednoczonych ``Unsung''. W Polsce nie ma jeszcze żadnej popularnej aplikacji, chociaż funkcjonują grupy na portalach społecznościowych spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione wybrane z konkurencyjnych rozwiązań.
 
 \section{Olio}
-Z wymienionych w tym rozdziale aplikacji \textit{Olio} jest najbardziej podobne do \textit{Podziel Się}. Posiada bardzo prosty interfejs, pozwalający już kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy znaleźć z listy ogłoszeń (która może być sortowana po odległości, lub czasie dodania ogłoszenia) produkt na który mamy ochotę. \textit{Olio} tak samo jak \textit{Podziel Się} jest zintegrowane z Mapami Google i lokalizacją telefonu (choć można ją wyłączyć). \textit{Olio} posiada też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie posiada natomiast podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.), w \textit{Olio} specyfikuje się tylko czy produkt jest żywnością czy nie.
+Z wymienionych w tym rozdziale aplikacji \textit{Olio} jest najbardziej podobne do \textit{Podziel Się}. Posiada bardzo prosty interfejs, pozwalający już kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy znaleźć z listy ogłoszeń (która może być sortowana po odległości, lub czasie dodania ogłoszenia) produkt na który mamy ochotę. \textit{Olio} tak samo jak \textit{Podziel Się} jest zintegrowane z Mapami Google i lokalizacją telefonu (choć można ją wyłączyć). \textit{Olio} posiada też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie posiada natomiast podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.), w \textit{Olio} specyfikuje się tylko czy produkt jest żywnością czy nie.
 
 \textit{Olio} jest bardzo popularną aplikacją. Na chwilę obecną posiada ponad milion użytkowników i ponad półtora miliona ogłoszeń (\cite{olio}). Jest najbardziej popularna w Wielkiej Brytanii, w Polsce praktycznie nie funkcjonuje.
 
@@ -292,7 +293,7 @@ Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy G
 
 \newpage
 \section{Infrastruktura serwera} 
-%to można trochę jeszcze rozbudować
+%to można trochę jeszcze rozbudować
 
 Serwer projektu został wdrożony na platformie AWS (Amazon Web Services). Decyzja o wybraniu chmury AWS została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. AWS udostępnia widoczny globalnie w Internecie klaster komputerów w chmurze obliczeniowej. Wspomniane klastry emulują zachowanie prawdziwego komputera, począwszy od wirtualizacji sprzętu (procesora, pamięci RAM, dysku twardego), poprzez infrastrukturę sieciową i system operacyjny, skończywszy na wirtualnej konsoli umożliwiającej połączenie się oraz sterowanie klastrem z poziomu przeglądarki. Wirtualne maszyny AWS udostępniają gotowe rozwiązania serwerowe i oprogramowanie do specjalistycznych zastosowań.
 
@@ -559,7 +560,7 @@ Zaprezentowane są tu przykładowe przypadki użycia.
 \section{Zbieranie wymagań}
 \section{Podział obowiązków}
 
-\chapter{Instrukcja budowania aplikacji i zawartość płytki}\label{r:build}
+\chapter{Instrukcja budowania aplikacji i zawartość płytki}\label{r:build}
 \chapter{Podsumowanie}\label{r:pods}
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
