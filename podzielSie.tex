@@ -197,7 +197,11 @@ Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast 
 \section{Przechowywanie zdjęć} 
 %tutaj pasowało by napisać dlaczego nie składowanie danych na dysku
 
-Projekt wykorzystuje usługę pokrewną firmy Amazon, Amazon Simple Storage Service (Amazon S3) do przechowywania zdjęć użytkowników aplikacji w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący; koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych. Transfer plików z platformy hostingowej jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
+W trakcie tworzenia systemu, musieliśmy wybrać sposób przechowywania zdjęć. Pierwszym pomysłem było zapisywanie zdjęć na lokalnym dysku serwera. Szybko zdaliśmy sobie sprawę, że takie rozwiązanie posiada szereg wad. Pierwszą z nich jest brak elastyczności, w przypadku wyczerpania miejsca bylibyśmy zmuszeni zapłacić za droższy serwer, nawet jeżeli nie potrzebowalibyśmy szybszego procesora czy większej pamięci ram. Kolejną wadą jest duże obciążenia serwera, który musiałby obsłużyć zapytania HTTP związane z transferem tych zdjęć na urządzenia mobilne. 
+
+Zdecydowliśmy skorzystać z serwisu Amazon Simple Storage Service (Amazon S3). Usługa pozwala przechowywać dane w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący. Co więcej, koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych, mamy więc pełną elastyczność jeśli chodzi o koszty. Transfer plików jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
+
+Obsługa zdjęć zrealizowana jest w następujący sposób: Część mobilna kompresuje fotografie przed wysłaniem, następnie wysyła je w jednym zapytaniu wraz z informacjami o ogłoszeniu do serwera aplikacji \textit{``Podziel się''}. Serwer zapisuje dane ogłoszenia i metadane zdjęć w bazie PostegreSQL, a następnie wysyła obrazy do usługi Amazon S3. Przy pobieraniu informacji o dostępnych ogłoszeniach lub szczegółach danego ogłoszenia serwer zwraca odnośniki do zdjęć, następnie urządzenie mobilne pozyskuje dane bezpośrednio z serwisu Amazon S3. W ten sposób w znacznym stopniu redukowane jest obciążenia serwera aplikacji \textit{``Podziel się''}.
 
 W dalszej perspektywie, w miarę rozwoju projektu, Amazon S3 oferuje rozszerzone plany wykorzystania oraz opcję archiwizacji danych z możliwością łatwego odtworzenia w przypadku nadpisania, usunięcia lub utracenia plików.
 
@@ -241,6 +245,7 @@ Drugą są powiadomienia. Tak jak pisaliśmy we wcześniejszym podrozdziale, wym
 
 Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy Google. W szczególności, obie wersją mają taki sam interfejs użytkownika. Różni on się jedynie szczegółami, typowymi dla danej platformy. Na przykład komponentami wyboru daty lub zdjęć z galerii. Poniżej zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone:
 
+\newpage
 \begin{figure}[h!]
   \centering
   \begin{subfigure}[b]{0.4\linewidth}
@@ -285,7 +290,7 @@ Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy G
   \label{fig:offers}
 \end{figure}
 
-
+\newpage
 \section{Infrastruktura serwera} 
 %to można trochę jeszcze rozbudować
 
