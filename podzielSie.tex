@@ -17,7 +17,7 @@
 \documentclass[licencjacka]{pracamgr}
 
 %\autor{Autor Zerowy}{342007}
-\autori{Paweł Giżka}{TODO}
+\autori{Paweł Giżka}{385522}
 \autorii{Szymon Gajda}{TODO}
 \autoriii{Kamil Ćwintal}{TODO}
 \autoriv{Tomasz Kanas}{385674}
@@ -555,9 +555,61 @@ Zaprezentowane są tu przykładowe przypadki użycia.
     Podczas oznaczania ogłoszenia jako zarezerwowane użytkownik może oznaczyć, dla którego użytkownika dokonywana jest rezerwacja.
 
 \chapter{Zarządzanie projektem}
+\section{Wykorzystane narzędzia}
 
-\section{Zbieranie wymagań}
+W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywany był zarówno do komunikacji między członkami zespołu, jak również między zespołem a zamawiającym. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomcne okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
+
+Kod programu oraz tekst pracy licencjackiej przechowywane były w serwisie Github. Dzięki niemu mogliśmy również w prosty sposób spisywać listę zadań do zrobienia.
+
+\section{Organizacja pracy}
+
+Nie korzystaliśmy w bezpośredni sposób z jednej ze znanych metodyk zarządzania projektemi programistycznymi. Jednakże trzymaliśmy się kilku isotnych zasad. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się, żeby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu zespołowy projekt programistyczny. Każdy z nas decydował jakie zadanie w danej chwili chce wykonać. Wspólnie zaprojektowaliśmy architektórę aplikacji oraz podejmowaliśmy najważniejsze decyzję dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy jakie w danej chwili napotykaliśmy.
+
+Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyńcze zadanie dotyczyło najczęściej zaimplementowanie jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej jak i serwerowej. W ten sposób mogliśmy znacznie zrównolegliść prace nad projektem. Jedna osoba nie musiała czekać aż ktoś inny zrealizuje niezbędną pracę po stronie serwera. Ponad to uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku ReactNative oraz realizacji częsci serwerowej we frameworku Django.
+
 \section{Podział obowiązków}
+
+\subsection{Kamil Ćwinatal}
+\begin{itemize}
+\setlength\itemsep{-0.2em}
+    \item Widok listy ogłoszeń,
+    \item Zdjęcia profilowe użytkowników,
+    \item Zdjęcia ogłoszeń,
+    \item Kategorie i hasztagi w ogłoszeniach,
+    \item Dopracowanie ogólnego wyglądu aplikacji,
+\end{itemize}{}
+
+\subsection{Szymon Gajda}
+\begin{itemize}
+\setlength\itemsep{-0.2em}
+    \item Dodawanie ogłoszeń,
+    \item Dodanie lokalizacji do ogłoszeń,
+    \item Wyświetlanie mapy w ogłoszenich,
+    \item Filtrowanie i sortowanie ogłoszeń po odległości między użytkownikiem a ogłoszeniem,
+    \item Logowanie z Facebookiem,
+    \item Zgłaszanie nieodpowiednich ogłoszeń,
+\end{itemize}{}
+
+\subsection{Paweł Giżka}
+\begin{itemize}
+\setlength\itemsep{-0.2em}
+    \item Logowanie i rejestracja,
+    \item Czat między użytkownikami,
+    \item Powiadomienia,
+    \item Sortowanie ogłoszeń,
+    \item Możliwość obserwacji wybranych użytkowników,
+    \item Konfiguracja serwera aplikacji,
+\end{itemize}{}
+
+\subsection{Tomasz Kanas}
+\begin{itemize}
+\setlength\itemsep{-0.2em}
+    \item Widok szczegółów ogłoszenia,
+    \item Widok własnych ogłoszeń,
+    \item Widok profilu innych użytkowników,
+    \item Ocenianie użytkowników,
+    \item Widok i możliwość edycji własnego profilu,
+\end{itemize}{}
 
 \chapter{Instrukcja budowania aplikacji i zawartość płytki}\label{r:build}
 \chapter{Podsumowanie}\label{r:pods}
