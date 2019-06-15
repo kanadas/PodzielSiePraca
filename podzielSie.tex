@@ -80,6 +80,8 @@
 \newtheorem{defi}{Definicja}[section]
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{subcaption}
+
 
 % koniec definicji
 
@@ -224,9 +226,65 @@ Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformi
 \section{Logowanie za pomocą Facebooka}
 %dlaczego to jest wygodne, jak działa itd...
 
-\section{Działanie aplikacji na dwóch systemach} 
+\section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych} 
 %opis że było wszystko działa na ios i że ogóle spoko
 %nie wiem jak to ładnie nazwać
+System operacyjny Android jest niezwykle popularny w naszym kraju. Według IDC 91,5\% sprzedanych smarfonów w 2017 roku stanowiły urządzenia działające pod kontrolą systemu firmy Google.
+
+Z tego względu postanowiliśmy, że w pierwszej kolejności tworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem IOS. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie informowali o komaptybilności z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone. 
+
+Nie udało nam się jedynie zaimplementować dwóch funkcjonalności:
+
+Pierwszą z nich jest logowanie z Facebookiem. Pomimo tego, że twórcy biblioteki z której skorzystaliśmy, zapewniali o działaniu na platformie IOS, to nie udało nam się odpowiednio jej skonfigurwać do działałania z naszą aplikacją.
+
+Drugą są powiadomienia. Tak jak pisaliśmy we wcześniejszym podrozdziale, wymogiem było posiadanie konta w programie \textit{Apple Developer Program}. 
+
+Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy Google. W szczególności, obie wersją mają taki sam interfejs użytkownika. Różni on się jedynie szczegółami, typowymi dla danej platformy. Na przykład komponentami wyboru daty lub zdjęć z galerii. Poniżej zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone:
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{android1.jpg}
+    \caption{Android.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{ios1.jpg}
+    \caption{iPhone.}
+  \end{subfigure}
+  \caption{Lista ogłoszeń.}
+  \label{fig:offers}
+\end{figure}
+
+\newpage
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{android2.jpg}
+    \caption{Android.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{ios2.jpg}
+    \caption{iPhone.}
+  \end{subfigure}
+  \caption{Szczegóły ogłoszenia.}
+  \label{fig:offers}
+\end{figure}
+
+\newpage
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{android3.jpg}
+    \caption{Android.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{ios3.jpg}
+    \caption{iPhone.}
+  \end{subfigure}
+  \caption{Główne menu.}
+  \label{fig:offers}
+\end{figure}
+
 
 \section{Infrastruktura serwera} 
 %to można trochę jeszcze rozbudować
@@ -516,6 +574,9 @@ Zaprezentowane są tu przykładowe przypadki użycia.
     \href{www.reducefoodwaste.eu}{\texttt{reducefoodwaste.eu}}
 
 \bibitem[ec.europa.eu]{ec} Działania KE ws.\ marnowania żywności\\ \href{https://ec.europa.eu/food/safety/food_waste_en}{\texttt{https://ec.europa.eu/food/safety/food\_waste\_en}}
+
+\bibitem[IDC]{ec} Popularność systemu Android w Polsce\\ 
+\href{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}
 
 \bibitem[ReactNative]{reactnative} \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
 
