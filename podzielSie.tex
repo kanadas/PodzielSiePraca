@@ -177,15 +177,17 @@ Ważnym elementem React Native jest moduł pośredniczący (ang. \textit{bridge}
 
 \subsection{Część Serwerowa} 
 
-Cześć serwerowa została stworza w języku Python, w oparciu o framework django. Pozwala on na szybkie tworzenie RESTowych endpointów oraz łatwy dostęp do relacyjnych baz danych dzięki rozbudowanemu mechanizmowi mapowania obiektowo-relacyjnego (ORM). Polega ono na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer.
+Cześć serwerowa została stworza w języku Python, w oparciu o framework Django. Pozwala on na szybkie tworzenie webowych interfejsów programistycznych aplikacji (po angielsku Web API) oraz łatwy dostęp do relacyjnych baz danych dzięki rozbudowanemu mechanizmowi mapowania obiektowo-relacyjnego (ORM). Polega ono na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer.
 
-Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyjnego. Wybrany framework posiada wbudowany moduł administracyjny, wystarczy dopisać kilka linijek kodu do każdej encji by powstał w pełni użyteczny panel adminstratora, pozwalający na wykonywanie podstawowych operacji: pobierz, dodaj, usuń, modyfikuj na danych znajdujących się w bazie.
+Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyjnego. Wybrany framework umożliwa automatyczne generowanie panelu administratora. Wygenerowany panel umożliwia wykonywanie podstawowych operacji: pobierz, dodaj, usuń, modyfikuj na danych znajdujących się w bazie. 
 
 %Nie wiedziałem jak napisać to zdanie: 
-PostegreSQL wraz wtyczką PostGis odpowiada za przechowywanie relacyjnych danych.
+Do przychowywania danych wykorzystana została relacyjna baza danych PostegreSql z wtyczką PostGIS, która pozwala na wydajne wykonywanie zapytań zapytań przestrzennych. Zdjęcia zapisywane są w usłudze AmazonS3.
 
 \subsection{Komunikacja Klient - Serwer} 
-%json, https,
+Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłana są w formacie JSON, jest on formatem tekstowym i bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikalnym tokenem przyznwanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token. 
+
+Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast za pośrednictwem usługi Firebase.
 
 \section{Postgis}
 %liczenie odległosci itd.
