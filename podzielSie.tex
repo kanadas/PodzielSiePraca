@@ -23,7 +23,7 @@
 \autoriv{Tomasz Kanas}{385674}
 %\autorv{Autor nr Pięć}{342011}
 
-\title{Aplikacja mobilna "Podziel się"}
+\title{Aplikacja mobilna ``Podziel się''}
 
 
 %\tytulang{An implementation of a difference blabalizer based on the theory of $\sigma$ -- $\rho$ phetors}
@@ -104,7 +104,7 @@ Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociol
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
 \section*{Kontekst społeczny}
-Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu (\cite{eurostat}), z których wynika, że w Polsce rocznie marnuje się około 9 milionów ton żywności. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie \cite{millward-brown} wykazało, że do wyrzucania jedzenia przyznaje się 42\% Polaków, podczas gdy wyrzucane produkty mogłyby przyczynić się do zaspokojenia podstawowych potrzeb żywieniowych niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
+Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu (\cite{eurostat}), z których wynika, że w Polsce rocznie marnuje się około 9 milionów ton żywności. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie~\cite{millward-brown} wykazało, że do wyrzucania jedzenia przyznaje się 42\% Polaków, podczas gdy wyrzucane produkty mogłyby przyczynić się do zaspokojenia podstawowych potrzeb żywieniowych niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
 
 W krajach rozwiniętych około 50\% wyrzucanego jedzenia pochodzi z gospodarstw domowych, w których na skutek nierozważnego planowania zakupów jedzenie ulega zepsuciu i~trafia do śmietnika (\cite{polityka}). Wierzymy, że~możliwe jest przeciwdziałanie temu zjawisku na poziomie lokalnym.
 
@@ -156,24 +156,24 @@ Poniżej znajduje się objaśnienie podstawowych pojeć i definicji używanych w
 \begin{itemize}
 \setlength\itemsep{-0.2em}
 
-\item \textbf{Framework} - z Wikipedi: \textit{``szkielet do budowy aplikacji. Definiuje on strukturę aplikacji oraz ogólny mechanizm jej działania, a także dostarcza zestaw komponentów i bibliotek ogólnego przeznaczenia do wykonywania określonych zadań''} (patrz~\cite{framework}) Spotyka się również określenie: \textit{``Zrąb''},
+\item \textbf{Framework} --- z Wikipedi: \textit{``szkielet do budowy aplikacji. Definiuje on strukturę aplikacji oraz ogólny mechanizm jej działania, a także dostarcza zestaw komponentów i bibliotek ogólnego przeznaczenia do wykonywania określonych zadań''} (patrz~\cite{framework}) Spotyka się również określenie: \textit{``Zrąb''},
 
-\item \textbf{Amazon S3} - usługa firmy Amazon umożliwiająca łatwe przechowywanie danych,
+\item \textbf{Amazon S3} --- usługa firmy Amazon umożliwiająca łatwe przechowywanie danych,
 
-\item \textbf{React Native} - framework stworzony przez firmę Facebook pozwalajaćy na tworzenie
+\item \textbf{React Native} --- framework stworzony przez firmę Facebook pozwalajaćy na tworzenie
 aplikacji jednocześnie na systemy Android i IOS,
 
-\item \textbf{Django} - framework do tworzenia aplikacji internetowych,
+\item \textbf{Django} --- framework do tworzenia aplikacji internetowych,
 
-\item \textbf{Firebase} - platforma stworzona przez firmę Google, oferuje narzędzia wspierające tworzenia aplikacji mobilnych, 
+\item \textbf{Firebase} --- platforma stworzona przez firmę Google, oferuje narzędzia wspierające tworzenia aplikacji mobilnych,
 
-\item \textbf{Firebase Cloud Messaging (FCM)} - narzędzie platformy Firebase pozwalające na wysyłanie powiadomień do telefonu użytkownika,
+\item \textbf{Firebase Cloud Messaging (FCM)} --- narzędzie platformy Firebase pozwalające na wysyłanie powiadomień do telefonu użytkownika
 
-\item \textbf{Apple Push Notification (APN)} - narzędzie firmy Apple umożliwiające wysyłanie powiadomień do telefonu użytkownika,
+\item \textbf{Apple Push Notification (APN)} --- narzędzie firmy Apple umożliwiające wysyłanie powiadomień do telefonu użytkownika,
 
-\item \textbf{Gunicorn} - serwer pozwalajacy uruchomić aplikację napisaną we frameworku Django,
+\item \textbf{Gunicorn} --- serwer pozwalajacy uruchomić aplikację napisaną we frameworku Django,
 
-\item \textbf{Nginx} - serwer HTTP, proxy,
+\item \textbf{Nginx} --- serwer HTTP, proxy,
 
 
 \end{itemize}
@@ -210,17 +210,17 @@ Aplikacja \textit{``Podziel się''} przeznaczona jest dla użytkowników dwóch 
 
 Ważnym elementem React Native jest moduł pośredniczący (ang. \textit{bridge}), który tłumaczy wywołania pochodzące z wątków JavaScriptu na polecenia skierowane do systemu operacyjnego. Komunikaty opisujące akcje do wykonania są przesyłane w formacie JSON do modułu pośredniczącego, a po ich otrzymaniu \textit{bridge} wywołuje odpowiednie funkcje systemowe. Wymiana komunikatów jest asynchroniczna oraz nieblokująca, zatem React Native nie ingeruje nadmiernie w pracę systemu operacyjnego oraz umożliwia sprawne renderowanie widoków na ekranie. Co więcej, aplikacja ma możliwość swobodnej komunikacji ze środowiskiem wykonania; w razie potrzeby może uzyskać dostęp do modułu GPS, aparatu, pamięci wewnętrznej urządzenia itp.
 
-\subsection{Część Serwerowa} 
+\subsection{Część Serwerowa}
 
 Cześć serwerowa została stworza w języku Python, w oparciu o framework Django. Pozwala on na szybkie tworzenie webowych interfejsów programistycznych aplikacji (po angielsku Web API) oraz łatwy dostęp do relacyjnych baz danych dzięki rozbudowanemu mechanizmowi mapowania obiektowo-relacyjnego (ORM). Polega ono na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer.
 
-Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyjnego. Wybrany framework umożliwa automatyczne generowanie panelu administratora. Wygenerowany panel umożliwia wykonywanie podstawowych operacji: pobierz, dodaj, usuń, modyfikuj na danych znajdujących się w bazie. 
+Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyjnego. Wybrany framework umożliwa automatyczne generowanie panelu administratora. Wygenerowany panel umożliwia wykonywanie podstawowych operacji: pobierz, dodaj, usuń, modyfikuj na danych znajdujących się w bazie.
 
-%Nie wiedziałem jak napisać to zdanie: 
+%Nie wiedziałem jak napisać to zdanie:
 Do przychowywania danych wykorzystana została relacyjna baza danych PostegreSql z wtyczką PostGIS, która pozwala na wydajne wykonywanie zapytań zapytań przestrzennych. Zdjęcia zapisywane są w usłudze AmazonS3.
 
-\subsection{Komunikacja Klient - Serwer} 
-Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłana są w formacie JSON, jest on formatem tekstowym i bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikalnym tokenem przyznwanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token. 
+\subsection{Komunikacja Klient - Serwer}
+Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłana są w formacie JSON, jest on formatem tekstowym i bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikalnym tokenem przyznwanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token.
 
 Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast za pośrednictwem usługi Firebase.
 
@@ -228,12 +228,12 @@ Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast 
 %liczenie odległosci itd.
 Jedną z funkcjonalności naszej aplikacji jest prezentowanie użytkownikowi ofert z adresem odbioru w pobliżu jego aktualnej lokalizacji. Żeby to osiągnąć musieliśmy po stronie serwera być w stanie wyznaczyć wszystkie ogłoszenia z bazy danych, które są oddalone od zadanej lokalizacji nie więcej niż pewna wartość otrzymana w zapytaniu użytkownika. Pierwszym podejściem do rozwiązania tego problemu było wyznaczanie dla każdego zapytania wszystkich odległości pomiędzy adresem odbioru ogłoszeń a otrzymaną lokalizacją i wybranie tych, które są bliżej niż maksymalna odległość, którą wybrał użytkownik. Byłoby to jednak rozwiązanie bardzo nieefektywne, ponieważ dla każdego zapytania wymaga przejrzenia wszystkich ofert z bazy co przy większej ilości użytkowników i ofert może powodować problemy z wydajnością całego systemu.
 
-Rozwiązaniem, na które ostatecznie się zdecydowaliśmy jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS. Pozwala ono na wprowadzanie danych geograficznych do bazy i ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa używa R-drzewa, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego powyżej.
+Rozwiązaniem, na które ostatecznie się zdecydowaliśmy jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS\@. Pozwala ono na wprowadzanie danych geograficznych do bazy i ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa używa R-drzewa, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego powyżej.
 
-\section{Przechowywanie zdjęć} 
+\section{Przechowywanie zdjęć}
 %tutaj pasowało by napisać dlaczego nie składowanie danych na dysku
 
-W trakcie tworzenia systemu, musieliśmy wybrać sposób przechowywania zdjęć. Pierwszym pomysłem było zapisywanie zdjęć na lokalnym dysku serwera. Szybko zdaliśmy sobie sprawę, że takie rozwiązanie posiada szereg wad. Pierwszą z nich jest brak elastyczności, w przypadku wyczerpania miejsca bylibyśmy zmuszeni zapłacić za droższy serwer, nawet jeżeli nie potrzebowalibyśmy szybszego procesora czy większej pamięci ram. Kolejną wadą jest duże obciążenia serwera, który musiałby obsłużyć zapytania HTTP związane z transferem tych zdjęć na urządzenia mobilne. 
+W trakcie tworzenia systemu, musieliśmy wybrać sposób przechowywania zdjęć. Pierwszym pomysłem było zapisywanie zdjęć na lokalnym dysku serwera. Szybko zdaliśmy sobie sprawę, że takie rozwiązanie posiada szereg wad. Pierwszą z nich jest brak elastyczności, w przypadku wyczerpania miejsca bylibyśmy zmuszeni zapłacić za droższy serwer, nawet jeżeli nie potrzebowalibyśmy szybszego procesora czy większej pamięci ram. Kolejną wadą jest duże obciążenia serwera, który musiałby obsłużyć zapytania HTTP związane z transferem tych zdjęć na urządzenia mobilne.
 
 Zdecydowliśmy skorzystać z serwisu Amazon Simple Storage Service (Amazon S3). Usługa pozwala przechowywać dane w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący. Co więcej, koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych, mamy więc pełną elastyczność jeśli chodzi o koszty. Transfer plików jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
 
@@ -257,30 +257,30 @@ Powiadomienia wyświetlane są w przypadku zajaścia jednego z następujących z
 
 Najprostszym sposobem implementacji tej funkcjonalności jest regularne odpytywanie serwera czy są dostępne nowe powiadomienia. Jednakże ze względu na ograniczenia systemu Android jak i IOS, obsługa procesów w tle (to znaczy wtedy kiedy użytkownik nie korzysta z aplikacji) jest bardzo mocno ograniczona. Procesy w tle nie mogą być uruchamiane częściej niż co kilkadziesięt minut. Związane jest to z oszcządzaniem energi.
 
-Z tego względu zdecydowaliśmy się na użycie zewnętrznych usług takich jak: Firabase Cloud Messaging (FCM), dla systemu Androida oraz Apple Push Notification (APN) w przypadku IOS. Umożliwiają one niemalże natychmiastowe dostarczanie wiadomości z serwera do telefonu użytkownika.
+Z tego względu zdecydowaliśmy się na użycie zewnętrznych usług takich jak: Firabase Cloud Messaging (FCM), dla systemu Androida oraz Apple Push Notification (APN) w przypadku IOS\@. Umożliwiają one niemalże natychmiastowe dostarczanie wiadomości z serwera do telefonu użytkownika.
 
 Schemat działania systemu powiadomień wygląda następująco: urządzenie mobilne przy pierwszym uruchomieniu pobiera unikalny identyfkiator (token) z serwisu FCM bądź APN, jest on wysyłany na serwer aplikacji \textit{``Podziel się''} w trakcie logowanie lub rejestracji, a następnie zapisywany w bazie danych. W przypadku potrzeby dostarczenia powiadomienia na dane urządzenie, serwer aplikacji \textit{``Podziel się''} wyśle do serwera FCM wiadomość zawierającą token danego telefonu oraz zawartość powiadomienia. Usługa FCM przekieruje notyfikację do konkretnego użytkownika na podstawie denego identyfikatora urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika, może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
 
-Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformie Android. Jeśli chodzi o system IOS to wymogiem usługi APN było posiadanie konta w programie \textit{Apple Developer Program}. Niestety ze wzlędów czasowych i formalnych nie byliśmy w stanie przystąpić do tego programu. Jednakże zarówno aplikacja mobilna jak i część serwerowa są już przystosowane do obsługi APN, wystarczy jedynie odpowiednio skonfigurwać platformę Firebase (wgrać odpowiednie certyfikaty wygenerowane na koncie dewelopera Apple), wtedy powiadomienia do użytkowników Apple będę przekierowywane do APN.  
+Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformie Android. Jeśli chodzi o system IOS to wymogiem usługi APN było posiadanie konta w programie \textit{Apple Developer Program}. Niestety ze wzlędów czasowych i formalnych nie byliśmy w stanie przystąpić do tego programu. Jednakże zarówno aplikacja mobilna jak i część serwerowa są już przystosowane do obsługi APN, wystarczy jedynie odpowiednio skonfigurwać platformę Firebase (wgrać odpowiednie certyfikaty wygenerowane na koncie dewelopera Apple), wtedy powiadomienia do użytkowników Apple będę przekierowywane do APN\@.
 
 \section{Logowanie za pomocą Facebooka}
 %dlaczego to jest wygodne, jak działa itd...
 Oprócz klasycznej możliwości logowania poprzez podanie adresu e-mail i hasła zgodnych z tymi zapisanymi podczas rejestracji, istnieje także opcja zalogowania przez połączenie swojego konta w serwisie Facebook z kontem w aplikacji \textit{Podziel się}. Cały proces z punktu widzenia użytkownika polega na naciśnięciu przycisku logowania z Facebookiem na ekranie logowania, udzieleniu odpowiednich pozwoleń i zalogowaniu się do swojego konta w serwisie Facebook. Po wykonaniu tych czynności użytkownik może już korzystać z aplikacji, co więcej jego dane i zdjęcie profilowe zostaną automatycznie pobrane. Taka możliwość pozwala na jeszcze szybsze skorzystanie z aplikacji \textit{Podziel się} niż klasyczne logowanie.
 
-Funkcjonalność ta jest możliwa dzięki modułowi integrującemu aplikację napisaną z użyciem React Native z kontem w serwisie Facebook. Po udzieleniu potrzebnych pozwoleń i zalogowaniu użytkownika do konta Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na zidentyfikowanie użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie, a także osobnego klucza specyficznego dla całej aplikacji, pobierane są dane użytkownika takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator użytkownika. Potem sprawdzane jest czy ten użytkownik posiada już konto, jeżeli nie to jego dane dodawane są do bazy danych, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający - analogicznie jak przy klasycznym logowaniu. 
+Funkcjonalność ta jest możliwa dzięki modułowi integrującemu aplikację napisaną z użyciem React Native z kontem w serwisie Facebook. Po udzieleniu potrzebnych pozwoleń i zalogowaniu użytkownika do konta Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na zidentyfikowanie użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie, a także osobnego klucza specyficznego dla całej aplikacji, pobierane są dane użytkownika takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator użytkownika. Potem sprawdzane jest czy ten użytkownik posiada już konto, jeżeli nie to jego dane dodawane są do bazy danych, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający --- analogicznie jak przy klasycznym logowaniu.
 
-\section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych} 
+\section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych}
 %opis że było wszystko działa na ios i że ogóle spoko
 %nie wiem jak to ładnie nazwać
 System operacyjny Android jest niezwykle popularny w naszym kraju. Według IDC 91,5\% sprzedanych smarfonów w 2017 roku stanowiły urządzenia działające pod kontrolą systemu firmy Google (patrz~\cite{popluarnoscAndroid}).
 
-Z tego względu postanowiliśmy, że w pierwszej kolejności tworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem IOS. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie informowali o komaptybilności z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone. 
+Z tego względu postanowiliśmy, że w pierwszej kolejności tworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem IOS\@. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie informowali o komaptybilności z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone.
 
 Nie udało nam się jedynie zaimplementować dwóch funkcjonalności:
 
 Pierwszą z nich jest logowanie z Facebookiem. Pomimo tego, że twórcy biblioteki z której skorzystaliśmy, zapewniali o działaniu na platformie IOS, to nie udało nam się odpowiednio jej skonfigurwać do działałania z naszą aplikacją.
 
-Drugą są powiadomienia. Tak jak pisaliśmy we wcześniejszym podrozdziale, wymogiem było posiadanie konta w programie \textit{Apple Developer Program}. 
+Drugą są powiadomienia. Tak jak pisaliśmy we wcześniejszym podrozdziale, wymogiem było posiadanie konta w programie \textit{Apple Developer Program}.
 
 Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy Google. W szczególności, obie wersją mają taki sam interfejs użytkownika. Różni on się jedynie szczegółami, typowymi dla danej platformy. Na przykład komponentami wyboru daty lub zdjęć z galerii. Poniżej zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone:
 
@@ -343,25 +343,25 @@ Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy G
 
 \newpage
 
-\chapter{Infrastruktura serwera}\label{r:infrastruktura} 
+\chapter{Infrastruktura serwera}\label{r:infrastruktura}
 
 Potrzeba udostępnienia pierwszej wersji aplikacji zamawiającemu, postawiła nas przed koniecznością uruchomienia stałego serwera aplikacyjnego. Musieliśmy podjęć decyzję dotycząca wyboru platformy na której będzie uruchomiony nasz serwer. Ze względu na bardzo dużo liczbę firm oferujących usługi typu wirtualny prywatny serwer, nie był to łatwy wybór.
 
 \section{Kryteria}
 Przy wyborze usługodawcy kierowaliśmy się następującymi kryteriami:
 \begin{itemize}
-    \item \textbf{Cena} - w trakcie tworzenia systemu z aplikacji korzystało tylko kilka osób: nasz zespół i
+    \item \textbf{Cena} --- w trakcie tworzenia systemu z aplikacji korzystało tylko kilka osób: nasz zespół i
     zamawiający, niepotrzebowaliśmy więc drogiego i bardzo wydajnego serwera,
-    \item \textbf{Skalowalność} - chcieliśmy mieć możliwość łatwego zwiększenia dostępnych zasobów jeśli
+    \item \textbf{Skalowalność} --- chcieliśmy mieć możliwość łatwego zwiększenia dostępnych zasobów jeśli
     zwiększy się liczba osób korzystających z systemu,
-    \item \textbf{System operacyjny Linux} - wybrany serwer powinien działać w oparciu o jedną z dystrybucji
+    \item \textbf{System operacyjny Linux} --- wybrany serwer powinien działać w oparciu o jedną z dystrybucji
     systemu Linux,
-    \item \textbf{Prosta administracja} - nikt z nas nie miał wcześniej doświadczenia związanego z administrowaniem serwerem, wybrany serwis musiał być więc dostatecznie prosty w obsłudze,
+    \item \textbf{Prosta administracja} --- nikt z nas nie miał wcześniej doświadczenia związanego z administrowaniem serwerem, wybrany serwis musiał być więc dostatecznie prosty w obsłudze,
 \end{itemize}{}
 
 \section{Amazon Lightsail}
 
-Nasz wybór padł na usługę \textit{``Lightsail''} firmy Amazon. Decyzja o wybraniu produktu firmy Amazon została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność, akceptowalną cenę (3,5\$ kosztuje najtańszy pakiet miesięcznie) oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. Lightsail udostępnia maszynę wirtualną działającą pod kontrolą systemu Linux Ubuntu, ze statycznym adresem IP.
+Nasz wybór padł na usługę \textit{``Lightsail''} firmy Amazon. Decyzja o wybraniu produktu firmy Amazon została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność, akceptowalną cenę (3,5\$ kosztuje najtańszy pakiet miesięcznie) oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. Lightsail udostępnia maszynę wirtualną działającą pod kontrolą systemu Linux Ubuntu, ze statycznym adresem IP\@.
 
 Administracja jest możliwa za pomocą witryny internetowej. Możliwe jest między innymi: zresetowanie maszyny, reinstalacja systemu czy wykonanie i przywrócenie kopi zapasowej.
 
@@ -372,10 +372,10 @@ Część serwerowa aplikacji działa pod kontrolą serwera HTTP Gunicorn. Gunico
 Baza danych PostegreSQL wraz z wtyczką PostGIS uruchomiona jest kontenerze Docker.
 
 \section{Dostęp do Serwera}
-Połączenie z serwerem odbywa się za pomocą protokołu SSH. Możliwy jest również dostęp za pomocą konsoli dostępnej na stronie internetowej serwisu Lightsail.
+Połączenie z serwerem odbywa się za pomocą protokołu SSH\@. Możliwy jest również dostęp za pomocą konsoli dostępnej na stronie internetowej serwisu Lightsail.
 
 \section{Dalszy rozwój}
-W miarę dalczego rozwoju projektu, narzędzie firmy Amazon oferuje elastyczne plany, zawierajęce większą liczbę rdzeni procesore, pamięci ram czy przestrzeni dyskowej. Istniej również możliwość łatwej integracji z innymi produktami z rodziny Amazon Web Services (AWS) takimi jak na przykład dedykowane serwery do równoważenia obciążenia, narzędzia do zarządzania domenami i certyfikatami SSL.
+W miarę dalczego rozwoju projektu, narzędzie firmy Amazon oferuje elastyczne plany, zawierajęce większą liczbę rdzeni procesore, pamięci ram czy przestrzeni dyskowej. Istniej również możliwość łatwej integracji z innymi produktami z rodziny Amazon Web Services (AWS) takimi jak na przykład dedykowane serwery do równoważenia obciążenia, narzędzia do zarządzania domenami i certyfikatami SSL\@.
 
 
 \chapter{Przypadki użycia}\label{r:usecase}
@@ -414,7 +414,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
             \end{itemize}
      \item Aplikacja pyta użytkownika, czy chce korzystać z usługi geolokalizacji do sortowania listy ogłoszeń względem aktualnego położenia.
      \item Użytkownik wyraża zgodę na korzystanie z geolokalizacji.
-     \item Proces rejestracji został zakończony - użytkownik jest domyślnie zalogowany do aplikacji na danym urządzeniu.
+     \item Proces rejestracji został zakończony --- użytkownik jest domyślnie zalogowany do aplikacji na danym urządzeniu.
     \end{enumerate}
     \subsubsection{Czynności alternatywne}
     \begin{enumerate}
@@ -519,7 +519,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się okienko ze stosownym komunikatem. Użytkownik zostaje przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
     \begin{enumerate}
         \item Użytkownik nie wprowadził kompletu wymaganych informacji.
-        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji (np. zbyt mała liczba wskazanych hasztagów)
+        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji (np.\ zbyt mała liczba wskazanych hasztagów)
         \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie ogłoszenia nie została rozpatrzona.
         \item Serwer zasygnalizował błąd podczas operacji dodawania ogłoszenia do bazy danych.
     \end{enumerate}
@@ -633,8 +633,8 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
         \item Użytkownik A naciska przycisk ``Wyślij opinię’’.
     \end{enumerate}
     \subsubsection{Czynności alternatywne}
-    Użytkownik A może co najwyżej raz ocenić użytkownika B. Jeśli miało już to miejsce, użytkownik A może edytować swoją ocenę na sześciostopniowej skali. Istnieje jednak możliwość wielokrotnego wystawiania komentarzy (np. dla każdego ogłoszenia B oddzielnie).
-    \subsubsection{Czynności niepoprawne}	
+    Użytkownik A może co najwyżej raz ocenić użytkownika B. Jeśli miało już to miejsce, użytkownik A może edytować swoją ocenę na sześciostopniowej skali. Istnieje jednak możliwość wielokrotnego wystawiania komentarzy (np.\ dla każdego ogłoszenia B oddzielnie).
+    \subsubsection{Czynności niepoprawne}
     \begin{enumerate}
         \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie / edycję opinii nie została rozpatrzona.
         \item Serwer zasygnalizował błąd podczas operacji dodawania / edycji opinii w bazie danych.
@@ -689,7 +689,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \paragraph{Użytkownik B}
     \begin{enumerate}
         \item Użytkownik otrzymuje nową wiadomość na czacie z chęcią odbioru oferowanego produktu.
-        \item Użytkownik decyduje, czy chce oddać oferowany produkt użytkownikowi A:
+        \item Użytkownik decyduje, czy chce oddać oferowany produkt użytkownikowi A\@:
         \begin{itemize}
             \item Jeżeli B nie chce oddać produktu użytkownikowi A, wysyła wiadomość odmowną i interakcja się kończy.
             \item Jeżeli B chce oddać produkt, wysyła wiadomość pozytywną, interakcja trwa dalej.
@@ -729,18 +729,21 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
   \label{fig:offerdetails}
 \end{figure}
 
-\chapter{Zarządzanie projektem}\label{r:zarzadzanieProjektem} 
+\chapter{Zarządzanie projektem}\label{r:zarzadzanieProjektem}
 \section{Wykorzystane narzędzia}
 
-W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywany był zarówno do komunikacji między członkami zespołu, jak również między zespołem a zamawiającym. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomcne okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
+W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywany był zarówno do komunikacji między członkami zespołu, jak również między zespołem a zamawiającym. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomocne okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
 
 Kod programu oraz tekst pracy licencjackiej przechowywane były w serwisie Github. Dzięki niemu mogliśmy również w prosty sposób spisywać listę zadań do zrobienia.
 
+\section{Współpraca z zamawiającą}
+Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie zna się na wytwarzaniu oprogramowania, nie wiedziała więc jakich informacji potrzebujemy. Aby się wzajemnie dobrze zrozumieć często komunikowaliśmy się, szczególnie na początku tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co utrudniło spotykanie się twarzą w twarz. Udało nam się tylko jedno takie spotkanie zorganizować (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas regularnie kontaktowaliśmy się internetowo, w szczególności regularnie udostępnialiśmy zamawiającej aktualną wersję aplikacji aby upewnić się, że się dobrze rozumiemy. Dzięki temu ostatecznie udało nam się stworzyć aplikacje zgodną z oczekiwaniami zamawiającej.
+
 \section{Organizacja pracy}
 
-Nie korzystaliśmy w bezpośredni sposób z jednej ze znanych metodyk zarządzania projektemi programistycznymi. Jednakże trzymaliśmy się kilku isotnych zasad. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się, żeby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu zespołowy projekt programistyczny. Każdy z nas decydował jakie zadanie w danej chwili chce wykonać. Wspólnie zaprojektowaliśmy architektórę aplikacji oraz podejmowaliśmy najważniejsze decyzję dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy jakie w danej chwili napotykaliśmy.
+Nie korzystaliśmy w bezpośredni sposób z jednej ze znanych metodyk zarządzania projektami programistycznymi. Jednakże trzymaliśmy się kilku istotnych zasad. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się, żeby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu zespołowy projekt programistyczny. Każdy z nas decydował jakie zadanie w danej chwili chce wykonać. Wspólnie zaprojektowaliśmy architekturę aplikacji oraz podejmowaliśmy najważniejsze decyzję dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy jakie w danej chwili napotykaliśmy.
 
-Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyńcze zadanie dotyczyło najczęściej zaimplementowanie jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej jak i serwerowej. W ten sposób mogliśmy znacznie zrównoleglić prace nad projektem. Jedna osoba nie musiała czekać aż ktoś inny zrealizuje niezbędną pracę po stronie serwera. Ponad to uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku ReactNative oraz realizacji częsci serwerowej we frameworku Django.
+Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyncze zadanie dotyczyło najczęściej zaimplementowanie jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej jak i serwerowej. W ten sposób mogliśmy znacznie zrównoleglić prace nad projektem. Jedna osoba nie musiała czekać aż ktoś inny zrealizuje niezbędną pracę po stronie serwera. Ponad to uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku ReactNative oraz realizacji części serwerowej we frameworku Django.
 
 \section{Podział obowiązków}
 
@@ -759,7 +762,7 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
 \setlength\itemsep{-0.2em}
     \item Dodawanie ogłoszeń,
     \item Dodanie lokalizacji do ogłoszeń,
-    \item Wyświetlanie mapy w ogłoszenich,
+    \item Wyświetlanie mapy w ogłoszeniach,
     \item Filtrowanie i sortowanie ogłoszeń po odległości między użytkownikiem a ogłoszeniem,
     \item Logowanie z Facebookiem,
     \item Zgłaszanie nieodpowiednich ogłoszeń,
@@ -794,15 +797,15 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
     /PodzielSieMobile/ \> Kod źródłowy części mobilnej. \\
     /PodzielSieModile/README.md \> Instrukcja uruchamiania części mobilnej. \\
     /PracaLicencjacka.pdf \> Praca licencjacka. \\
-    /Precentacja.pdf \> Końcowa prezentajca projektu. \\
+    /Precentacja.pdf \> Końcowa prezentacja projektu. \\
 \end{tabbing}
 
 \chapter{Podsumowanie}\label{r:pods}
-W trakcie ostatnich siedmiu miesięcy powstała w pełni funkcjonalna aplikacja mobilna, która w istotny sposób może przycznić się do zmniejszenia ilości marnowanej żywności. Udało nam się zrealizować zdecydowaną większość wymagań zamawiającej, w szczególności wszystkie niezbędne funkcjonalności zostały zaimplementowane. 
+W trakcie ostatnich siedmiu miesięcy powstała w pełni funkcjonalna aplikacja mobilna, która w istotny sposób może przyczynić się do zmniejszenia ilości marnowanej żywności. Udało nam się zrealizować zdecydowaną większość wymagań zamawiającej, w szczególności wszystkie niezbędne funkcjonalności zostały zaimplementowane.
 
-W trakcie prac nad projektem nauczyliśmy się wielu zagadnień związanych z inżynierią oprogramowania, tworzeniem aplikacji mobilnych z wykorzystaniem ReactNative, implementacji części serwerowej we frameworku Django, integracji ze zewnętrznymi usługami czy administrowania serwerem aplikacyjnym. Było to dla nas również okazja do rozwinięciu tak zwanych umiejętności miękkich takich jak chociażby pracę w zespole czy kontakt z zamwamiającym.
+W trakcie prac nad projektem nauczyliśmy się wielu zagadnień związanych z inżynierią oprogramowania, tworzeniem aplikacji mobilnych z wykorzystaniem ReactNative, implementacji części serwerowej we frameworku Django, integracji ze zewnętrznymi usługami czy administrowania serwerem aplikacyjnym. Było to dla nas również okazja do rozwinięciu tak zwanych umiejętności miękkich takich jak chociażby pracę w zespole czy kontakt z zamawiającym.
 
-W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia aplikacji do użytku. Niezależnie od tego czy aplikacja zostanie wdrożona, jesteśmy z niej bardzo zadowoleni. Realizacja tego projektu dała nam wiele satysfakcji. 
+W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia aplikacji do użytku. Niezależnie od tego czy aplikacja zostanie wdrożona, jesteśmy z niej bardzo zadowoleni. Realizacja tego projektu dała nam wiele satysfakcji.
 
 
 \begin{thebibliography}{99}
@@ -827,7 +830,7 @@ W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia ap
 
 \bibitem[ec.europa.eu]{ec} Działania KE ws.\ marnowania żywności\\ \href{https://ec.europa.eu/food/safety/food_waste_en}{\texttt{https://ec.europa.eu/food/safety/food\_waste\_en}}
 
-\bibitem[IDC]{popluarnoscAndroid} Popularność systemu Android w Polsce\\ 
+\bibitem[IDC]{popluarnoscAndroid} Popularność systemu Android w Polsce\\
 \href{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}
 
 \bibitem[ReactNative]{reactnative} \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
