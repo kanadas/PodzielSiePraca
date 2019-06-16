@@ -18,12 +18,12 @@
 
 %\autor{Autor Zerowy}{342007}
 \autori{Paweł Giżka}{385522}
-\autorii{Szymon Gajda}{TODO}
-\autoriii{Kamil Ćwintal}{TODO}
+\autorii{Szymon Gajda}{385477}
+\autoriii{Kamil Ćwintal}{385369}
 \autoriv{Tomasz Kanas}{385674}
 %\autorv{Autor nr Pięć}{342011}
 
-\title{Mobilna aplikacja do dzielenia się żywnością ``Podziel się''}
+\title{Aplikacja mobilna "Podziel się"}
 
 
 %\tytulang{An implementation of a difference blabalizer based on the theory of $\sigma$ -- $\rho$ phetors}
@@ -70,11 +70,12 @@
 }
 
 %Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
-\klasyfikacja{D. Software\\
+\klasyfikacja{Software and its engineering\\
+Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociology\\
 }
 
 % Słowa kluczowe:
-\keywords{aplikacja mobilna, żywność, ReactNative}
+\keywords{informatyka, aplikacja mobilna, żywność, foodsharing, React Native}
 
 % Tu jest dobre miejsce na Twoje własne makra i~środowiska:
 \newtheorem{defi}{Definicja}[section]
@@ -91,7 +92,7 @@
 
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS\@. Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W niniejszej pracy przedstawiono szczegółowy opis aplikacji i jej architektury, oraz przybliżono proces jej powstawania.
+\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS\@. Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W pracy przedstawiono szczegółowy opis aplikacji oraz całościowej architektury projektu, a także przybliżono proces jego powstawania.
 \end{abstract}
 
 \tableofcontents
@@ -100,24 +101,24 @@
 
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
-\section*{Problematyka}
-Obecnie w Polsce istnieją liczne grupy entuzjastów wymiany żywności funkcjonujące na portalach społecznościowych (przeważnie na Facebooku), jednak duża liczebność tych grup uniemożliwia skuteczną organizację wymiany jedzenia w satysfakcjonujący sposób. Aplikacja \textit{``Podziel się''} będzie wspierać dalsze funkcjonowanie tej inicjatywy oraz zapewni zwolennikom idei food sharingu platformę do efektywnej wymiany żywności, także w znacznie większej skali.
-
 \section*{Kontekst społeczny}
-Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu, z których wynika, że w Polsce marnuje się około 9 milionów ton żywności rocznie. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie Millward Brown wykazało, że do wyrzucania jedzenia przyznaje się 35\% Polaków, podczas gdy wyrzucane produkty mogłyby przyczynić się do zaspokojenia podstawowych potrzeb żywieniowych niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
+Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu (\cite{eurostat}), z których wynika, że w Polsce rocznie marnuje się około 9 milionów ton żywności. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie \cite{millward-brown} wykazało, że do wyrzucania jedzenia przyznaje się 42\% Polaków, podczas gdy wyrzucane produkty mogłyby przyczynić się do zaspokojenia podstawowych potrzeb żywieniowych niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
 
-W krajach rozwiniętych około 50\% wyrzucanego jedzenia pochodzi z gospodarstw domowych, w których na skutek nierozważnego planowania zakupów jedzenie ulega zepsuciu i~trafia do śmietnika. Wierzymy, że~możliwe jest przeciwdziałanie temu zjawisku na poziomie lokalnym.
+W krajach rozwiniętych około 50\% wyrzucanego jedzenia pochodzi z gospodarstw domowych, w których na skutek nierozważnego planowania zakupów jedzenie ulega zepsuciu i~trafia do śmietnika (\cite{polityka}). Wierzymy, że~możliwe jest przeciwdziałanie temu zjawisku na poziomie lokalnym.
 
 Istnieją ruchy społeczne (dumpster diving, freeganizm, zero waste) promujące możliwie racjonalny obrót żywnością oraz uwrażliwiające społeczeństwo na problem masowego wyrzucania jedzenia.
 
+\section*{Problem do rozwiązania}
+Obecnie w Polsce istnieją liczne grupy entuzjastów wymiany żywności funkcjonujące na portalach społecznościowych (przeważnie na Facebooku), jednak duża liczebność tych grup uniemożliwia skuteczną organizację wymiany jedzenia w satysfakcjonujący sposób. Nasza aplikacja \textit{``Podziel się''} powstała, aby wspierać dalsze funkcjonowanie tej inicjatywy oraz zapewnić zwolennikom idei food sharingu platformę do efektywnej wymiany żywności, także w znacznie większej skali.
+
 \section*{Zamawiający}
-Aplikacja \textit{``Podziel się''} powstała na zamówienie pani Marii Skołożyńskiej, działaczki społecznej oraz pomysłodawczyni akcji \textit{Podziel się Posiłkiem z Bezdomnymi}, podczas której mieszkańcy całej Polski mogą przekazać pozostałe po świętach (Bożego Narodzenia, Wielkanocy) posiłki do wolontariuszy, którzy zajmują się transportem jedzenia do osób potrzebujących. Pani Maria jest wolontariuszką działającą na rzecz przeciwdziałania marnowaniu jedzenia oraz główną koordynatorką akcji dystrybucji żywności. Działalność pani Marii Skołożyńskiej ma zasięg ogólnopolski; akcje gromadzenia żywności dla bezdomnych i ubogich działają obecnie w kilkudziesięciu miastach, m.\ in.\ w Warszawie, Krakowie, Wrocławiu, Trójmieście, Szczecinie, Toruniu, Bydgoszczy, Katowicach, Łodzi. W 2018 r.\ akcja \textit{Podziel się Posiłkiem z Bezdomnymi}, w~uznaniu dla skuteczności działania oraz promocji pozytywnych postaw społecznych, otrzymała Europejską Nagrodę Reduce Food Waste.
+Aplikacja \textit{``Podziel się''} powstała na zamówienie pani Marii Skołożyńskiej, działaczki społecznej oraz pomysłodawczyni akcji \textit{Podziel się Posiłkiem z Bezdomnymi} (\cite{podzielmysie}), podczas której mieszkańcy całej Polski mogą przekazać pozostałe po świętach (Bożego Narodzenia, Wielkanocy) posiłki do wolontariuszy, którzy zajmują się transportem jedzenia do osób potrzebujących. Pani Maria jest aktywistką działającą na rzecz przeciwdziałania marnowaniu jedzenia oraz główną koordynatorką akcji dystrybucji żywności. Działalność pani Marii Skołożyńskiej ma zasięg ogólnopolski; akcje gromadzenia żywności dla bezdomnych i ubogich działają obecnie w kilkudziesięciu miastach, m.\ in.\ w Warszawie, Krakowie, Wrocławiu, Trójmieście, Szczecinie, Toruniu, Bydgoszczy, Katowicach, Łodzi. W 2018 r.\ akcja \textit{Podziel się Posiłkiem z Bezdomnymi}, w~uznaniu dla skuteczności działania oraz promocji pozytywnych postaw społecznych, otrzymała Europejską Nagrodę Reduce Food Waste (\cite{rfw}).
 
 \section*{Osoby zaangażowane w projekt}
 Aplikacja \textit{``Podziel się''} została opracowana oraz wdrożona przez zespół studentów informatyki Uniwersytetu Warszawskiego: Kamila Ćwintala, Szymona Gajdę, Pawła Giżkę oraz Tomasza Kanasa. Opiekę nad projektem sprawował dr Janusz Jabłonowski. Wymagania funkcjonalne zostały dostarczone zespołowi przez pomysłodawczynie projektu: p. Marię Skołożyńską oraz p. Martynę Dakowską.
 
 \section*{Grupa docelowa}
-Aplikacja \textit{``Podziel się''} jest przeznaczona dla użytkowników smartfonów, którym nie jest obojętny problem marnowania żywności. \textit{``Podziel się''} może stanowić interesującą propozycję dla osób, które nie mają czasu na przygotowanie posiłku albo gotują zbyt dużo (i~jednocześnie nie chcą wyrzucać nadwyżki jedzenia). Aplikacja \textit{``Podziel się''} zrzesza społeczność osób zainteresowanych tematyką food sharingu i zero waste, które dbają o środowisko naturalne oraz racjonalną gospodarkę żywnością.
+Aplikacja \textit{``Podziel się''} jest przeznaczona dla użytkowników smartfonów, którym nie jest obojętny problem marnowania żywności. \textit{``Podziel się''} może stanowić interesującą propozycję dla osób, które nie mają czasu na przygotowanie posiłku albo gotują zbyt dużo (i~jednocześnie nie chcą wyrzucać nadwyżki jedzenia). Aplikacja \textit{``Podziel się''} będzie docelowo zrzeszać społeczność osób zainteresowanych tematyką food sharingu i zero waste, które dbają o środowisko naturalne oraz racjonalną gospodarkę żywnością.
 
 \section*{Opis funkcjonalności}
 Aplikacja \textit{``Podziel się''} umożliwia:
@@ -128,23 +129,22 @@ Aplikacja \textit{``Podziel się''} umożliwia:
 \item dodawanie nowego ogłoszenia (opisu produktu wraz z preferowaną lokalizacją miejsca odbioru),
 \item zamieszczenie w ogłoszeniu zdjęć produktu, opakowania, etykiet itp.,
 \item przeglądanie dostępnych do odebrania posiłków w okolicy aktualnej lokalizacji użytkownika,
-\item sortowanie dostępnych ogłoszeń w oparciu o wprowadzone przez użytkownika kryteria i preferencje,
-\item funkcję czatu między odbiorcą a darczyńcą w celu ustalenia szczegółów odbioru, zadawania pytań,
+\item sortowanie dostępnych ogłoszeń w oparciu o ustalone kryteria (odległość, data wystawienia produktu, data przydatności itp.),
+\item funkcję czatu między odbiorcą a darczyńcą w celu ustalenia szczegółów odbioru, zadawania dodatkowych pytań,
 \item przechowywanie historii konwersacji z innymi użytkownikami,
+%TODO to nie do końca prawda, bo nie mamy `listy osob zainteresowanych ogloszeniem', tylko listę wszystkich userów
 \item wskazanie użytkownika (ze zbiorczej listy osób zainteresowanych ogłoszeniem), która otrzyma wystawiony~produkt/artykuł żywnościowy,
 \item pośrednictwo w procesie przekazania żywności,
-%TODO czy to jest zrobione? chyba tak
+%TODO czy to jest zrobione? chyba tak  <-- zakładając, że użytkownicy dbają o samodzielne wycofywanie ogłoszeń, to tak
 \item usuwanie ogłoszeń zrealizowanych pomyślnie lub ogłoszeń, dla których minęła data przydatności do~spożycia,
 \item system recenzji/ocen użytkowników,
-%TODO tego nie ma nie?
 \item oznaczanie wybranych użytkowników jako ``obserwowanych'', dzięki czemu ich nowe ogłoszenia będą dodatkowo eksponowane na liście dostępnych ogłoszeń,
-%TODO czy to jest zrobione?
-\item flagowanie ogłoszeń o nieodpowiedniej zawartości, co skutkuje powiadomieniem moderatora o~konieczności~weryfikacji zamieszczonej treści,
+\item zgłaszanie ogłoszeń o nieodpowiedniej zawartości, co skutkuje powiadomieniem moderatora o~konieczności~weryfikacji zamieszczonej treści.
 \end{itemize}
 Aplikację wyróżnia nowoczesny interfejs graficzny, zaprojektowany specjalnie na potrzeby projektu.
 
 \section*{Zawartość pracy}
-W rozdziale~\ref{r:konkurencja} przedstawiono przegląd i analizę konkurencyjnych rozwiązań. Rozdział~\ref{r:arch} zawiera opis użytych technologi i architektury systemu. W kolejnych rozdziałach opisano implementację aplikacji i wybrane przypadki użycia. Rozdział~\ref{r:problem} opisuje problemy i trudności które napotkaliśmy podczas tworzenia aplikacji oraz jak sobie z nim poradziliśmy. Ostatnie rozdziały zawierają instrukcje budowania aplikacji i zawartość płytki dołączonej do pracy, podział pracy w zespole i krótkie podsumowanie pracy.
+Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych rozwiązań. W rozdziale~\ref{r:arch} przedstawiono całościową architekturę systemu, zadania poszczególnych modułów oraz wykorzystane technologie. Rozdział~\ref{r:usecase} szczegółowo opisuje najważniejsze przypadki użycia aplikacji. Rozdział 4 poświęcony jest metodyce tworzenia projektu. Końcowe rozdziały zawierają: instrukcję zbudowania aplikacji, spis zawartości płyty dołączonej do pracy, podział zadań w zespole oraz krótkie podsumowanie projektu.
 
 \chapter{Przegląd konkurencyjnych rozwiązań}\label{r:konkurencja}
 
@@ -152,7 +152,7 @@ W rozdziale~\ref{r:konkurencja} przedstawiono przegląd i analizę konkurencyjny
 Od paru lat można zaobserwować ciągły wzrost zainteresowania tematyką marnowania żywności wśród społeczeństwa. Przejawia się to na przykład w rosnącym zainteresowaniu polityków i władz, w tym Komisji Europejskiej (patrz~\cite{ec}), bardzo licznym publikacjom na ten temat, a także w rosnącej popularności ruchów społecznych takich ``freeganizm'', czy ``zero waste''. Zainteresowanie tym tematem przejawia się też w licznych aplikacjach pomagających wymieniać się jedzeniem które inaczej by się zmarnowało. Co ciekawe w różnych państwach popularne są różne aplikacje. Na przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Zachodniej Europie \textit{Too Good To Go}, a w Stanach Zjednoczonych ``Unsung''. W Polsce nie ma jeszcze żadnej popularnej aplikacji, chociaż funkcjonują grupy na portalach społecznościowych spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione wybrane z konkurencyjnych rozwiązań.
 
 \section{Olio}
-Z wymienionych w tym rozdziale aplikacji \textit{Olio} jest najbardziej podobne do \textit{Podziel Się}. Posiada bardzo prosty interfejs, pozwalający już kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy znaleźć z listy ogłoszeń (która może być sortowana po odległości, lub czasie dodania ogłoszenia) produkt na który mamy ochotę. \textit{Olio} tak samo jak \textit{Podziel Się} jest zintegrowane z Mapami Google i lokalizacją telefonu (choć można ją wyłączyć). \textit{Olio} posiada też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie posiada natomiast podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.), w \textit{Olio} specyfikuje się tylko czy produkt jest żywnością czy nie.
+Z wymienionych w tym rozdziale aplikacji \textit{Olio} jest najbardziej podobne do \textit{Podziel Się}. Posiada bardzo prosty interfejs, pozwalający już kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy znaleźć z listy ogłoszeń (która może być sortowana po odległości, lub czasie dodania ogłoszenia) produkt na który mamy ochotę. \textit{Olio} tak samo jak \textit{Podziel Się} jest zintegrowane z Mapami Google i lokalizacją telefonu (choć można ją wyłączyć). \textit{Olio} posiada też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie posiada natomiast podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.), w \textit{Olio} specyfikuje się tylko czy produkt jest żywnością czy nie.
 
 \textit{Olio} jest bardzo popularną aplikacją. Na chwilę obecną posiada ponad milion użytkowników i ponad półtora miliona ogłoszeń (\cite{olio}). Jest najbardziej popularna w Wielkiej Brytanii, w Polsce praktycznie nie funkcjonuje.
 
@@ -191,8 +191,11 @@ Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą b
 
 Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast za pośrednictwem usługi Firebase.
 
-\section{Postgis}
+\section{PostGIS}
 %liczenie odległosci itd.
+Jedną z funkcjonalności naszej aplikacji jest prezentowanie użytkownikowi ofert z adresem odbioru w pobliżu jego aktualnej lokalizacji. Żeby to osiągnąć musieliśmy po stronie serwera być w stanie wyznaczyć wszystkie ogłoszenia z bazy danych, które są oddalone od zadanej lokalizacji nie więcej niż pewna wartość otrzymana w zapytaniu użytkownika. Pierwszym podejściem do rozwiązania tego problemu było wyznaczanie dla każdego zapytania wszystkich odległości pomiędzy adresem odbioru ogłoszeń a otrzymaną lokalizacją i wybranie tych, które są bliżej niż maksymalna odległość, którą wybrał użytkownik. Byłoby to jednak rozwiązanie bardzo nieefektywne, ponieważ dla każdego zapytania wymaga przejrzenia wszystkich ofert z bazy co przy większej ilości użytkowników i ofert może powodować problemy z wydajnością całego systemu.
+
+Rozwiązaniem, na które ostatecznie się zdecydowaliśmy jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS. Pozwala ono na wprowadzanie danych geograficznych do bazy i ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa używa R-drzewa, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego powyżej.
 
 \section{Przechowywanie zdjęć} 
 %tutaj pasowało by napisać dlaczego nie składowanie danych na dysku
@@ -292,7 +295,7 @@ Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy G
 
 \newpage
 \section{Infrastruktura serwera} 
-%to można trochę jeszcze rozbudować
+%to można trochę jeszcze rozbudować
 
 Serwer projektu został wdrożony na platformie AWS (Amazon Web Services). Decyzja o wybraniu chmury AWS została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. AWS udostępnia widoczny globalnie w Internecie klaster komputerów w chmurze obliczeniowej. Wspomniane klastry emulują zachowanie prawdziwego komputera, począwszy od wirtualizacji sprzętu (procesora, pamięci RAM, dysku twardego), poprzez infrastrukturę sieciową i system operacyjny, skończywszy na wirtualnej konsoli umożliwiającej połączenie się oraz sterowanie klastrem z poziomu przeglądarki. Wirtualne maszyny AWS udostępniają gotowe rozwiązania serwerowe i oprogramowanie do specjalistycznych zastosowań.
 
@@ -616,19 +619,22 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 
-\bibitem[podzielmysie.pl]{podzielmysie} Strona akcji społecznej ``Podzielmy się'', \href{www.podzielmysie.pl}{\texttt{podzielmysie.pl}}
+\bibitem[FAO]{fao} raport Organizacji Narodów Zjednoczonych do spraw Wyżywienia i Rolnictwa\\\textit{``Global food losses and food waste''}, \href{http://www.fao.org/3/mb060e/mb060e.pdf}{\texttt{fao.org/3/mb060e/mb060e.pdf}}
 
-\bibitem[FAO]{fao} Food and Agriculture Organization of the United Nations,\\
-    \href{http://www.fao.org/save-food/resources/keyfindings/en/}{\texttt{http://www.fao.org/save-food/resources/keyfindings/en/}}
+\bibitem[Eurostat]{eurostat} raport techniczny Komisji Europejskiej z 2010 roku\\\textit{``Preparatory Study on Food Waste Across EU 27''},\\\href{http://ec.europa.eu/environment/eussd/pdf/bio\_foodwaste\_report.pdf}{\texttt{ec.europa.eu/environment/eussd/pdf/bio\_foodwaste\_report.pdf}}
 
-\bibitem[Buissness Insider]{buissins} Artykuł prasowy portalu Business Insider \href{https://businessinsider.com.pl/lifestyle/jedzenie/marnowanie-zywnosci-ile-ton-jedzenia-wyrzucaja-polacy/5wnn8yt}{``Polacy rocznie marnują 9 mln ton jedzenia''}
+\bibitem[Kantar Millward Brown]{millward-brown}raport Federacji Polskich Banków Żywności \textit{``Nie marnuję jedzenia 2018''} z wynikami badań zrealizowanych przez Kantar Millward Brown,\\\href{http://bzsos.pl/2018/raportu-nie-marnuj-jedzenia-2018}{\texttt{bzsos.pl/2018/raportu-nie-marnuj-jedzenia-2018}}
+
+\bibitem[Polityka]{polityka}opracowanie \textit{``Zgubione kalorie. Jak skutecznie walczyć z marnotrawieniem żywności''} dla magazynu Polityka Insight,\\\href{http://politykainsight.pl/gospodarka/ryzykaitrendy/\_resource/multimedium/20145149}{\texttt{politykainsight.pl/gospodarka/ryzykaitrendy/\_resource/multimedium/20145149}}
+
+\bibitem[podzielmysie.pl]{podzielmysie} oficjalna strona akcji społecznej \textit{``Podziel się Posiłkiem z Bezdomnymi''}, \href{http://www.podzielmysie.pl}{\texttt{podzielmysie.pl}}
+
+\bibitem[reducefoodwaste.eu]{rfw} oficjalna strona internetowa projektu Reduce Food Waste,\\
+    \href{http://www.reducefoodwaste.eu}{\texttt{reducefoodwaste.eu}}
 
 \bibitem[Olioex.com]{olio} Statystyki dotyczące wykorzystania żywności na świecie z oficjalnej strony aplikacji  \textit{Olio}, \href{https://olioex.com}{\texttt{olioex.com}}
 
 \bibitem[toogoodtogo.com]{tgtg} Oficjalna strona aplikacji \textit{Too Good To Go}, \href{https://toogoodtogo.com}{\texttt{toogoodtogo.com}}.
-
-\bibitem[reducefoodwaste.eu]{rfw} Oficjalna strona internetowa projektu Reduce Food Waste,\\
-    \href{www.reducefoodwaste.eu}{\texttt{reducefoodwaste.eu}}
 
 \bibitem[ec.europa.eu]{ec} Działania KE ws.\ marnowania żywności\\ \href{https://ec.europa.eu/food/safety/food_waste_en}{\texttt{https://ec.europa.eu/food/safety/food\_waste\_en}}
 
