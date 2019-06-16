@@ -144,8 +144,8 @@ Aplikacja \textit{``Podziel się''} umożliwia:
 Aplikację wyróżnia nowoczesny interfejs graficzny, zaprojektowany specjalnie na potrzeby projektu.
 
 \section*{Zawartość pracy}
-Rozdział~\ref{r:definicje} objaśnia definicje użyte w pracy licencjackiej.
-Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych rozwiązań. W rozdziale~\ref{r:arch} przedstawiono całościową architekturę systemu oraz wywzwania i problemy nopotkane w trakcie implementacji funkcjonalności. Infrastruktura serwera została szczegółowa opisana w rozdziale~\ref{r:infrastruktura}. Rozdział~\ref{r:usecase} szczegółowo opisuje najważniejsze przypadki użycia aplikacji.  Rozdział~\ref{r:zarzadzanieProjektem} poświęcony jest metodyce tworzenia projektu oraz podziale pracy w zespole. Końcowe rozdziały zawierają: spis zawartości płyty dołączonej do pracy oraz krótkie podsumowanie projektu.
+Rozdział~\ref{r:definicje} podaje definicje niektórych specjalistycznych terminów użytych w pracy licencjackiej.
+Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych rozwiązań. W rozdziale~\ref{r:arch} przedstawiono całościową architekturę systemu oraz wyzwania i problemy napotkane podczas jego implementacji. Infrastruktura serwera została szczegółowo opisana w rozdziale~\ref{r:infrastruktura}. Rozdział~\ref{r:usecase} przedstawia najważniejsze przypadki użycia aplikacji.  Rozdział~\ref{r:zarzadzanieProjektem} poświęcony jest metodyce tworzenia projektu oraz podziałowi pracy w zespole. Końcowe rozdziały zawierają: spis zawartości płyty dołączonej do pracy oraz krótkie podsumowanie projektu.
 
 \chapter{Podstawowe definicje}\label{r:definicje}
 
@@ -158,7 +158,7 @@ Poniżej znajduje się objaśnienie podstawowych pojeć i definicji używanych w
 
 \item \textbf{Amazon S3} - usługa firmy Amazon umożliwiająca łatwe przechowywanie danych,
 
-\item \textbf{React Native} - framework stworzony przez firmę Facebook pozwalajaćy na tworzenie
+\item \textbf{React Native} - framework stworzony przez firmę Facebook pozwalajaćy na tworzenie
 aplikacji jednocześnie na systemy Android i IOS,
 
 \item \textbf{Django} - framework do tworzenia aplikacji internetowych,
@@ -365,41 +365,53 @@ W miarę dalczego rozwoju projektu, narzędzie firmy Amazon oferuje elastyczne p
 
 
 \chapter{Przypadki użycia}\label{r:usecase}
-Zaprezentowane są tu przykładowe przypadki użycia.
+Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczególnym uwzględnieniem interakcji pomiędzy użytkownikiem a komponentami systemu. Przedstawione zostały również ścieżki alternatywne, a także dodatkowe funkcjonalności, o które można wzbogacić aplikację w dalszej perspektywie czasowej.
+
 \section{Rejestracja}
     \subsection{Krótki opis}
-    Utworzenie konta użytkownika w aplikacji.
+    Utworzenie nowego konta użytkownika w aplikacji.
     \subsection{Cele}
-    Umożliwienie aplikacji identyfikacji użytkowników w celu dostarczenia im określonych funkcjonalności.
+    \begin{itemize}
+    \item Umożliwienie aplikacji identyfikacji użytkowników w celu dostarczenia im określonych funkcjonalności.
+    \item Uzyskanie informacji koniecznych do poprawnego działania aplikacji.
+    \end{itemize}
     \subsection{Warunki wstępne}
-    \begin{enumerate}
+    \begin{itemize}
         \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
         \item Użytkownik dysponuje stałym połączeniem internetowym.
-    \end{enumerate}
+    \end{itemize}
     \subsection{Czynności}
     \subsubsection{Czynności podstawowe}
     \begin{enumerate}
-        \item Użytkownik naciska przycisk ``Załóż konto''.
+        \item Użytkownik naciska przycisk ``Załóż nowe konto''.
         \item Aplikacja wyświetla użytkownikowi formularz rejestracyjny.
-        \item Użytkownik wprowadza swoje imię, nazwisko (lub nazwę firmy), numer telefonu, adres e-mail, hasło.
-        \item W polu ``Potwierdź hasło'' użytkownik wpisuje drugi raz to samo hasło.
-        \item Użytkownik akceptuje regulamin.
-        \item Użytkownik naciska przycisk ``Zarejestruj''.
+        \item Użytkownik wprowadza swoje imię, nazwisko, adres e-mail, hasło.
+        \item W polu ``Powtórz hasło'' użytkownik wpisuje drugi raz to samo hasło.
+        \item Użytkownik naciska przycisk ``Utwórz konto''.
         \item Aplikacja potwierdza poprawną rejestrację.
-     \item Użytkownik jest domyślnie zalogowany do aplikacji na danym urządzeniu.
-     \item Użytkownik może nacisnąć przycisk ``Wyloguj'', aby się wylogować.
+        \item Następuje przejście do ekranu dodawania zdjęcia profilowego. Początkowo widoczny jest domyślny awatar.
+            \begin{itemize}
+                \item Jeżeli użytkownik nie chce zamieścić własnego zdjęcia, naciska przycisk ``Dalej''.
+                \item W przypadku wskazania opcji ``Zmień zdjęcie profilowe'' aplikacja wyświetla okienko z prośbą o wskazanie źródła zdjęcia, do wyboru: załączenie zdjęcia z pamięci urządzenia (galerii) lub utworzenie aparatem nowego zdjęcia.
+                    \begin{itemize}
+                        \item Jeżeli użytkownik wyrazi chęć dodania istniejącego zdjęcia, aplikacja uruchamia klasyczny interfejs przeglądania galerii systemu operacyjnego.
+                        \item Wybór opcji zrobienia nowego zdjęcia przekazuje sterowanie wbudowanej w~system operacyjny aplikacji obsługującej aparat.
+                    \end{itemize}
+            \end{itemize}
+     \item Aplikacja pyta użytkownika, czy chce korzystać z usługi geolokalizacji do sortowania listy ogłoszeń względem aktualnego położenia.
+     \item Użytkownik wyraża zgodę na korzystanie z geolokalizacji.
+     \item Proces rejestracji został zakończony - użytkownik jest domyślnie zalogowany do aplikacji na danym urządzeniu.
     \end{enumerate}
     \subsubsection{Czynności alternatywne}
     \begin{enumerate}
-        \item Użytkownik:
+        \item Jeśli użytkownik wypełnił formularz w sposób niepoprawny:
         \begin{itemize}
-            \item wprowadza drugi raz inne hasło.
-            \item nie wypełnia któregoś z pól.
-            \item wprowadza niepoprawny składniowo adres e-mail.
-            \item nie akceptuje regulaminu.
+            \item za drugim razem wprowadził inne hasło,
+            \item nie wypełnił któregoś z pól,
+            \item wprowadził niepoprawny składniowo adres e-mail,
         \end{itemize}
-        \item Użytkownik naciska przycisk ``Zarejestruj''.
-        \item Aplikacja powiadamia użytkownika o popełnionym błędzie i odsyła go z powrotem do edycji formularza.
+        aplikacja powiadamia użytkownika o popełnionym błędzie i odsyła go z powrotem do edycji formularza.
+        \item Jeżeli użytkownik nie wyraził zgody na korzystanie z geolokalizacji, aplikacja pyta użytkownika, względem jakiego miejsca ma sortować ogłoszenia i wyświetla interaktywną mapę. Aby kontynuować, użytkownik musi wskazać konkretne miejsce na mapie.
     \end{enumerate}
 
 \section{Dodawanie nowego ogłoszenia}
@@ -423,11 +435,6 @@ Zaprezentowane są tu przykładowe przypadki użycia.
         \item Na ekranie pojawia się formularz dodawania ogłoszenia z podpisanymi polami.
         \item Użytkownik wprowadza (w dowolnej kolejności) wymagane informacje:
         \begin{itemize}
-            \item Kategorie ogłoszenia (np.\ pieczywo, mięso, przetwory, wyroby cukiernicze\ldots)
-            \begin{itemize}
-                \item Użytkownik rozwija listę dostępnych kategorii.
-                \item Użytkownik wskazuje kategorie, które wydają się najbardziej odpowiednie do zawartości ogłoszenia.
-            \end{itemize}
             \item Tytuł ogłoszenia, który będzie widoczny na liście ogłoszeń
             \item Właściwa treść ogłoszenia
             \item Sugerowana data przydatności do spożycia
@@ -436,12 +443,23 @@ Zaprezentowane są tu przykładowe przypadki użycia.
                 \item W razie potrzeby użytkownik przechodzi za pomocą przycisków-strzałek do dalszych miesięcy.
                 \item Użytkownik wskazuje konkretny dzień w kalendarzu.
             \end{itemize}
-            \item Preferowane miejsce odbioru (z rozwijanej listy uprzednio wgranych miejsc odbioru)
+            \item Preferowany adres odbioru (z rozwijanej listy uprzednio zapisanych w aplikacji miejsc odbioru)
+            \item Kategoria ogłoszenia (np.\ pieczywo, mięso, warzywa, dania pasteryzowane\ldots)
+            \begin{itemize}
+                \item Użytkownik rozwija listę dostępnych kategorii.
+                \item Użytkownik wskazuje kategorię, która wydaje się najbardziej odpowiednia do zawartości ogłoszenia.
+            \end{itemize}
+            \item Hasztagi przypisane do ogłoszenia (np. \texttt{\#bezglutenu}, \texttt{\#mięsne}, \texttt{\#słodkie},\\ \texttt{\#wegetariańskie}\ldots)
+            \begin{itemize}
+                \item Użytkownik rozwija listę dostępnych hasztagów.
+                \item Użytkownik wybiera (być może wiele) hasztagów pasujących do ogłoszenia.
+                \item Dostępna jest także wyszukiwarka hasztagów.
+            \end{itemize}
         \end{itemize}
-        \item Użytkownik przesuwa widok ekranu na koniec formularza i naciska przycisk ``Wyślij''.
+        \item Użytkownik przesuwa widok ekranu na koniec formularza i naciska przycisk ``Dodaj ogłoszenie''.
         \item Aplikacja komunikuje się z serwerem, wysyłając prośbę o dodanie wprowadzonego ogłoszenia do bazy danych.
         \item Aplikacja otrzymuje odpowiedź od serwera --- ogłoszenie zostało dodane pomyślnie.
-        \item Użytkownik dostaje informację zwrotną: aplikacja wyświetla na ekranie okienko o pomyślnym dodaniu nowego ogłoszenia.
+        \item Użytkownik dostaje informację zwrotną: aplikacja wyświetla na ekranie listę ogłoszeń użytkownika z nowo dodanym ogłoszeniem na szczycie listy.
     \end{enumerate}
     \subsubsection{Czynności alternatywne}
     Użytkownik może opcjonalnie dodać zdjęcia artykułu żywnościowego, opakowania, etykiet.
@@ -449,20 +467,19 @@ Zaprezentowane są tu przykładowe przypadki użycia.
         \item Użytkownik wskazuje przycisk ``Dodaj nowe zdjęcie''.
         \item Aplikacja wyświetla okienko z prośbą o wskazanie źródła zdjęcia, do wyboru: załączenie zdjęcia z pamięci urządzenia (galerii)
         lub utworzenie aparatem nowego zdjęcia.
-        \begin{enumerate}
+        \begin{itemize}
             \item Jeżeli użytkownik wyrazi chęć dodania istniejącego zdjęcia, aplikacja uruchamia klasyczny interfejs przeglądania galerii
             systemu operacyjnego.
             \item Wybór opcji zrobienia nowego zdjęcia przekazuje sterowanie wbudowanej w system operacyjny aplikacji obsługującej aparat.
-        \end{enumerate}
+        \end{itemize}
         \item Jeżeli zdjęcie ma zbyt duży rozmiar, następuje jego kompresja (po stronie aplikacji).
         \item Na ekranie formularza pojawia się miniaturka dodanego zdjęcia.
     \end{enumerate}
     \subsubsection{Czynności niepoprawne}
-    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat. Użytkownik zostaje
-    przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
+    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się okienko ze stosownym komunikatem. Użytkownik zostaje przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
     \begin{enumerate}
         \item Użytkownik nie wprowadził kompletu wymaganych informacji.
-        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji (np.\ zbyt długa treść ogłoszenia)
+        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji (np. zbyt mała liczba wskazanych hasztagów)
         \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie ogłoszenia nie została rozpatrzona.
         \item Serwer zasygnalizował błąd podczas operacji dodawania ogłoszenia do bazy danych.
     \end{enumerate}
@@ -491,9 +508,9 @@ Zaprezentowane są tu przykładowe przypadki użycia.
     \begin{enumerate}
         \item Użytkownik A otwiera ekran czatu z użytkownikiem B. Może to zrobić na kilka sposobów:
         \begin{itemize}
-            \item Bezpośrednio ze strony profilowej użytkownika B.
-            \item Naciskając przycisk ``Zadaj pytanie'' widocznego na ekranie ogłoszenia wystawionego przez B.
-            \item Wybierając pseudonim użytkownika B z zakładki ``Moje konwersacje'' w menu szufladkowym.
+            \item Naciskając przycisk ``Otwórz czat z wystawiającym'' widocznego na ekranie ogłoszenia wystawionego przez B.
+            \item Wybierając opcję ``Nowy czat'' w sekcji \textit{Czaty}.
+            \item Wskazując awatar użytkownika B w sekcji \textit{Czaty} (jeżeli użytkownicy A oraz B rozmawiali ze sobą wcześniej).
         \end{itemize}
         \item W dolnej części ekranu pojawia się pole tekstowe do wpisania wiadomości oraz przycisk służący do jej wysłania. Jeżeli użytkownicy A i B rozmawiali ze sobą wcześniej, na ekranie będzie także widoczna przewijana lista poprzednich wiadomości, uporządkowana chronologicznie.
         \item Użytkownik A wpisuje treść wiadomości i wysyła ją.
@@ -501,27 +518,23 @@ Zaprezentowane są tu przykładowe przypadki użycia.
         \item Użytkownik A oczekuje na odpowiedź użytkownika B:\@
         \begin{itemize}
             \item Jeżeli osoba B udzieli odpowiedzi od razu, jej treść pojawi się na ekranie użytkownika A w czasie rzeczywistym.
-            \item W przypadku, gdy użytkownik A nie korzysta w danej chwili z aplikacji ``Podziel się'', oraz korzysta z systemu Android, otrzyma powiadomienie (notyfikację) systemu operacyjnego o nowej wiadomości od użytkownika B.
+            \item W przypadku, gdy użytkownik A nie korzysta w danej chwili z aplikacji ``Podziel się'' w systemie Android, otrzyma powiadomienie (notyfikację) systemu operacyjnego o~nowej wiadomości od użytkownika B.
         \end{itemize}
     \end{enumerate}
     \subsubsection{Czynności niepoprawne}
-    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się okienko ze stosownym komunikatem.
     \begin{enumerate}
-        %TODO tego chyba nie ma
-        \item Osoba A znajduje się na ``czarnej liście'' użytkownika B (tzn. B zablokował możliwość interakcji z użytkownikiem A)
         \item Nastąpił błąd komunikacji z serwerem --- nie udało się wysłać wiadomości.
         \item Serwer zasygnalizował błąd podczas dopisywania wiadomości do historii konwersacji.
     \end{enumerate}
     \subsection{Możliwe rozwinięcia}
-    %TODO to chyba jest
     \subsubsection{Przesyłanie obrazów}
-    Umożliwienie przesyłania wiadomości w formie zdjęć. W tym celu użytkownik wysyłający wiadomość wybiera piktogram ``prześlij obraz''. Dalszy scenariusz jest analogiczny do opisanego w punkcie 5.4.2.
+    Umożliwienie przesyłania wiadomości w formie zdjęć. W tym celu użytkownik wysyłający wiadomość mógłby wybrać piktogram ``prześlij obraz''. Dalszy scenariusz byłby analogiczny do opisanego w \textit{Czynnościach alternatywnych} z punktu 3.2.4.
 
 \section{Ocena innego użytkownika}
     \subsection{Krótki opis}
-    Wystawienie innemu użytkownikowi oceny w skali od 1 do 5 oraz możliwość napisania krótkiego komentarza dotyczącego współpracy z nim.
+    Wystawienie innemu użytkownikowi oceny w skali od 1 do 6 oraz możliwość napisania krótkiego komentarza dotyczącego współpracy z nim.
     \subsection{Cele}
-    Informowanie innych osób o jakości współpracy z daną osobą, w szczególności ostrzeganie innych przed nierzetelnymi użytkownikami.
+    Informowanie innych użytkowników o jakości współpracy z daną osobą, w szczególności ostrzeganie innych przed nierzetelnymi użytkownikami.
     \subsection{Warunki wstępne}
     \begin{itemize}
         \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
@@ -532,51 +545,40 @@ Zaprezentowane są tu przykładowe przypadki użycia.
     \subsection{Czynności}
     \subsubsection{Czynności podstawowe}
     \begin{enumerate}
-        \item Użytkownik A otwiera ekran, na którym znajduje się publiczny profil użytkownika B. Może to zrobić na kilka sposobów:
+        \item Użytkownik A otwiera publiczny profil użytkownika B (zwykle poprzez naciśnięcie zdjęcia profilowego na ekranie ogłoszenia, które użytkownik B wystawił).
+        \item Wyświetla się ekran z profilem użytkownika B, a na nim następujące elementy:
         \begin{itemize}
-            \item W oknie konwersacji z użytkownikiem B, poprzez kliknięcie na jego imię lub zdjęcie w lewym górnym rogu ekranu.
-            \item Naciskając przycisk ``Pokaż profil użytkownika’’ na ekranie ogłoszenia, które użytkownik B wystawił.
-            \item Wpisując: imię, nazwisko lub nazwę użytkownika B w polu tekstowym znajdującym się na samej górze ekranu prostej wyszukiwarki.
-        \end{itemize}
-        \item Wyświetla się ekran z profilem użytkownika B, a w nim następujące elementy:
-        \begin{itemize}
-            \item Imię, nazwisko oraz nazwa użytkownika.
+            \item Imię oraz nazwisko użytkownika.
             \item Zdjęcie profilowe.
-            \item Zbiorcza ocena innych użytkowników w skali od 1 do 5.
-            \item Przycisk ``Rozpocznij czat’’.
-            \item Przycisk ``Dodaj ocenę’’.
-            \item Lista z ocenami i komentarzami innych osób.
+            \item Licznik osób obserwujących.
+            \item Przycisk ``Obserwuj'' / ``Przestań obserwować''.
+            \item Zbiorcza ocena innych użytkowników w skali od 1 do 6.
+            \item Sześciogwiazdkowa skala własnej oceny.
+            \item Pole tekstowe przeznaczone na wpisanie komentarza.
+            \item Przycisk ``Wyślij opinię’’.
+            \item Lista opinii i komentarzy wystawionych przez społeczność użytkowników.
         \end{itemize}
-        \item Użytkownik A naciska przycisk ``Dodaj ocenę’’.
-        \item Wyświetla mu się ekran z formularzem dodawania oceny.
-        \item Użytkownik A ocenia użytkownika B w skali od 1 do 5.
+        \item Użytkownik A ocenia użytkownika B w skali od 1 do 6.
         \item Użytkownik A wpisuje krótki komentarz odnośnie użytkownika B.
-        \item Użytkownik A naciska przycisk ``Dodaj ocenę’’.
+        \item Użytkownik A naciska przycisk ``Wyślij opinię’’.
     \end{enumerate}
     \subsubsection{Czynności alternatywne}
-    Użytkownika A może co najwyżej raz ocenić użytkownika B. Jeśli miało już to miejsce, użytkownik A może edytować swoją opinię:
-    \begin{enumerate}
-        \item Zamiast przycisku ``Dodaj ocenę’’ na ekranie z profilem użytkownika B będzie widoczny przycisk ``Edytuj ocenę’’.
-        \item Formularz dodawania oceny będzie uzupełniony o poprzednią ocenę i komentarz.
-        \item Użytkownik po edycji formularza klika przycisk ``Zapisz ocenę’’.
-    \end{enumerate}
-    \subsubsection{Czynności niepoprawne}
-    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat. Użytkownik zostaje
-    przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
+    Użytkownik A może co najwyżej raz ocenić użytkownika B. Jeśli miało już to miejsce, użytkownik A może edytować swoją ocenę na sześciostopniowej skali. Istnieje jednak możliwość wielokrotnego wystawiania komentarzy (np. dla każdego ogłoszenia B oddzielnie).
+    \subsubsection{Czynności niepoprawne}	
     \begin{enumerate}
         \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie / edycję opinii nie została rozpatrzona.
-        \item Serwer zasygnalizował błąd podczas operacji dodawania / edycji opinii do bazy danych.
+        \item Serwer zasygnalizował błąd podczas operacji dodawania / edycji opinii w bazie danych.
     \end{enumerate}
     \subsection{Możliwe rozwinięcia}
-    Blokada możliwości oceny danego użytkownika do momentu, w którym odbierzemy od niego (lub on od nas) pożywienie z przynajmniej jednego ogłoszenia.
+    Blokada możliwości oceny danego użytkownika do momentu, w którym odbierzemy od niego (lub on od nas) produkt z przynajmniej jednego ogłoszenia.
 
-\section{Odbiór przedmiotów oferowanych w liście ogłoszeń}
+\section{Odbiór produktów oferowanych na liście ogłoszeń}
     \subsection{Krótki opis}
-    Umożliwienie użytkownikowi, który wystawił ogłoszenie (A) i użytkownikowi, który jest zainteresowany odbiorem przedmiotu z ogłoszenia (B) ustalenia szczegółów odbioru.
+    Umożliwienie użytkownikowi, który jest zainteresowany odbiorem przedmiotu z ogłoszenia (A) oraz użytkownikowi, który wystawił ogłoszenie (B) wspólnego ustalenia szczegółów odbioru.
     \subsection{Cele}
     \begin{itemize}
-        \item Umożliwienie użytkownikom ustalenia szczegółów odbioru przedmiotu (np.\ czas odbioru, miejsce odbioru).
-        \item Umożliwienie użytkownikowi zarządzania statusem swoich ogłoszeń.
+        \item Umożliwienie użytkownikom ustalenia szczegółów odbioru produktu (takich jak termin odbioru czy miejsce odbioru).
+        \item Łatwiejsze zarządzanie statusem ogłoszeń.
     \end{itemize}
     \subsection{Warunki wstępne}
     \begin{itemize}
@@ -590,40 +592,37 @@ Zaprezentowane są tu przykładowe przypadki użycia.
     \subsubsection{Czynności podstawowe}
     \paragraph{Użytkownik A}
     \begin{enumerate}
-        \item Użytkownik naciska oznaczony przycisk ``Szczegóły ogłoszenia'' przy ogłoszeniu na liście ogłoszeń.
-        \item Na ekranie ze szczegółami ogłoszenia użytkownik naciska przycisk ``Zadaj pytanie''.
+        \item Użytkownik otwiera listę dostępnych ogłoszeń i wskazuje jedno z nich.
+        \item Na ekranie ze szczegółami ogłoszenia użytkownik naciska przycisk \textit{``Otwórz czat z wystawiającym''}.
         \item Użytkownikowi otwiera się ekran czatu z autorem ogłoszenia.
-        \item Użytkownik wysyła wiadomość, w której wyraża chęć odbioru przedmiotu z ogłoszenia.
+        \item Użytkownik wysyła wiadomość, w której wyraża chęć odbioru produktu z ogłoszenia.
         \item Jeżeli użytkownik otrzyma odpowiedź pozytywną, użytkownicy ustalają między sobą szczegóły odbioru.
     \end{enumerate}
     \paragraph{Użytkownik B}
     \begin{enumerate}
-        \item Użytkownik otrzymuje nową wiadomość na czacie z chęcią odbioru oferowanego przedmiotu.
-        \item Użytkownik decyduje, czy chce oddać oferowany produkt użytkownikowi A
-        \begin{enumerate}
-            \item Jeżeli użytkownik nie chce oddać produktu użytkownikowi A, wysyła wiadomość odmowną i interakcja się kończy.
-            \item Jeżeli użytkownik chce oddać produkt, wysyła wiadomość pozytywną, interakcja trwa dalej.
-        \end{enumerate}
-        \item Na ekranie szczegółów swojego ogłoszenia użytkownik naciska przycisk ``Oznacz jako zarezerwowane''
+        \item Użytkownik otrzymuje nową wiadomość na czacie z chęcią odbioru oferowanego produktu.
+        \item Użytkownik decyduje, czy chce oddać oferowany produkt użytkownikowi A:
+        \begin{itemize}
+            \item Jeżeli B nie chce oddać produktu użytkownikowi A, wysyła wiadomość odmowną i interakcja się kończy.
+            \item Jeżeli B chce oddać produkt, wysyła wiadomość pozytywną, interakcja trwa dalej.
+        \end{itemize}
         \item Użytkownicy ustalają między sobą szczegóły odbioru.
-        \item Po oddaniu oferowanego przedmiotu, użytkownik naciska przycisk ``Oznacz jako oddane'' na ekranie szczegółów swojego ogłoszenia, przez co ogłoszenie znika z listy ogłoszeń.
+        \item Po oddaniu oferowanego produktu, użytkownik naciska przycisk \textit{``Oznacz jako odebrane''} na ekranie szczegółów swojego ogłoszenia, dzięki czemu produkt zniknie z listy dostępnych ogłoszeń. Podczas tej operacji użytkownik musi wskazać, dla kogo została dokonana rezerwacja.
     \end{enumerate}
     \subsubsection{Czynności alternatywne}
-    Jeżeli po oznaczeniu ogłoszenia jako zarezerwowane, użytkownik A albo B zmieni zdanie co do chęci odbioru/oddania produktu, użytkownik B może odznaczyć ogłoszenie jako zarezerwowane poprzez ponowne kliknięcie w przycisk ``oznacz jako zarezerwowane'' na ekranie szczegółów swojego ogłoszenia.
+    Jeżeli użytkownik chciałby wycofać ogłoszenie z listy, może nacisnąć przycisk \textit{``Usuń ogłoszenie''}.
     \subsubsection{Czynności niepoprawne}
-    We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się (jaskrawym czerwonym kolorem) stosowny komunikat.
     \begin{enumerate}
-        \item Czynności niepoprawne z podpunktu 6.4.2 dotyczące funkcjonalności czatu
-        \item Nastąpił błąd komunikacji z serwerem --- prośba o oznaczenie jako zarezerwowane / oddane nie została rozpatrzona.
-        \item Serwer zasygnalizował błąd podczas operacji związanych z oznaczeniem ogłoszenia jako zarezerwowane / oddane.
+        \item Czynności niepoprawne z podpunktu 3.3.4 dotyczące funkcjonalności czatu.
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o oznaczenie ogłoszenia jako oddane nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji związanej z oznaczeniem ogłoszenia jako oddane.
     \end{enumerate}
-    \subsection{Możliwe rozwinięcia}
-    Podczas oznaczania ogłoszenia jako zarezerwowane użytkownik może oznaczyć, dla którego użytkownika dokonywana jest rezerwacja.
+
 
 \chapter{Zarządzanie projektem}\label{r:zarzadzanieProjektem} 
 \section{Wykorzystane narzędzia}
 
-W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywany był zarówno do komunikacji między członkami zespołu, jak również między zespołem a zamawiającym. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomcne okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
+W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywany był zarówno do komunikacji między członkami zespołu, jak również między zespołem a zamawiającym. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomcne okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
 
 Kod programu oraz tekst pracy licencjackiej przechowywane były w serwisie Github. Dzięki niemu mogliśmy również w prosty sposób spisywać listę zadań do zrobienia.
 
@@ -677,7 +676,7 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
     \item Widok i możliwość edycji własnego profilu,
 \end{itemize}{}
 
-\chapter{Zawartość płytki}\label{r:build}
+\chapter{Zawartość płytki}\label{r:build}
 \begin{tabbing}
       \hspace{20em} \=   \hspace{10em} \\
     /PodzielSieBackend/ \> Kod źródłowy części serwerowej. \\
