@@ -145,7 +145,7 @@ Aplikację wyróżnia nowoczesny interfejs graficzny, zaprojektowany specjalnie 
 
 \section*{Zawartość pracy}
 Rozdział~\ref{r:definicje} objaśnia definicje użyte w pracy licencjackiej.
-Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych rozwiązań. W rozdziale~\ref{r:arch} przedstawiono całościową architekturę systemu oraz wywzwania i problemy nopotkane w trakcie implementacji funkcjonalności. Rozdział~\ref{r:usecase} szczegółowo opisuje najważniejsze przypadki użycia aplikacji. Rozdział 4 poświęcony jest metodyce tworzenia projektu oraz podziale pracy w zespole. Końcowe rozdziały zawierają: spis zawartości płyty dołączonej do pracy oraz krótkie podsumowanie projektu.
+Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych rozwiązań. W rozdziale~\ref{r:arch} przedstawiono całościową architekturę systemu oraz wywzwania i problemy nopotkane w trakcie implementacji funkcjonalności. Infrastruktura serwera została szczegółowa opisana w rozdziale~\ref{r:infrastruktura}. Rozdział~\ref{r:usecase} szczegółowo opisuje najważniejsze przypadki użycia aplikacji.  Rozdział~\ref{r:zarzadzanieProjektem} poświęcony jest metodyce tworzenia projektu oraz podziale pracy w zespole. Końcowe rozdziały zawierają: spis zawartości płyty dołączonej do pracy oraz krótkie podsumowanie projektu.
 
 \chapter{Podstawowe definicje}\label{r:definicje}
 
@@ -325,12 +325,41 @@ Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy G
 \end{figure}
 
 \newpage
-\section{Infrastruktura serwera} 
-%to można trochę jeszcze rozbudować
 
-Serwer projektu został wdrożony na platformie AWS (Amazon Web Services). Decyzja o wybraniu chmury AWS została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. AWS udostępnia widoczny globalnie w Internecie klaster komputerów w chmurze obliczeniowej. Wspomniane klastry emulują zachowanie prawdziwego komputera, począwszy od wirtualizacji sprzętu (procesora, pamięci RAM, dysku twardego), poprzez infrastrukturę sieciową i system operacyjny, skończywszy na wirtualnej konsoli umożliwiającej połączenie się oraz sterowanie klastrem z poziomu przeglądarki. Wirtualne maszyny AWS udostępniają gotowe rozwiązania serwerowe i oprogramowanie do specjalistycznych zastosowań.
+\chapter{Infrastruktura serwera}\label{r:infrastruktura} 
+
+Potrzeba udostępnienia pierwszej wersji aplikacji zamawiającemu, postawiła nas przed koniecznością uruchomienia stałego serwera aplikacyjnego. Musieliśmy podjęć decyzję dotycząca wyboru platformy na której będzie uruchomiony nasz serwer. Ze względu na bardzo dużo liczbę firm oferujących usługi typu wirtualny prywatny serwer, nie był to łatwy wybór.
+
+\section{Kryteria}
+Przy wyborze usługodawcy kierowaliśmy się następującymi kryteriami:
+\begin{itemize}
+    \item \textbf{Cena} - w trakcie tworzenia systemu z aplikacji korzystało tylko kilka osób: nasz zespół i
+    zamawiający, niepotrzebowaliśmy więc drogiego i bardzo wydajnego serwera,
+    \item \textbf{Skalowalność} - chcieliśmy mieć możliwość łatwego zwiększenia dostępnych zasobów jeśli
+    zwiększy się liczba osób korzystających z systemu,
+    \item \textbf{System operacyjny Linux} - wybrany serwer powinien działać w oparciu o jedną z dystrybucji
+    systemu Linux,
+    \item \textbf{Prosta administracja} - nikt z nas nie miał wcześniej doświadczenia związanego z administrowaniem serwerem, wybrany serwis musiał być więc dostatecznie prosty w obsłudze,
+\end{itemize}{}
+
+\section{Amazon Lightsail}
+
+Nasz wybór padł na usługę \textit{``Lightsail''} firmy Amazon. Decyzja o wybraniu produktu firmy Amazon została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność, akceptowalną cenę (3,5\$ kosztuje najtańszy pakiet miesięcznie) oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. Lightsail udostępnia maszynę wirtualną działającą pod kontrolą systemu Linux Ubuntu, ze statycznym adresem IP.
+
+Administracja jest możliwa za pomocą witryny internetowej. Możliwe jest między innymi: zresetowanie maszyny, reinstalacja systemu czy wykonanie i przywrócenie kopi zapasowej.
+
+\section{Oprogramowanie serwera}
 
 Część serwerowa aplikacji działa pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. Nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
+
+Baza danych PostegreSQL wraz z wtyczką PostGIS uruchomiona jest kontenerze Docker.
+
+\section{Dostęp do Serwera}
+Połączenie z serwerem odbywa się za pomocą protokołu SSH. Możliwy jest również dostęp za pomocą konsoli dostępnej na stronie internetowej serwisu Lightsail.
+
+\section{Dalszy rozwój}
+W miarę dalczego rozwoju projektu, narzędzie firmy Amazon oferuje elastyczne plany, zawierajęce większą liczbę rdzeni procesore, pamięci ram czy przestrzeni dyskowej. Istniej również możliwość łatwej integracji z innymi produktami z rodziny Amazon Web Services (AWS) takimi jak na przykład dedykowane serwery do równoważenia obciążenia, narzędzia do zarządzania domenami i certyfikatami SSL.
+
 
 \chapter{Przypadki użycia}\label{r:usecase}
 Zaprezentowane są tu przykładowe przypadki użycia.
@@ -588,7 +617,7 @@ Zaprezentowane są tu przykładowe przypadki użycia.
     \subsection{Możliwe rozwinięcia}
     Podczas oznaczania ogłoszenia jako zarezerwowane użytkownik może oznaczyć, dla którego użytkownika dokonywana jest rezerwacja.
 
-\chapter{Zarządzanie projektem}
+\chapter{Zarządzanie projektem}\label{r:zarzadzanieProjektem} 
 \section{Wykorzystane narzędzia}
 
 W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywany był zarówno do komunikacji między członkami zespołu, jak również między zespołem a zamawiającym. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomcne okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
