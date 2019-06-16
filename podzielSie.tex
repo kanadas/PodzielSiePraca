@@ -166,6 +166,8 @@ Jest to grupa funkcjonująca na portalu społecznościowym Facebook. Nie jest to
 
 \chapter{Implementacja}\label{r:arch}
 
+Na początku rozdziału opisana jest ogólna architektura projektu. W dalszej części zostały opisane szczegóły realizacji poszczególnych części systemu. Przedstawione są również problemy i wyzwanie, które napotkaliśmy w trakcie implementacji poszczególnych funkcjonalności oraz sposób ich rozwiązania.
+
 \section{Architektóra systemu}
 Architektóra aplikacji \textit{``Podziel się''} składa się z dwóch głównych komponentów: aplikacji mobilnej oraz części serwerowej. Wykorzystywane są również zewnętrzne usługi takie jak Firebase, Facebook, GoogleMaps, AmazonS3.
 
@@ -568,7 +570,7 @@ Kod programu oraz tekst pracy licencjackiej przechowywane były w serwisie Githu
 
 Nie korzystaliśmy w bezpośredni sposób z jednej ze znanych metodyk zarządzania projektemi programistycznymi. Jednakże trzymaliśmy się kilku isotnych zasad. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się, żeby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu zespołowy projekt programistyczny. Każdy z nas decydował jakie zadanie w danej chwili chce wykonać. Wspólnie zaprojektowaliśmy architektórę aplikacji oraz podejmowaliśmy najważniejsze decyzję dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy jakie w danej chwili napotykaliśmy.
 
-Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyńcze zadanie dotyczyło najczęściej zaimplementowanie jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej jak i serwerowej. W ten sposób mogliśmy znacznie zrównolegliść prace nad projektem. Jedna osoba nie musiała czekać aż ktoś inny zrealizuje niezbędną pracę po stronie serwera. Ponad to uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku ReactNative oraz realizacji częsci serwerowej we frameworku Django.
+Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyńcze zadanie dotyczyło najczęściej zaimplementowanie jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej jak i serwerowej. W ten sposób mogliśmy znacznie zrównoleglić prace nad projektem. Jedna osoba nie musiała czekać aż ktoś inny zrealizuje niezbędną pracę po stronie serwera. Ponad to uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku ReactNative oraz realizacji częsci serwerowej we frameworku Django.
 
 \section{Podział obowiązków}
 
@@ -614,7 +616,17 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
     \item Widok i możliwość edycji własnego profilu,
 \end{itemize}{}
 
-\chapter{Instrukcja budowania aplikacji i zawartość płytki}\label{r:build}
+\chapter{Zawartość płytki}\label{r:build}
+\begin{tabbing}
+      \hspace{20em} \=   \hspace{10em} \\
+    /PodzielSieBackend/ \> Kod źródłowy części serwerowej. \\
+    /PodzielSieBackend/README.md \> Instrukcja uruchamiania części serwerowej. \\
+    /PodzielSieMobile/ \> Kod źródłowy części mobilnej. \\
+    /PodzielSieModile/README.md \> Instrukcja uruchamiania części mobilnej. \\
+    /PracaLicencjacka.pdf \> Praca licencjacka. \\
+    /Precentacja.pdf \> Końcowa prezentajca projektu. \\
+\end{tabbing}
+
 \chapter{Podsumowanie}\label{r:pods}
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
@@ -670,3 +682,4 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
 %%% TeX-master: t
 %%% coding: latin-2
 %%% End:
+
