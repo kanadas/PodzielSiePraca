@@ -144,11 +144,40 @@ Aplikacja \textit{``Podziel się''} umożliwia:
 Aplikację wyróżnia nowoczesny interfejs graficzny, zaprojektowany specjalnie na potrzeby projektu.
 
 \section*{Zawartość pracy}
-Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych rozwiązań. W rozdziale~\ref{r:arch} przedstawiono całościową architekturę systemu, zadania poszczególnych modułów oraz wykorzystane technologie. Rozdział~\ref{r:usecase} szczegółowo opisuje najważniejsze przypadki użycia aplikacji. Rozdział 4 poświęcony jest metodyce tworzenia projektu. Końcowe rozdziały zawierają: instrukcję zbudowania aplikacji, spis zawartości płyty dołączonej do pracy, podział zadań w zespole oraz krótkie podsumowanie projektu.
+Rozdział~\ref{r:definicje} objaśnia definicje użyte w pracy licencjackiej.
+Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych rozwiązań. W rozdziale~\ref{r:arch} przedstawiono całościową architekturę systemu oraz wywzwania i problemy nopotkane w trakcie implementacji funkcjonalności. Rozdział~\ref{r:usecase} szczegółowo opisuje najważniejsze przypadki użycia aplikacji. Rozdział 4 poświęcony jest metodyce tworzenia projektu oraz podziale pracy w zespole. Końcowe rozdziały zawierają: spis zawartości płyty dołączonej do pracy oraz krótkie podsumowanie projektu.
+
+\chapter{Podstawowe definicje}\label{r:definicje}
+
+Poniżej znajduje się objaśnienie podstawowych pojeć i definicji używanych w dalszej części pracy licenjackiej.
+
+\begin{itemize}
+\setlength\itemsep{-0.2em}
+
+\item \textbf{Framework} - z Wikipedi: \textit{``szkielet do budowy aplikacji. Definiuje on strukturę aplikacji oraz ogólny mechanizm jej działania, a także dostarcza zestaw komponentów i bibliotek ogólnego przeznaczenia do wykonywania określonych zadań''} (patrz~\cite{framework}) Spotyka się również określenie: \textit{``Zrąb''},
+
+\item \textbf{Amazon S3} - usługa firmy Amazon umożliwiająca łatwe przechowywanie danych,
+
+\item \textbf{React Native} - framework stworzony przez firmę Facebook pozwalajaćy na tworzenie
+aplikacji jednocześnie na systemy Android i IOS,
+
+\item \textbf{Django} - framework do tworzenia aplikacji internetowych,
+
+\item \textbf{Firebase} - platforma stworzona przez firmę Google, oferuje narzędzia wspierające tworzenia aplikacji mobilnych, 
+
+\item \textbf{Firebase Cloud Messaging (FCM)} - narzędzie platformy Firebase pozwalające na wysyłanie powiadomień do telefonu użytkownika,
+
+\item \textbf{Apple Push Notification (APN)} - narzędzie firmy Apple umożliwiające wysyłanie powiadomień do telefonu użytkownika,
+
+\item \textbf{Gunicorn} - serwer pozwalajacy uruchomić aplikację napisaną we frameworku Django,
+
+\item \textbf{Nginx} - serwer HTTP, proxy,
+
+
+\end{itemize}
 
 \chapter{Przegląd konkurencyjnych rozwiązań}\label{r:konkurencja}
 
-\section{Sytuacja na rynku}
 Od paru lat można zaobserwować ciągły wzrost zainteresowania tematyką marnowania żywności wśród społeczeństwa. Przejawia się to na przykład w rosnącym zainteresowaniu polityków i władz, w tym Komisji Europejskiej (patrz~\cite{ec}), bardzo licznym publikacjom na ten temat, a także w rosnącej popularności ruchów społecznych takich ``freeganizm'', czy ``zero waste''. Zainteresowanie tym tematem przejawia się też w licznych aplikacjach pomagających wymieniać się jedzeniem które inaczej by się zmarnowało. Co ciekawe w różnych państwach popularne są różne aplikacje. Na przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Zachodniej Europie \textit{Too Good To Go}, a w Stanach Zjednoczonych ``Unsung''. W Polsce nie ma jeszcze żadnej popularnej aplikacji, chociaż funkcjonują grupy na portalach społecznościowych spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione wybrane z konkurencyjnych rozwiązań.
 
 \section{Olio}
@@ -238,7 +267,7 @@ Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformi
 \section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych} 
 %opis że było wszystko działa na ios i że ogóle spoko
 %nie wiem jak to ładnie nazwać
-System operacyjny Android jest niezwykle popularny w naszym kraju. Według IDC 91,5\% sprzedanych smarfonów w 2017 roku stanowiły urządzenia działające pod kontrolą systemu firmy Google.
+System operacyjny Android jest niezwykle popularny w naszym kraju. Według IDC 91,5\% sprzedanych smarfonów w 2017 roku stanowiły urządzenia działające pod kontrolą systemu firmy Google (patrz~\cite{popluarnoscAndroid}).
 
 Z tego względu postanowiliśmy, że w pierwszej kolejności tworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem IOS. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie informowali o komaptybilności z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone. 
 
@@ -650,7 +679,7 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
 
 \bibitem[ec.europa.eu]{ec} Działania KE ws.\ marnowania żywności\\ \href{https://ec.europa.eu/food/safety/food_waste_en}{\texttt{https://ec.europa.eu/food/safety/food\_waste\_en}}
 
-\bibitem[IDC]{ec} Popularność systemu Android w Polsce\\ 
+\bibitem[IDC]{popluarnoscAndroid} Popularność systemu Android w Polsce\\ 
 \href{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}
 
 \bibitem[ReactNative]{reactnative} \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
@@ -671,6 +700,8 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
 
 \bibitem[PostgreSQL]{postgresql} \href{https://www.postgresql.org/}{\texttt{postgresql.org}}
 
+
+\bibitem[Framework]{framework} \href{https://pl.wikipedia.org/wiki/Framework}{\texttt{https://pl.wikipedia.org/wiki/Framework}}
 
 \end{thebibliography}
 
