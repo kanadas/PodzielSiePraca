@@ -263,6 +263,9 @@ Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformi
 
 \section{Logowanie za pomocą Facebooka}
 %dlaczego to jest wygodne, jak działa itd...
+Oprócz klasycznej możliwości logowania poprzez podanie adresu e-mail i hasła zgodnych z tymi zapisanymi podczas rejestracji, istnieje także opcja zalogowania przez połączenie swojego konta w serwisie Facebook z kontem w aplikacji \textit{Podziel się}. Cały proces z punktu widzenia użytkownika polega na naciśnięciu przycisku logowania z Facebookiem na ekranie logowania, udzieleniu odpowiednich pozwoleń i zalogowaniu się do swojego konta w serwisie Facebook. Po wykonaniu tych czynności użytkownik może już korzystać z aplikacji, co więcej jego dane i zdjęcie profilowe zostaną automatycznie pobrane. Taka możliwość pozwala na jeszcze szybsze skorzystanie z aplikacji \textit{Podziel się} niż klasyczne logowanie.
+
+Funkcjonalność ta jest możliwa dzięki modułowi integrującemu aplikację napisaną z użyciem React Native z kontem w serwisie Facebook. Po udzieleniu potrzebnych pozwoleń i zalogowaniu użytkownika do konta Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na zidentyfikowanie użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie, a także osobnego klucza specyficznego dla całej aplikacji, pobierane są dane użytkownika takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator użytkownika. Potem sprawdzane jest czy ten użytkownik posiada już konto, jeżeli nie to jego dane dodawane są do bazy danych, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający - analogicznie jak przy klasycznym logowaniu. 
 
 \section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych} 
 %opis że było wszystko działa na ios i że ogóle spoko
