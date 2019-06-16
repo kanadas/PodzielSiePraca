@@ -82,7 +82,9 @@ Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociol
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{subcaption}
-
+\usepackage{float}
+\usepackage{framed}
+\FrameSep0pt
 
 % koniec definicji
 
@@ -283,11 +285,15 @@ Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy G
 \begin{figure}[h!]
   \centering
   \begin{subfigure}[b]{0.4\linewidth}
-    \includegraphics[width=\linewidth]{android1.jpg}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{android1.jpg}
+    \end{framed}
     \caption{Android.}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\linewidth}
-    \includegraphics[width=\linewidth]{ios1.jpg}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{ios1.jpg}
+    \end{framed}
     \caption{iPhone.}
   \end{subfigure}
   \caption{Lista ogłoszeń.}
@@ -298,30 +304,38 @@ Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy G
 \begin{figure}[h!]
   \centering
   \begin{subfigure}[b]{0.4\linewidth}
-    \includegraphics[width=\linewidth]{android2.jpg}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{android2.jpg}
+    \end{framed}
     \caption{Android.}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\linewidth}
-    \includegraphics[width=\linewidth]{ios2.jpg}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{ios2.jpg}
+    \end{framed}
     \caption{iPhone.}
   \end{subfigure}
   \caption{Szczegóły ogłoszenia.}
-  \label{fig:offers}
+  \label{fig:offer}
 \end{figure}
 
 \newpage
 \begin{figure}[h!]
   \centering
   \begin{subfigure}[b]{0.4\linewidth}
-    \includegraphics[width=\linewidth]{android3.jpg}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{android3.jpg}
+    \end{framed}
     \caption{Android.}
   \end{subfigure}
   \begin{subfigure}[b]{0.4\linewidth}
-    \includegraphics[width=\linewidth]{ios3.jpg}
+    \begin{framed}
+     \includegraphics[width=\linewidth]{ios3.jpg}
+    \end{framed}
     \caption{iPhone.}
   \end{subfigure}
-  \caption{Główne menu.}
-  \label{fig:offers}
+  \caption{Menu główne.}
+  \label{fig:menu}
 \end{figure}
 
 \newpage
@@ -411,6 +425,32 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
         \item Jeżeli użytkownik nie wyraził zgody na korzystanie z geolokalizacji, aplikacja pyta użytkownika, względem jakiego miejsca ma sortować ogłoszenia i wyświetla interaktywną mapę. Aby kontynuować, użytkownik musi wskazać konkretne miejsce na mapie.
     \end{enumerate}
 
+\newpage
+\begin{figure}[H]
+  \centering
+
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{rejestracja1.png}
+    \end{framed}
+    \caption{Ekran powitalny.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{rejestracja2.png}
+    \end{framed}
+    \caption{Formularz rejestracyjny.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{rejestracja3.png}
+    \end{framed}
+    \caption{Wybór zdjęcia profilowego.}
+  \end{subfigure}
+  \caption{Proces rejestracji nowego konta.}
+  \label{fig:registration}
+\end{figure}
+
 \section{Dodawanie nowego ogłoszenia}
     \subsection{Krótki opis}
     Wprowadzenie przez użytkownika informacji potrzebnych do stworzenia nowego ogłoszenia oraz opublikowanie go na liście aktualnie dostępnych
@@ -484,6 +524,24 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \subsubsection{Automatyczna klasyfikacja ogłoszeń}
     Wyświetlenie podpowiedzi co do wyboru odpowiedniej kategorii na podstawie analizy słownictwa użytego w treści ogłoszenia.
 
+\newpage
+\begin{figure}[H]
+  \centering
+
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{dodawanie1.png}
+    \end{framed}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{dodawanie2.png}
+    \end{framed}
+  \end{subfigure}
+  \caption{Formularz dodawania nowego ogłoszenia.}
+  \label{fig:addoffer}
+\end{figure}
+
 \section{Konwersacja (czat) z innym użytkownikiem}
     \subsection{Krótki opis}
     Wykorzystanie funkcji czatu do komunikacji z innym użytkownikiem aplikacji.
@@ -527,6 +585,18 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \subsubsection{Przesyłanie obrazów}
     Umożliwienie przesyłania wiadomości w formie zdjęć. W tym celu użytkownik wysyłający wiadomość mógłby wybrać piktogram ``prześlij obraz''. Dalszy scenariusz byłby analogiczny do opisanego w \textit{Czynnościach alternatywnych} z punktu 3.2.4.
 
+\newpage
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{czat.png}
+    \end{framed}
+  \end{subfigure}
+  \caption{Ekran czatu.}
+  \label{fig:chat}
+\end{figure}
+
 \section{Ocena innego użytkownika}
     \subsection{Krótki opis}
     Wystawienie innemu użytkownikowi oceny w skali od 1 do 6 oraz możliwość napisania krótkiego komentarza dotyczącego współpracy z nim.
@@ -568,6 +638,24 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \end{enumerate}
     \subsection{Możliwe rozwinięcia}
     Blokada możliwości oceny danego użytkownika do momentu, w którym odbierzemy od niego (lub on od nas) produkt z przynajmniej jednego ogłoszenia.
+
+\newpage
+\begin{figure}[H]
+  \centering
+
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{profil1.png}
+    \end{framed}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{profil2.png}
+    \end{framed}
+  \end{subfigure}
+  \caption{Profil użytkownika.}
+  \label{fig:grading}
+\end{figure}
 
 \section{Odbiór produktów oferowanych na liście ogłoszeń}
     \subsection{Krótki opis}
@@ -615,6 +703,28 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
         \item Serwer zasygnalizował błąd podczas operacji związanej z oznaczeniem ogłoszenia jako oddane.
     \end{enumerate}
 
+\newpage
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{lista.png}
+    \end{framed}
+  \end{subfigure}
+  \caption{Lista dostępnych ogłoszeń.}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{szczegoly1.png}
+    \end{framed}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{framed}
+      \includegraphics[width=\linewidth]{szczegoly2.png}
+    \end{framed}
+  \end{subfigure}
+  \caption{Szczegóły ogłoszenia.}
+  \label{fig:offerdetails}
+\end{figure}
 
 \chapter{Zarządzanie projektem}\label{r:zarzadzanieProjektem} 
 \section{Wykorzystane narzędzia}
