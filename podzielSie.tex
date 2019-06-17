@@ -344,37 +344,37 @@ Wszystkie pozostałe funkcjonalności działają dokładnie tak, jak na systemie
 
 \chapter{Infrastruktura serwera}\label{r:infrastruktura}
 
-Potrzeba udostępnienia pierwszej wersji aplikacji zamawiającemu, postawiła nas przed koniecznością uruchomienia stałego serwera aplikacyjnego. Musieliśmy podjęć decyzję dotycząca wyboru platformy na której będzie uruchomiony nasz serwer. Ze względu na bardzo dużo liczbę firm oferujących usługi typu wirtualny prywatny serwer, nie był to łatwy wybór.
+Potrzeba udostępnienia pierwszej wersji aplikacji \textit{Podziel się} zamawiającej postawiła nas przed koniecznością uruchomienia stałego serwera aplikacyjnego. Musieliśmy podjąć ważną decyzję dotyczącą wyboru platformy, na której będzie uruchomiony nasz serwer. Z uwagi na bardzo dużą liczbę firm oferujących usługi typu wirtualny prywatny serwer, nie był to łatwy wybór.
 
 \section{Kryteria}
 Przy wyborze usługodawcy kierowaliśmy się następującymi kryteriami:
 \begin{itemize}
-    \item \textbf{Cena} --- w trakcie tworzenia systemu z aplikacji korzystało tylko kilka osób: nasz zespół i
-    zamawiający, niepotrzebowaliśmy więc drogiego i bardzo wydajnego serwera,
-    \item \textbf{Skalowalność} --- chcieliśmy mieć możliwość łatwego zwiększenia dostępnych zasobów jeśli
-    zwiększy się liczba osób korzystających z systemu,
-    \item \textbf{System operacyjny Linux} --- wybrany serwer powinien działać w oparciu o jedną z dystrybucji
+    \item \textbf{Cena} --- w fazie rozwojowej systemu z aplikacji korzystało tylko kilka osób: nasz zespół oraz
+    zamawiająca, nie potrzebowaliśmy więc drogiego i bardzo wydajnego serwera,
+    \item \textbf{Skalowalność} --- chcieliśmy mieć możliwość łatwego zwiększenia dostępnych zasobów, jeśli
+    wzrośnie liczba osób korzystających z systemu,
+    \item \textbf{System operacyjny Linux} --- wybrany serwer powinien działać w oparciu o jedną z~dystrybucji
     systemu Linux,
-    \item \textbf{Prosta administracja} --- nikt z nas nie miał wcześniej doświadczenia związanego z administrowaniem serwerem, wybrany serwis musiał być więc dostatecznie prosty w obsłudze,
+    \item \textbf{Łatwa administracja} --- nikt z nas nie miał wcześniej do czynienia z administrowaniem serwerem, wybrany serwis musiał więc być dostatecznie prosty w obsłudze.
 \end{itemize}{}
 
 \section{Amazon Lightsail}
 
-Nasz wybór padł na usługę \textit{``Lightsail''} firmy Amazon. Decyzja o wybraniu produktu firmy Amazon została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność, akceptowalną cenę (3,5\$ kosztuje najtańszy pakiet miesięcznie) oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. Lightsail udostępnia maszynę wirtualną działającą pod kontrolą systemu Linux Ubuntu, ze statycznym adresem IP\@.
+Nasz wybór padł na usługę \textit{Lightsail} firmy Amazon. Decyzja o wybraniu produktu firmy Amazon została podjęta z uwagi na jej wydajność, skalowalność, stosunkowo niską awaryjność, akceptowalną cenę (\$3,50 to koszt najtańszego miesięcznego pakietu) oraz obecność rozbudowanych mechanizmów zapewniających bezpieczeństwo danych. \textit{Lightsail} udostępnia maszynę wirtualną działającą pod kontrolą systemu Ubuntu ze statycznym adresem IP\@.
 
-Administracja jest możliwa za pomocą witryny internetowej. Możliwe jest między innymi: zresetowanie maszyny, reinstalacja systemu czy wykonanie i przywrócenie kopi zapasowej.
+Administracja jest możliwa za pomocą witryny internetowej. Możliwe jest między innymi: zresetowanie maszyny, reinstalacja systemu czy wykonanie i przywrócenie kopii zapasowej.
 
 \section{Oprogramowanie serwera}
 
-Część serwerowa aplikacji działa pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. Nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
+Część serwerowa aplikacji działa pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
 
-Baza danych PostegreSQL wraz z wtyczką PostGIS uruchomiona jest kontenerze Docker.
+Baza danych PostgreSQL wraz z wtyczką PostGIS uruchomiona jest w kontenerze Docker.
 
-\section{Dostęp do Serwera}
-Połączenie z serwerem odbywa się za pomocą protokołu SSH\@. Możliwy jest również dostęp za pomocą konsoli dostępnej na stronie internetowej serwisu Lightsail.
+\section{Dostęp do serwera}
+Połączenie z serwerem odbywa się poprzez protokół SSH\@. Możliwy jest również dostęp za pośrednictwem konsoli dostępnej na stronie internetowej serwisu \textit{Lightsail}.
 
 \section{Dalszy rozwój}
-W miarę dalczego rozwoju projektu, narzędzie firmy Amazon oferuje elastyczne plany, zawierajęce większą liczbę rdzeni procesore, pamięci ram czy przestrzeni dyskowej. Istniej również możliwość łatwej integracji z innymi produktami z rodziny Amazon Web Services (AWS) takimi jak na przykład dedykowane serwery do równoważenia obciążenia, narzędzia do zarządzania domenami i certyfikatami SSL\@.
+W miarę dalszego rozwoju projektu, narzędzie firmy Amazon oferuje elastyczne plany zapewniające większą liczbę rdzeni procesora, pamięci RAM czy przestrzeni dyskowej. Istnieje również możliwość łatwej integracji z innymi produktami z rodziny Amazon Web Services (AWS), takimi jak dedykowane serwery do równoważenia obciążenia, narzędzia do zarządzania domenami i certyfikatami SSL\@.
 
 
 \chapter{Przypadki użycia}\label{r:usecase}
@@ -731,29 +731,29 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
 \chapter{Zarządzanie projektem}\label{r:zarzadzanieProjektem}
 \section{Wykorzystane narzędzia}
 
-W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywany był zarówno do komunikacji między członkami zespołu, jak również między zespołem a zamawiającym. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomocne okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
+W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. Wykorzystywaliśmy go zarówno do komunikacji między członkami zespołu, jak również między zespołem a~zamawiającą. Dzięki niemu mogliśmy w łatwy sposób dzielić się plikami i dokumentami. Niezwykle pomocna okazała się również możliwość oznaczania postów z ważnymi informacjami, na przykład instrukcją dostępu do serwera.
 
-Kod programu oraz tekst pracy licencjackiej przechowywane były w serwisie Github. Dzięki niemu mogliśmy również w prosty sposób spisywać listę zadań do zrobienia.
+Kod źródłowy programu oraz tekst pracy licencjackiej przechowywane były w serwisie \mbox{GitHub}, który pozwalał także w prosty sposób spisywać i aktualizować listę zadań do zrobienia.
 
 \section{Współpraca z zamawiającą}
-Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie zna się na wytwarzaniu oprogramowania, nie wiedziała więc jakich informacji potrzebujemy. Aby się wzajemnie dobrze zrozumieć często komunikowaliśmy się, szczególnie na początku tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co utrudniło spotykanie się twarzą w twarz. Udało nam się tylko jedno takie spotkanie zorganizować (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas regularnie kontaktowaliśmy się internetowo, w szczególności regularnie udostępnialiśmy zamawiającej aktualną wersję aplikacji aby upewnić się, że się dobrze rozumiemy. Dzięki temu ostatecznie udało nam się stworzyć aplikacje zgodną z oczekiwaniami zamawiającej.
+Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie ma doświadczenia w wytwarzaniu oprogramowania, nie wiedziała więc, jakich informacji potrzebujemy. Aby wzajemnie dobrze się porozumieć, często komunikowaliśmy się, szczególnie na początku procesu tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co znacząco utrudniło spotykanie się twarzą w twarz. Udało nam się zorganizować tylko jedno takie spotkanie (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas regularnie kontaktowaliśmy się internetowo, w szczególności regularnie udostępnialiśmy zamawiającej aktualną wersję aplikacji, aby upewnić się, że się dobrze rozumiemy. Dzięki temu ostatecznie udało nam się stworzyć aplikację zgodną z oczekiwaniami zamawiającej.
 
 \section{Organizacja pracy}
 
-Nie korzystaliśmy w bezpośredni sposób z jednej ze znanych metodyk zarządzania projektami programistycznymi. Jednakże trzymaliśmy się kilku istotnych zasad. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się, żeby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu zespołowy projekt programistyczny. Każdy z nas decydował jakie zadanie w danej chwili chce wykonać. Wspólnie zaprojektowaliśmy architekturę aplikacji oraz podejmowaliśmy najważniejsze decyzję dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy jakie w danej chwili napotykaliśmy.
+Nie korzystaliśmy w bezpośredni sposób z żadnej ze znanych metodyk zarządzania projektami programistycznymi, jednakże trzymaliśmy się kilku istotnych zasad i dobrych praktyk. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się również, aby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu Zespołowy Projekt Programistyczny. Każdy z nas samodzielnie decydował, które zadanie w~danej chwili chce wykonać. Wspólnie zaprojektowaliśmy architekturę aplikacji oraz podejmowaliśmy najważniejsze decyzje dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy, które napotkaliśmy.
 
-Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyncze zadanie dotyczyło najczęściej zaimplementowanie jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej jak i serwerowej. W ten sposób mogliśmy znacznie zrównoleglić prace nad projektem. Jedna osoba nie musiała czekać aż ktoś inny zrealizuje niezbędną pracę po stronie serwera. Ponad to uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku ReactNative oraz realizacji części serwerowej we frameworku Django.
+Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyncze zadanie dotyczyło najczęściej zaimplementowania jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej, jak i serwerowej. W ten sposób mogliśmy znacznie zrównoleglić prace nad projektem (przykładowo, osoba rozwijająca aplikację mobilną nie musiała czekać, aż ktoś inny zrealizuje niezbędną pracę po stronie serwera). Ponadto uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej --- każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku React Native, jak i realizacji części serwerowej z wykorzystaniem frameworka Django.
 
 \section{Podział obowiązków}
 
-\subsection{Kamil Ćwinatal}
+\subsection{Kamil Ćwintal}
 \begin{itemize}
 \setlength\itemsep{-0.2em}
     \item Widok listy ogłoszeń,
-    \item Zdjęcia profilowe użytkowników,
     \item Zdjęcia ogłoszeń,
+    \item Zdjęcia profilowe użytkowników,
     \item Kategorie i hasztagi w ogłoszeniach,
-    \item Dopracowanie ogólnego wyglądu aplikacji,
+    \item Dopracowanie interfejsu graficznego aplikacji.
 \end{itemize}{}
 
 \subsection{Szymon Gajda}
@@ -764,7 +764,7 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
     \item Wyświetlanie mapy w ogłoszeniach,
     \item Filtrowanie i sortowanie ogłoszeń po odległości między użytkownikiem a ogłoszeniem,
     \item Logowanie z Facebookiem,
-    \item Zgłaszanie nieodpowiednich ogłoszeń,
+    \item Zgłaszanie nieodpowiednich ogłoszeń.
 \end{itemize}{}
 
 \subsection{Paweł Giżka}
@@ -775,7 +775,7 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
     \item Powiadomienia,
     \item Sortowanie ogłoszeń,
     \item Możliwość obserwacji wybranych użytkowników,
-    \item Konfiguracja serwera aplikacji,
+    \item Konfiguracja serwera aplikacji.
 \end{itemize}{}
 
 \subsection{Tomasz Kanas}
@@ -785,26 +785,26 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
     \item Widok własnych ogłoszeń,
     \item Widok profilu innych użytkowników,
     \item Ocenianie użytkowników,
-    \item Widok i możliwość edycji własnego profilu,
+    \item Widok i możliwość edycji własnego profilu.
 \end{itemize}{}
 
-\chapter{Zawartość płytki}\label{r:build}
+\chapter{Zawartość płyty}\label{r:build}
 \begin{tabbing}
       \hspace{20em} \=   \hspace{10em} \\
-    /PodzielSieBackend/ \> Kod źródłowy części serwerowej. \\
-    /PodzielSieBackend/README.md \> Instrukcja uruchamiania części serwerowej. \\
-    /PodzielSieMobile/ \> Kod źródłowy części mobilnej. \\
-    /PodzielSieModile/README.md \> Instrukcja uruchamiania części mobilnej. \\
-    /PracaLicencjacka.pdf \> Praca licencjacka. \\
-    /Precentacja.pdf \> Końcowa prezentacja projektu. \\
+    \texttt{/PodzielSieBackend/} \> Kod źródłowy części serwerowej. \\
+    \texttt{/PodzielSieBackend/README.md} \> Instrukcja uruchamiania części serwerowej. \\
+    \texttt{/PodzielSieMobile/} \> Kod źródłowy części mobilnej. \\
+    \texttt{/PodzielSieModile/README.md} \> Instrukcja uruchamiania części mobilnej. \\
+    \texttt{/PracaLicencjacka.pdf} \> Praca licencjacka. \\
+    \texttt{/Prezentacja.pdf} \> Końcowa prezentacja projektu. \\
 \end{tabbing}
 
 \chapter{Podsumowanie}\label{r:pods}
 W trakcie ostatnich siedmiu miesięcy powstała w pełni funkcjonalna aplikacja mobilna, która w istotny sposób może przyczynić się do zmniejszenia ilości marnowanej żywności. Udało nam się zrealizować zdecydowaną większość wymagań zamawiającej, w szczególności wszystkie niezbędne funkcjonalności zostały zaimplementowane.
 
-W trakcie prac nad projektem nauczyliśmy się wielu zagadnień związanych z inżynierią oprogramowania, tworzeniem aplikacji mobilnych z wykorzystaniem ReactNative, implementacji części serwerowej we frameworku Django, integracji ze zewnętrznymi usługami czy administrowania serwerem aplikacyjnym. Było to dla nas również okazja do rozwinięciu tak zwanych umiejętności miękkich takich jak chociażby pracę w zespole czy kontakt z zamawiającym.
+W trakcie prac nad projektem nauczyliśmy się wielu zagadnień związanych z inżynierią oprogramowania, tworzenia aplikacji mobilnych z wykorzystaniem React Native, implementacji części serwerowej we frameworku Django, integracji ze zewnętrznymi usługami oraz administrowania serwerem aplikacyjnym. Była to dla nas również okazja do rozwinięcia tak zwanych umiejętności miękkich --- pracy w zespole, utrzymywania kontaktu z zamawiającym.
 
-W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia aplikacji do użytku. Niezależnie od tego czy aplikacja zostanie wdrożona, jesteśmy z niej bardzo zadowoleni. Realizacja tego projektu dała nam wiele satysfakcji.
+W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia aplikacji do użytku. Niezależnie od tego, czy aplikacja zostanie wdrożona, jesteśmy z niej bardzo zadowoleni. Realizacja tego projektu dała nam wiele satysfakcji.
 
 
 \begin{thebibliography}{99}
