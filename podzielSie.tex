@@ -151,49 +151,49 @@ Rozdział~\ref{r:konkurencja} stanowi przegląd oraz analizę konkurencyjnych ro
 
 \chapter{Podstawowe definicje}\label{r:definicje}
 
-Poniżej znajduje się objaśnienie podstawowych pojeć i definicji używanych w dalszej części pracy licenjackiej.
+Poniżej znajdują się objaśnienia podstawowych pojęć i definicji używanych w dalszej części pracy licencjackiej.
 
 \begin{itemize}
 \setlength\itemsep{-0.2em}
 
-\item \textbf{Framework} --- z Wikipedi: \textit{``szkielet do budowy aplikacji. Definiuje on strukturę aplikacji oraz ogólny mechanizm jej działania, a także dostarcza zestaw komponentów i bibliotek ogólnego przeznaczenia do wykonywania określonych zadań''} (patrz~\cite{framework}) Spotyka się również określenie: \textit{``Zrąb''},
+\item \textbf{Framework} --- z Wikipedii: ``(...) \textit{szkielet do budowy aplikacji. Definiuje on strukturę aplikacji oraz ogólny mechanizm jej działania, a także dostarcza zestaw komponentów i~bibliotek ogólnego przeznaczenia do wykonywania określonych zadań}'' (patrz~\cite{framework}). W polskiej terminologii informatycznej spotyka się również określenie \textit{zrąb}, jednak w~dalszej części pracy będziemy konsekwentnie stosować określenie \textit{framework} jako słowo bardziej rozpoznawalne i rozpowszechnione w codziennej praktyce programistycznej.
 
-\item \textbf{Amazon S3} --- usługa firmy Amazon umożliwiająca łatwe przechowywanie danych,
+\item \textbf{Amazon S3} --- usługa firmy Amazon umożliwiająca przechowywanie danych (pamięć masowa w chmurze).
 
-\item \textbf{React Native} --- framework stworzony przez firmę Facebook pozwalajaćy na tworzenie
-aplikacji jednocześnie na systemy Android i IOS,
+\item \textbf{React Native} --- framework stworzony przez firmę Facebook, pozwalający na tworzenie
+aplikacji jednocześnie na systemy Android oraz iOS.
 
-\item \textbf{Django} --- framework do tworzenia aplikacji internetowych,
+\item \textbf{Django} --- framework do tworzenia aplikacji internetowych.
 
-\item \textbf{Firebase} --- platforma stworzona przez firmę Google, oferuje narzędzia wspierające tworzenia aplikacji mobilnych,
+\item \textbf{Firebase} --- platforma stworzona przez firmę Google, oferuje narzędzia wspierające tworzenie aplikacji mobilnych.
 
-\item \textbf{Firebase Cloud Messaging (FCM)} --- narzędzie platformy Firebase pozwalające na wysyłanie powiadomień do telefonu użytkownika
+\item \textbf{Firebase Cloud Messaging (FCM)} --- narzędzie platformy Firebase pozwalające na wysyłanie powiadomień do telefonu użytkownika.
 
-\item \textbf{Apple Push Notification (APN)} --- narzędzie firmy Apple umożliwiające wysyłanie powiadomień do telefonu użytkownika,
+\item \textbf{Apple Push Notification (APN)} --- narzędzie firmy Apple umożliwiające wysyłanie natychmiastowych powiadomień do telefonu użytkownika.
 
-\item \textbf{Gunicorn} --- serwer pozwalajacy uruchomić aplikację napisaną we frameworku Django,
+\item \textbf{Gunicorn} --- serwer pozwalający na uruchomienie aplikacji napisanej z wykorzystaniem frameworka Django.
 
-\item \textbf{Nginx} --- serwer HTTP, proxy,
+\item \textbf{nginx} --- serwer HTTP, wykorzystywany również jako serwer proxy.
 
 
 \end{itemize}
 
 \chapter{Przegląd konkurencyjnych rozwiązań}\label{r:konkurencja}
 
-Od paru lat można zaobserwować ciągły wzrost zainteresowania tematyką marnowania żywności wśród społeczeństwa. Przejawia się to na przykład w rosnącym zainteresowaniu polityków i władz, w tym Komisji Europejskiej (patrz~\cite{ec}), bardzo licznym publikacjom na ten temat, a także w rosnącej popularności ruchów społecznych takich ``freeganizm'', czy ``zero waste''. Zainteresowanie tym tematem przejawia się też w licznych aplikacjach pomagających wymieniać się jedzeniem które inaczej by się zmarnowało. Co ciekawe w różnych państwach popularne są różne aplikacje. Na przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Zachodniej Europie \textit{Too Good To Go}, a w Stanach Zjednoczonych ``Unsung''. W Polsce nie ma jeszcze żadnej popularnej aplikacji, chociaż funkcjonują grupy na portalach społecznościowych spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione wybrane z konkurencyjnych rozwiązań.
+Na przestrzeni ostatnich kilku lat można zaobserwować systematyczny wzrost zainteresowania tematyką marnowania żywności. Przyczyn tego zjawiska należy upatrywać w coraz wyższym poziomie świadomości ekologicznej polskiego społeczeństwa, bardziej intensywnych działaniach władz i rozmaitych instytucji (w tym Komisji Europejskiej - patrz~\cite{ec}), a~także w licznych publikacjach naukowych na ten temat. Trend ``zero waste'' przejawia się w~bogatej ofercie aplikacji mobilnych pomagających wymieniać się jedzeniem, które inaczej by się zmarnowało. Co ciekawe, w różnych państwach popularność zyskały różne aplikacje. Na przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Europie Zachodniej - \textit{Too Good To Go}, a w Stanach Zjednoczonych - \textit{Unsung}. W Polsce nie ma jeszcze żadnej rozpoznawalnej aplikacji, chociaż na portalach społecznościowych istnieją grupy spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione niektóre konkurencyjne rozwiązania.
 
-\section{Olio}
-Z wymienionych w tym rozdziale aplikacji \textit{Olio} jest najbardziej podobne do \textit{Podziel Się}. Posiada bardzo prosty interfejs, pozwalający już kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy znaleźć z listy ogłoszeń (która może być sortowana po odległości, lub czasie dodania ogłoszenia) produkt na który mamy ochotę. \textit{Olio} tak samo jak \textit{Podziel Się} jest zintegrowane z Mapami Google i lokalizacją telefonu (choć można ją wyłączyć). \textit{Olio} posiada też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie posiada natomiast podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.), w \textit{Olio} specyfikuje się tylko czy produkt jest żywnością czy nie.
+\section{\textit{Olio}}
+Spośród wymienionych w tym rozdziale aplikacji \textit{Olio} jest koncepcyjnie najbardziej podobne do \textit{Podziel się}. Aplikacja posiada bardzo prosty interfejs, pozwalający już w kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy też znaleźć na liście ogłoszeń (która może być sortowana po odległości lub czasie dodania ogłoszenia) produkt, na który mamy ochotę. \textit{Olio}, tak samo jak \textit{Podziel się}, jest zintegrowane z Mapami Google oraz wykorzystuje lokalizację telefonu (choć można tę opcję wyłączyć). \textit{Olio} udostępnia też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie daje natomiast możliwości podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.) - w \textit{Olio} specyfikuje się tylko, czy dany produkt jest żywnością, czy nie.
 
-\textit{Olio} jest bardzo popularną aplikacją. Na chwilę obecną posiada ponad milion użytkowników i ponad półtora miliona ogłoszeń (\cite{olio}). Jest najbardziej popularna w Wielkiej Brytanii, w Polsce praktycznie nie funkcjonuje.
+\textit{Olio} jest bardzo popularną aplikacją. Na chwilę obecną posiada ponad milion użytkowników i ponad półtora miliona ogłoszeń (\cite{olio}). Największą popularność zdobyła w~Wielkiej Brytanii, w Polsce praktycznie nie funkcjonuje.
 
-\section{Too Good To Go}
-Ta aplikacja reprezentuje zupełnie inne podejście niż \textit{Podziel Się}. Służy do umożliwienia restauracjom i jadłodajnią do odsprzedania niesprzedanych posiłków po znacznie niższych cenach niedługo przed zamknięciem. Oznacza, to że oferty są zwykle płatne, w przeciwieństwie do \textit{Podziel Się}, gdzie wszystkie oferty są darmowe. \textit{Too Good To Go} ma trochę bardziej skomplikowany interfejs niż \textit{Olio}, czy Podziel się. Tak jak poprzednie aplikacje jest zintegrowana z Mapami Google i lokalizacją telefonu, umożliwia też przeglądanie mapy z zaznaczonymi wszystkimi dostępnymi jadłodajniami, oraz dodawania jadłodajni do listy swoich ulubionych.
+\section{\textit{Too Good To Go}}
+Ta aplikacja reprezentuje zupełnie inne podejście niż \textit{Podziel się}. Umożliwia restauracjom i~jadłodajniom zbyt niesprzedanych posiłków po znacznie niższych cenach niedługo przed zamknięciem. Oznacza to, że oferty są zwykle płatne - w przeciwieństwie do \textit{Podziel się}, gdzie wszystkie oferowane produkty są darmowe. \textit{Too Good To Go} ma nieco bardziej skomplikowany interfejs niż \textit{Olio} czy \textit{Podziel się}, jest zintegrowana z Mapami Google, wykorzystuje lokalizację telefonu, umożliwia też przeglądanie mapy z zaznaczonymi wszystkimi dostępnymi jadłodajniami oraz posiada opcję dodawania jadłodajni do listy swoich ulubionych.
 
-\textit{Too Good To Go} jest popularna w praktycznie całej Zachodniej Europie, posiadając obecnie prawie 25.000 współpracujących jadłodajni (\cite{tgtg}). W Warszawie jest tylko \~20 jadłodajni.
+\textit{Too Good To Go} jest popularna w praktycznie całej Europie Zachodniej, posiadając obecnie prawie 25 tysięcy współpracujących jadłodajni (\cite{tgtg}). W Warszawie aplikacja jest wykorzystywana przez zaledwie 20 jadłodajni.
 
-\section{Grupa ``Freeganism, dumpster diving, food sharing --- Warszawa''}
-Jest to grupa funkcjonująca na portalu społecznościowym Facebook. Nie jest to co prawda aplikacja, jednak służy do tego samego celu i jest największą lokalną konkurencją. Grup tego rodzaju jest wiele zarówno w Polsce jak i w samej Warszawie, ta została wybrana jako przykładowa głównie ze względu na największą popularność, ponieważ w chwili obecnej liczy prawie 9 tysięcy członków i publikowanych na niej jest około 700 postów miesięcznie. Główny problem takich grup wynika z niedostosowania platformy --- portalu Facebook. Nie posiada on narzędzi umożliwiających wygodne przeglądanie listy aktualnych ofert, nie pozwala filtrować, ani sortować ogłoszeń po odległości, ani nawet łatwo odfiltrować już wygasłe ogłoszenia. Bardzo ogranicza to rozrost takich grup. Z ciekawych rozwiązań z których ta grupa korzysta jest koncept jadłodzielni. Są to zwykle ogólnodostępne lodówki i szafki na żywność w których można umieszczać produkty których się nie spożyje. Udostępniane są one zwykle przez różne jednostki jak: urząd miasta, uniwersytet, czy centrum kultury. Jest to szczególnie wygodne w odbiorze, ponieważ nie trzeba nawet wiedzieć, że ktoś ma coś do oddania, wystarczy jak się jest w pobliżu sprawdzić, czy nie ma w niej akurat czegoś na co ma się ochotę.
+\section{Grupa ``\textit{Freeganism, dumpster diving, food sharing --- Warszawa}''}
+Największą konkurencją dla aplikacji mobilnych są grupy funkcjonujące na portalu społecznościowym Facebook, które w założeniu mają służyć do tego samego celu. Tego rodzaju lokalnych grup jest w Polsce bardzo wiele, ta została wybrana jako przykładowa głównie ze względu na jej największą popularność - w chwili obecnej liczy prawie 9 tysięcy członków, a~publikowanych jest na niej około 700 postów miesięcznie. Główny problem takich grup wynika z niedostosowania platformy --- portalu Facebook. Nie posiada on narzędzi umożliwiających wygodne przeglądanie listy aktualnych ofert, nie pozwala filtrować ani sortować ogłoszeń po odległości, ani nawet łatwo odrzucić już wygasłe ogłoszenia. Bardzo ogranicza to rozrost takich grup. Warto wspomnieć o ciekawym rozwiązaniu, z którego korzysta przedstawiona grupa - jest to koncept jadłodzielni. Są to zazwyczaj ogólnodostępne lodówki i szafki na żywność, w których można umieszczać produkty przeznaczone do oddania. Udostępniane są zwykle przez budynki użyteczności publicznej, takie jak urząd miasta, uniwersytet czy centrum kultury. Jest to szczególnie wygodne w odbiorze, ponieważ nie trzeba nawet wiedzieć, kto dokładnie ma żywność do oddania - wystarczy będąc w pobliżu sprawdzić, czy nie ma w~niej akurat czegoś, na co ma się ochotę.
 
 \chapter{Implementacja}\label{r:arch}
 
@@ -267,7 +267,7 @@ Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformi
 %dlaczego to jest wygodne, jak działa itd...
 Oprócz klasycznej możliwości logowania poprzez podanie adresu e-mail i hasła zgodnych z tymi zapisanymi podczas rejestracji, istnieje także opcja zalogowania przez połączenie swojego konta w serwisie Facebook z kontem w aplikacji \textit{Podziel się}. Cały proces z punktu widzenia użytkownika polega na naciśnięciu przycisku logowania z Facebookiem na ekranie logowania, udzieleniu odpowiednich pozwoleń i zalogowaniu się do swojego konta w serwisie Facebook. Po wykonaniu tych czynności użytkownik może już korzystać z aplikacji, co więcej jego dane i zdjęcie profilowe zostaną automatycznie pobrane. Taka możliwość pozwala na jeszcze szybsze skorzystanie z aplikacji \textit{Podziel się} niż klasyczne logowanie.
 
-Funkcjonalność ta jest możliwa dzięki modułowi integrującemu aplikację napisaną z użyciem React Native z kontem w serwisie Facebook. Po udzieleniu potrzebnych pozwoleń i zalogowaniu użytkownika do konta Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na zidentyfikowanie użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie, a także osobnego klucza specyficznego dla całej aplikacji, pobierane są dane użytkownika takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator użytkownika. Potem sprawdzane jest czy ten użytkownik posiada już konto, jeżeli nie to jego dane dodawane są do bazy danych, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający --- analogicznie jak przy klasycznym logowaniu.
+Funkcjonalność ta jest możliwa dzięki modułowi integrującemu aplikację napisaną z użyciem React Native z kontem w serwisie Facebook. Po udzieleniu potrzebnych pozwoleń i zalogowaniu użytkownika do konta Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na zidentyfikowanie użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie, a także osobnego klucza specyficznego dla całej aplikacji, pobierane są dane użytkownika takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator użytkownika. Potem sprawdzane jest czy ten użytkownik posiada już konto, jeżeli nie to jego dane dodawane są do bazy danych, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający --- analogicznie jak przy klasycznym logowaniu.
 
 \section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych}
 %opis że było wszystko działa na ios i że ogóle spoko
@@ -737,7 +737,7 @@ W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. W
 Kod programu oraz tekst pracy licencjackiej przechowywane były w serwisie Github. Dzięki niemu mogliśmy również w prosty sposób spisywać listę zadań do zrobienia.
 
 \section{Współpraca z zamawiającą}
-Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie zna się na wytwarzaniu oprogramowania, nie wiedziała więc jakich informacji potrzebujemy. Aby się wzajemnie dobrze zrozumieć często komunikowaliśmy się, szczególnie na początku tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co utrudniło spotykanie się twarzą w twarz. Udało nam się tylko jedno takie spotkanie zorganizować (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas regularnie kontaktowaliśmy się internetowo, w szczególności regularnie udostępnialiśmy zamawiającej aktualną wersję aplikacji aby upewnić się, że się dobrze rozumiemy. Dzięki temu ostatecznie udało nam się stworzyć aplikacje zgodną z oczekiwaniami zamawiającej.
+Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie zna się na wytwarzaniu oprogramowania, nie wiedziała więc jakich informacji potrzebujemy. Aby się wzajemnie dobrze zrozumieć często komunikowaliśmy się, szczególnie na początku tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co utrudniło spotykanie się twarzą w twarz. Udało nam się tylko jedno takie spotkanie zorganizować (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas regularnie kontaktowaliśmy się internetowo, w szczególności regularnie udostępnialiśmy zamawiającej aktualną wersję aplikacji aby upewnić się, że się dobrze rozumiemy. Dzięki temu ostatecznie udało nam się stworzyć aplikacje zgodną z oczekiwaniami zamawiającej.
 
 \section{Organizacja pracy}
 
@@ -824,11 +824,13 @@ W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia ap
 \bibitem[reducefoodwaste.eu]{rfw} oficjalna strona internetowa projektu Reduce Food Waste,\\
     \href{http://www.reducefoodwaste.eu}{\texttt{reducefoodwaste.eu}}
 
-\bibitem[Olioex.com]{olio} Statystyki dotyczące wykorzystania żywności na świecie z oficjalnej strony aplikacji  \textit{Olio}, \href{https://olioex.com}{\texttt{olioex.com}}
+\bibitem[Framework]{framework} \href{https://pl.wikipedia.org/wiki/Framework}{\texttt{pl.wikipedia.org/wiki/Framework}}
 
-\bibitem[toogoodtogo.com]{tgtg} Oficjalna strona aplikacji \textit{Too Good To Go}, \href{https://toogoodtogo.com}{\texttt{toogoodtogo.com}}.
+\bibitem[ec.europa.eu]{ec} Działania KE ws.\ marnowania żywności\\ \href{https://ec.europa.eu/food/safety/food_waste_en}{\texttt{ec.europa.eu/food/safety/food\_waste\_en}}
 
-\bibitem[ec.europa.eu]{ec} Działania KE ws.\ marnowania żywności\\ \href{https://ec.europa.eu/food/safety/food_waste_en}{\texttt{https://ec.europa.eu/food/safety/food\_waste\_en}}
+\bibitem[olioex.com]{olio} Statystyki dotyczące aplikacji \textit{Olio}, \href{https://www.olioex.com}{\texttt{olioex.com}}
+
+\bibitem[toogoodtogo.com]{tgtg} Oficjalna strona aplikacji \textit{Too Good To Go}, \href{https://www.toogoodtogo.com}{\texttt{toogoodtogo.com}}
 
 \bibitem[IDC]{popluarnoscAndroid} Popularność systemu Android w Polsce\\
 \href{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}
@@ -851,8 +853,6 @@ W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia ap
 
 \bibitem[PostgreSQL]{postgresql} \href{https://www.postgresql.org/}{\texttt{postgresql.org}}
 
-
-\bibitem[Framework]{framework} \href{https://pl.wikipedia.org/wiki/Framework}{\texttt{https://pl.wikipedia.org/wiki/Framework}}
 
 \end{thebibliography}
 
