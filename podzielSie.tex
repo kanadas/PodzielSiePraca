@@ -197,92 +197,91 @@ Największą konkurencją dla aplikacji mobilnych są grupy funkcjonujące na po
 
 \chapter{Implementacja}\label{r:arch}
 
-Na początku rozdziału opisana jest ogólna architektura projektu. W dalszej części zostały opisane szczegóły realizacji poszczególnych części systemu. Przedstawione są również problemy i wyzwanie, które napotkaliśmy w trakcie implementacji poszczególnych funkcjonalności oraz sposób ich rozwiązania.
+Niniejszy rozdział zawiera opis architektury projektu w ujęciu ogólnym, a także szczegóły realizacji poszczególnych komponentów systemu. Przedstawione zostały problemy i~wyzwania, które napotkaliśmy w trakcie implementacji kluczowych funkcjonalności. Prezentujemy także sposoby ich rozwiązania.
 
-\section{Architektóra systemu}
-Architektóra aplikacji \textit{``Podziel się''} składa się z dwóch głównych komponentów: aplikacji mobilnej oraz części serwerowej. Wykorzystywane są również zewnętrzne usługi takie jak Firebase, Facebook, GoogleMaps, AmazonS3.
-
-\includegraphics[width=\linewidth]{architektura.png}
+\section{Architektura systemu}
+Architektura aplikacji \textit{``Podziel się''} składa się z dwóch głównych komponentów: aplikacji mobilnej oraz części serwerowej. Wykorzystywane są również zewnętrzne usługi, takie jak: Firebase, Facebook, Mapy Google, Amazon S3.
 
 \subsection{Aplikacja mobilna}
 Aplikacja \textit{``Podziel się''} przeznaczona jest dla użytkowników dwóch najpopularniejszych mobilnych systemów operacyjnych: Androida oraz iOS\@. Interfejs aplikacji powstał z wykorzystaniem nowoczesnego frameworka React Native, pozwalającego opisać graficzne rozmieszczenie elementów na ekranie w składni zbliżonej do arkuszy stylów CSS, zaś logikę działania aplikacji w kodzie JavaScriptu. W React Native, przy użyciu specjalnego języka znaczników JSX, zostały zdefiniowane tzw.\ komponenty (lista ogłoszeń, przycisk wysyłania wiadomości, menu szufladkowe, okienko z komunikatem itp.), na bazie których React Native buduje komponenty natywne dla Androida oraz iOS\@. Pozwala to na ujednolicenie wyglądu interfejsu graficznego dla użytkowników różnych systemów i architektur --- aplikacja nie odbiega wyglądem od rozwiązań natywnych, projektowanych specjalnie z myślą~o~konkretnej platformie. Filozofia React Native polega na stosowaniu schematów tworzenia aplikacji webowych przy projektowaniu aplikacji działających w środowisku mobilnym, w szczególności możliwe jest korzystanie z rozmaitych pomocniczych bibliotek JavaScriptu.
 
-
 Ważnym elementem React Native jest moduł pośredniczący (ang. \textit{bridge}), który tłumaczy wywołania pochodzące z wątków JavaScriptu na polecenia skierowane do systemu operacyjnego. Komunikaty opisujące akcje do wykonania są przesyłane w formacie JSON do modułu pośredniczącego, a po ich otrzymaniu \textit{bridge} wywołuje odpowiednie funkcje systemowe. Wymiana komunikatów jest asynchroniczna oraz nieblokująca, zatem React Native nie ingeruje nadmiernie w pracę systemu operacyjnego oraz umożliwia sprawne renderowanie widoków na ekranie. Co więcej, aplikacja ma możliwość swobodnej komunikacji ze środowiskiem wykonania; w razie potrzeby może uzyskać dostęp do modułu GPS, aparatu, pamięci wewnętrznej urządzenia itp.
 
-\subsection{Część Serwerowa}
+\newpage
+\begin{figure}[H]
+  \centering
+  \includegraphics[angle=90, width=\textwidth,height=\textheight, keepaspectratio]{architekturakolor.png}
+  \caption{Schemat architektury systemu (opracowanie własne)}
+\end{figure}
 
-Cześć serwerowa została stworza w języku Python, w oparciu o framework Django. Pozwala on na szybkie tworzenie webowych interfejsów programistycznych aplikacji (po angielsku Web API) oraz łatwy dostęp do relacyjnych baz danych dzięki rozbudowanemu mechanizmowi mapowania obiektowo-relacyjnego (ORM). Polega ono na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu QuerySet, który może podlegać dalszemu przetwarzaniu przez serwer.
+\subsection{Część serwerowa}
 
-Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyjnego. Wybrany framework umożliwa automatyczne generowanie panelu administratora. Wygenerowany panel umożliwia wykonywanie podstawowych operacji: pobierz, dodaj, usuń, modyfikuj na danych znajdujących się w bazie.
+Część serwerowa została stworzona w języku Python, w oparciu o framework Django. Pozwala on na szybkie tworzenie sieciowych interfejsów programistycznych aplikacji (po angielsku Web API) oraz łatwą pracę z relacyjnymi bazami danych dzięki rozbudowanemu mechanizmowi mapowania obiektowo-relacyjnego (ORM). Wspomniany mechanizm polega na odwzorowaniu logicznych modeli encji, reprezentowanych jako klasy w języku Python, na rzeczywistą treść skryptów tworzących tabele i więzy spójności w bazie danych. Podobnie, wyniki zapytań są konwertowane do obiektu typu \texttt{QuerySet}, który może podlegać dalszemu przetwarzaniu przez serwer.
 
-%Nie wiedziałem jak napisać to zdanie:
-Do przychowywania danych wykorzystana została relacyjna baza danych PostegreSql z wtyczką PostGIS, która pozwala na wydajne wykonywanie zapytań zapytań przestrzennych. Zdjęcia zapisywane są w usłudze AmazonS3.
+Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyjnego. Wybrany przez nas framework umożliwia automatyczne generowanie panelu administratora. Tak powstały panel pozwala na wykonywanie kompletu operacji CRUD: dodawania nowych danych, odczytania istniejących informacji, modyfikowania oraz usuwania wpisów znajdujących się w bazie.
 
-\subsection{Komunikacja Klient - Serwer}
-Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłana są w formacie JSON, jest on formatem tekstowym i bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikalnym tokenem przyznwanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token.
+Do przechowywania danych została wykorzystana relacyjna baza danych PostgreSQL z~wtyczką PostGIS, która pozwala na wydajne wykonywanie zapytań przestrzennych. Zdjęcia przechowywane są w zewnętrznej usłudze Amazon S3.
+
+\subsection{Komunikacja klient - serwer}
+Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłane są w formacie JSON, jest on formatem tekstowym i~bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikalnym tokenem przyznawanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token.
 
 Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast za pośrednictwem usługi Firebase.
 
 \section{PostGIS}
-%liczenie odległosci itd.
-Jedną z funkcjonalności naszej aplikacji jest prezentowanie użytkownikowi ofert z adresem odbioru w pobliżu jego aktualnej lokalizacji. Żeby to osiągnąć musieliśmy po stronie serwera być w stanie wyznaczyć wszystkie ogłoszenia z bazy danych, które są oddalone od zadanej lokalizacji nie więcej niż pewna wartość otrzymana w zapytaniu użytkownika. Pierwszym podejściem do rozwiązania tego problemu było wyznaczanie dla każdego zapytania wszystkich odległości pomiędzy adresem odbioru ogłoszeń a otrzymaną lokalizacją i wybranie tych, które są bliżej niż maksymalna odległość, którą wybrał użytkownik. Byłoby to jednak rozwiązanie bardzo nieefektywne, ponieważ dla każdego zapytania wymaga przejrzenia wszystkich ofert z bazy co przy większej ilości użytkowników i ofert może powodować problemy z wydajnością całego systemu.
+Jedną z funkcjonalności naszej aplikacji jest prezentowanie użytkownikowi ofert z adresem odbioru położonym w pobliżu jego aktualnej lokalizacji. Aby to osiągnąć, musielibyśmy efektywnie wyznaczać po stronie serwera wszystkie ogłoszenia z bazy danych, które są oddalone od zadanej lokalizacji o nie więcej niż pewną wartość otrzymaną w zapytaniu użytkownika. Pierwszym podejściem do rozwiązania tego problemu było wyznaczanie dla każdego zapytania wszystkich odległości pomiędzy adresem odbioru ogłoszeń a otrzymaną lokalizacją, a~następnie wybranie tych, które są położone bliżej niż maksymalna odległość wskazana przez użytkownika. Byłoby to jednak rozwiązanie skrajnie nieefektywne, ponieważ dla każdego zapytania wymaga przejrzenia wszystkich ofert z bazy, co przy większej ilości użytkowników i ofert spowodowałoby poważne problemy z wydajnością całego systemu.
 
-Rozwiązaniem, na które ostatecznie się zdecydowaliśmy jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS\@. Pozwala ono na wprowadzanie danych geograficznych do bazy i ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa używa R-drzewa, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego powyżej.
+Rozwiązaniem, na które ostatecznie się zdecydowaliśmy, jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS\@. Pozwala ono na wprowadzanie danych geograficznych oraz ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa wykorzystuje R-drzewo, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego powyżej.
 
 \section{Przechowywanie zdjęć}
-%tutaj pasowało by napisać dlaczego nie składowanie danych na dysku
 
-W trakcie tworzenia systemu, musieliśmy wybrać sposób przechowywania zdjęć. Pierwszym pomysłem było zapisywanie zdjęć na lokalnym dysku serwera. Szybko zdaliśmy sobie sprawę, że takie rozwiązanie posiada szereg wad. Pierwszą z nich jest brak elastyczności, w przypadku wyczerpania miejsca bylibyśmy zmuszeni zapłacić za droższy serwer, nawet jeżeli nie potrzebowalibyśmy szybszego procesora czy większej pamięci ram. Kolejną wadą jest duże obciążenia serwera, który musiałby obsłużyć zapytania HTTP związane z transferem tych zdjęć na urządzenia mobilne.
+W trakcie tworzenia systemu musieliśmy wybrać sposób przechowywania zdjęć. Pierwszym narzucającym się pomysłem było zapisywanie zdjęć na lokalnym dysku serwera. Szybko jednak zdaliśmy sobie sprawę, że takie rozwiązanie posiada szereg wad.
+Pierwszą z nich jest brak elastyczności --- w przypadku wyczerpania miejsca bylibyśmy zmuszeni wykupić droższy serwer, nawet jeżeli nie potrzebowalibyśmy szybszego procesora czy większej pamięci RAM. Kolejną wadą jest duże obciążenie serwera, który musiałby obsłużyć zapytania HTTP związane z transferem tych zdjęć na urządzenia mobilne.
 
-Zdecydowliśmy skorzystać z serwisu Amazon Simple Storage Service (Amazon S3). Usługa pozwala przechowywać dane w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący. Co więcej, koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych, mamy więc pełną elastyczność jeśli chodzi o koszty. Transfer plików jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
+Ostatecznie zdecydowaliśmy się skorzystać z serwisu Amazon Simple Storage Service (Amazon S3). Usługa pozwala przechowywać dane w sposób trwały i bezpieczny. Zaletą Amazon S3 jest nieograniczona pojemność dyskowa oraz brak narzuconych limitów na transfer wychodzący. Co więcej, koszt usługi jest proporcjonalny do sumarycznego rozmiaru przechowywanych danych, mamy więc pełną elastyczność jeśli chodzi o koszty. Transfer plików jest szyfrowany protokołem SSL, ponadto same dane podlegają 256-bitowemu szyfrowaniu po stronie serwera.
 
-Obsługa zdjęć zrealizowana jest w następujący sposób: Część mobilna kompresuje fotografie przed wysłaniem, następnie wysyła je w jednym zapytaniu wraz z informacjami o ogłoszeniu do serwera aplikacji \textit{``Podziel się''}. Serwer zapisuje dane ogłoszenia i metadane zdjęć w bazie PostegreSQL, a następnie wysyła obrazy do usługi Amazon S3. Przy pobieraniu informacji o dostępnych ogłoszeniach lub szczegółach danego ogłoszenia serwer zwraca odnośniki do zdjęć, następnie urządzenie mobilne pozyskuje dane bezpośrednio z serwisu Amazon S3. W ten sposób w znacznym stopniu redukowane jest obciążenia serwera aplikacji \textit{``Podziel się''}.
+Obsługa zdjęć zrealizowana jest w następujący sposób: część mobilna kompresuje fotografie przed wysłaniem, następnie przesyła je w jednym zapytaniu wraz z informacjami o~ogłoszeniu do serwera aplikacji \textit{``Podziel się''}. Serwer zapisuje dane ogłoszenia i metadane zdjęć w~bazie PostgreSQL, a następnie wysyła obrazy do usługi Amazon S3. Przy pobieraniu informacji o dostępnych ogłoszeniach lub szczegółach danego ogłoszenia serwer zwraca odnośniki do zdjęć, następnie urządzenie mobilne pozyskuje dane bezpośrednio z serwisu Amazon S3. Dzięki temu w znacznym stopniu redukowane jest obciążenie serwera aplikacji \textit{``Podziel się''}.
 
 W dalszej perspektywie, w miarę rozwoju projektu, Amazon S3 oferuje rozszerzone plany wykorzystania oraz opcję archiwizacji danych z możliwością łatwego odtworzenia w przypadku nadpisania, usunięcia lub utracenia plików.
 
 \section{Powiadomienia}
 %tutaj dlaczego nie odpytywanie serwera non stop co jakiś czas
 
-Aplikacja \textit{``Podziel się''} wspiera użytkowników w zarządzaniu licznymi ogłoszeniami wykorzystując mechaniz powiadomień. Wspomniana funkcjonalność pozwala na wyświetlanie użytkownikom krótkich komunikatów o zajściu zdarzeń wymagających uwagi.
-
-Powiadomienia wyświetlane są w przypadku zajaścia jednego z następujących zdarzeń:
+Aplikacja \textit{``Podziel się''} wspiera użytkowników w zarządzaniu licznymi ogłoszeniami wykorzystując mechanizm powiadomień. Wspomniana funkcjonalność pozwala na wyświetlanie użytkownikom krótkich komunikatów o zajściu zdarzeń wymagających uwagi.
+Powiadomienia wyświetlane są w przypadku zajścia jednego z następujących zdarzeń:
 \begin{itemize}
 \setlength\itemsep{-0.2em}
-    \item otrzymanie wiadomości od innego użytkownika,
-    \item dodanie nowego ogłoszenia w okolicy,
-    \item dodanie nowego ogłoszenia przez obserwowaną osobę
-    \item polubienie naszego ogłoszenia,
+    \item otrzymania wiadomości od innego użytkownika,
+    \item pojawienia się nowego ogłoszenia w okolicy,
+    \item dodania nowego ogłoszenia przez obserwowaną osobę,
+    \item polubienia naszego ogłoszenia.
 \end{itemize}{}
 
-Najprostszym sposobem implementacji tej funkcjonalności jest regularne odpytywanie serwera czy są dostępne nowe powiadomienia. Jednakże ze względu na ograniczenia systemu Android jak i IOS, obsługa procesów w tle (to znaczy wtedy kiedy użytkownik nie korzysta z aplikacji) jest bardzo mocno ograniczona. Procesy w tle nie mogą być uruchamiane częściej niż co kilkadziesięt minut. Związane jest to z oszcządzaniem energi.
+Najprostszym sposobem implementacji tej funkcjonalności jest regularne odpytywanie serwera, czy są dostępne nowe powiadomienia. Jednakże ze względu na ograniczenia systemów Android oraz iOS obsługa procesów w tle (to znaczy wtedy, gdy użytkownik nie korzysta z~aplikacji) jest bardzo mocno ograniczona. Procesy w tle nie mogą być uruchamiane częściej niż co kilkadziesiąt minut --- związane jest to z oszczędzaniem energii.
 
-Z tego względu zdecydowaliśmy się na użycie zewnętrznych usług takich jak: Firabase Cloud Messaging (FCM), dla systemu Androida oraz Apple Push Notification (APN) w przypadku IOS\@. Umożliwiają one niemalże natychmiastowe dostarczanie wiadomości z serwera do telefonu użytkownika.
+Z tego powodu zdecydowaliśmy się na użycie zewnętrznych usług, takich jak: Firebase Cloud Messaging (FCM) dla systemu Android oraz dedykowanego Apple Push Notification (APN) w przypadku iOS\@. Umożliwiają one niemalże natychmiastowe dostarczanie wiadomości z serwera do telefonu użytkownika.
 
-Schemat działania systemu powiadomień wygląda następująco: urządzenie mobilne przy pierwszym uruchomieniu pobiera unikalny identyfkiator (token) z serwisu FCM bądź APN, jest on wysyłany na serwer aplikacji \textit{``Podziel się''} w trakcie logowanie lub rejestracji, a następnie zapisywany w bazie danych. W przypadku potrzeby dostarczenia powiadomienia na dane urządzenie, serwer aplikacji \textit{``Podziel się''} wyśle do serwera FCM wiadomość zawierającą token danego telefonu oraz zawartość powiadomienia. Usługa FCM przekieruje notyfikację do konkretnego użytkownika na podstawie denego identyfikatora urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika, może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
+Schemat działania systemu powiadomień wygląda następująco: urządzenie mobilne przy pierwszym uruchomieniu pobiera unikalny identyfikator (token) z serwisu FCM bądź APN, dalej jest on wysyłany na serwer aplikacji \textit{``Podziel się''} w trakcie logowania lub rejestracji, a~następnie zapisywany w bazie danych. Jeżeli zajdzie potrzeba dostarczenia powiadomienia na dane urządzenie, serwer aplikacji \textit{``Podziel się''} wyśle do serwera FCM wiadomość zawierającą token danego telefonu oraz zawartość powiadomienia. Usługa FCM przekieruje notyfikację do konkretnego użytkownika na podstawie danego identyfikatora urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika, może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
 
-Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformie Android. Jeśli chodzi o system IOS to wymogiem usługi APN było posiadanie konta w programie \textit{Apple Developer Program}. Niestety ze wzlędów czasowych i formalnych nie byliśmy w stanie przystąpić do tego programu. Jednakże zarówno aplikacja mobilna jak i część serwerowa są już przystosowane do obsługi APN, wystarczy jedynie odpowiednio skonfigurwać platformę Firebase (wgrać odpowiednie certyfikaty wygenerowane na koncie dewelopera Apple), wtedy powiadomienia do użytkowników Apple będę przekierowywane do APN\@.
+Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformie Android. Jeśli chodzi o system iOS, to wymogiem usługi APN było posiadanie konta w programie \textit{Apple Developer Program}. Niestety, ze względów czasowych i formalnych nie byliśmy w stanie przystąpić do tego programu. Jednakże zarówno aplikacja mobilna, jak i część serwerowa są już przystosowane do obsługi APN --- wystarczy jedynie odpowiednio skonfigurować platformę Firebase (wgrać odpowiednie certyfikaty wygenerowane na koncie dewelopera Apple), wtedy powiadomienia do użytkowników systemu firmy Apple będą przekierowywane do APN\@.
 
 \section{Logowanie za pomocą Facebooka}
-%dlaczego to jest wygodne, jak działa itd...
-Oprócz klasycznej możliwości logowania poprzez podanie adresu e-mail i hasła zgodnych z tymi zapisanymi podczas rejestracji, istnieje także opcja zalogowania przez połączenie swojego konta w serwisie Facebook z kontem w aplikacji \textit{Podziel się}. Cały proces z punktu widzenia użytkownika polega na naciśnięciu przycisku logowania z Facebookiem na ekranie logowania, udzieleniu odpowiednich pozwoleń i zalogowaniu się do swojego konta w serwisie Facebook. Po wykonaniu tych czynności użytkownik może już korzystać z aplikacji, co więcej jego dane i zdjęcie profilowe zostaną automatycznie pobrane. Taka możliwość pozwala na jeszcze szybsze skorzystanie z aplikacji \textit{Podziel się} niż klasyczne logowanie.
 
-Funkcjonalność ta jest możliwa dzięki modułowi integrującemu aplikację napisaną z użyciem React Native z kontem w serwisie Facebook. Po udzieleniu potrzebnych pozwoleń i zalogowaniu użytkownika do konta Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na zidentyfikowanie użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie, a także osobnego klucza specyficznego dla całej aplikacji, pobierane są dane użytkownika takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator użytkownika. Potem sprawdzane jest czy ten użytkownik posiada już konto, jeżeli nie to jego dane dodawane są do bazy danych, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający --- analogicznie jak przy klasycznym logowaniu.
+Oprócz klasycznej możliwości logowania poprzez podanie adresu e-mail i hasła, istnieje także opcja zalogowania się przez powiązanie swojego konta w serwisie Facebook z kontem w aplikacji \textit{Podziel się}. Cały proces z punktu widzenia użytkownika polega na naciśnięciu przycisku logowania z Facebookiem na ekranie powitalnym, udzieleniu odpowiednich zezwoleń oraz zalogowaniu się na swoje konto w serwisie Facebook. Po wykonaniu tych czynności użytkownik może już korzystać z aplikacji, co więcej, jego dane i zdjęcie profilowe zostaną automatycznie pobrane. Taka możliwość pozwala na jeszcze szybsze skorzystanie z aplikacji \textit{Podziel się} niż klasyczne logowanie.
+
+Funkcjonalność ta jest możliwa dzięki modułowi integrującemu konto w serwisie Facebook z aplikacją napisaną z użyciem React Native. Po udzieleniu potrzebnych zezwoleń i zalogowaniu użytkownika na konto Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na identyfikację użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie (a także osobnego klucza specyficznego dla całej aplikacji) pobierane są dane użytkownika, takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator. Kolejnym krokiem jest sprawdzenie, czy ten użytkownik posiada już konto; jeżeli nie, to jego dane są dodawane do bazy, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający --- analogicznie jak przy klasycznym logowaniu.
 
 \section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych}
-%opis że było wszystko działa na ios i że ogóle spoko
-%nie wiem jak to ładnie nazwać
-System operacyjny Android jest niezwykle popularny w naszym kraju. Według IDC 91,5\% sprzedanych smarfonów w 2017 roku stanowiły urządzenia działające pod kontrolą systemu firmy Google (patrz~\cite{popluarnoscAndroid}).
 
-Z tego względu postanowiliśmy, że w pierwszej kolejności tworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem IOS\@. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie informowali o komaptybilności z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone.
+System operacyjny Android jest niezwykle popularny w naszym kraju. Według IDC 91,5\% sprzedanych smartfonów w 2017 roku stanowiły urządzenia działające pod kontrolą systemu firmy Google (patrz~\cite{popularnoscAndroid}).
+
+Z tego powodu postanowiliśmy, że w pierwszej kolejności stworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem iOS\@. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie deklarowali kompatybilność z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone.
 
 Nie udało nam się jedynie zaimplementować dwóch funkcjonalności:
-
-Pierwszą z nich jest logowanie z Facebookiem. Pomimo tego, że twórcy biblioteki z której skorzystaliśmy, zapewniali o działaniu na platformie IOS, to nie udało nam się odpowiednio jej skonfigurwać do działałania z naszą aplikacją.
-
-Drugą są powiadomienia. Tak jak pisaliśmy we wcześniejszym podrozdziale, wymogiem było posiadanie konta w programie \textit{Apple Developer Program}.
-
-Cała pozostała funkcjonalność działa dokładnie tak jak na systemie firmy Google. W szczególności, obie wersją mają taki sam interfejs użytkownika. Różni on się jedynie szczegółami, typowymi dla danej platformy. Na przykład komponentami wyboru daty lub zdjęć z galerii. Poniżej zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone:
+\begin{itemize}
+\item Pierwszą z nich jest logowanie z Facebookiem. Pomimo zapewnień twórców biblioteki o~bezproblemowym działaniu na platformie iOS nie udało nam się odpowiednio jej skonfigurować do działania z naszą aplikacją.
+\item Drugą są powiadomienia. Tak jak wspomnieliśmy we wcześniejszym podrozdziale, wymogiem było posiadanie konta w programie \textit{Apple Developer Program}.
+\end{itemize}
+Wszystkie pozostałe funkcjonalności działają dokładnie tak, jak na systemie firmy Google. W szczególności obie wersje mają identyczny interfejs użytkownika. Różnice są widoczne jedynie w szczegółach charakterystycznych dla danej platformy, na przykład komponentach wyboru daty lub zdjęć z galerii. Poniżej prezentujemy zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone:
 
 \newpage
 \begin{figure}[h!]
@@ -832,24 +831,24 @@ W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia ap
 
 \bibitem[toogoodtogo.com]{tgtg} Oficjalna strona aplikacji \textit{Too Good To Go}, \href{https://www.toogoodtogo.com}{\texttt{toogoodtogo.com}}
 
-\bibitem[IDC]{popluarnoscAndroid} Popularność systemu Android w Polsce\\
-\href{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}{https://www.telepolis.pl/wiadomosci/prawo-finanse-statystyki/w-2017-roku-w-polsce-sprzedano-8-8-mln-smartfonow}
+\bibitem[IDC]{popularnoscAndroid} Popularność systemu Android w Polsce\\
+\href{https://gsmonline.pl/artykuly/sprzedaz-smartfonow-w-polsce-2017}{\texttt{gsmonline.pl/artykuly/sprzedaz-smartfonow-w-polsce-2017}}
 
-\bibitem[ReactNative]{reactnative} \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
+\bibitem[React Native]{reactnative} \href{https://facebook.github.io/react-native/}{\texttt{facebook.github.io/react-native}}
 
-\bibitem[GoogleMaps]{googlemaps} \href{https://developers.google.com/maps/documentation/}{\texttt{developers.google.com/maps/documentation}}
+\bibitem[Mapy Google]{googlemaps} \href{https://developers.google.com/maps/documentation/}{\texttt{developers.google.com/maps/documentation}}
 
 \bibitem[Firebase]{firebase} \href{https://firebase.google.com/docs/cloud-messaging/}{\texttt{firebase.google.com/docs/cloud-messaging}}
 
-\bibitem[Notifications]{nots} \href{https://developer.apple.com/notifications/}{\texttt{developer.apple.com/notifications}}
+\bibitem[Apple Push Notifications]{nots} \href{https://developer.apple.com/notifications/}{\texttt{developer.apple.com/notifications}}
 
-\bibitem[AWS]{amazonaws} \href{https://aws.amazon.com/}{\texttt{aws.amazon.com}}
+\bibitem[Amazon Web Services]{amazonaws} \href{https://aws.amazon.com/}{\texttt{aws.amazon.com}}
 
 \bibitem[Django]{django} \href{https://www.djangoproject.com/}{\texttt{djangoproject.com}}
 
 \bibitem[Gunicorn]{gunicorn} \href{https://gunicorn.org/}{\texttt{gunicorn.org}}
 
-\bibitem[NginX]{nginx} \href{https://www.nginx.com/}{\texttt{nginx.com}}
+\bibitem[nginx]{nginx} \href{https://www.nginx.com/}{\texttt{nginx.com}}
 
 \bibitem[PostgreSQL]{postgresql} \href{https://www.postgresql.org/}{\texttt{postgresql.org}}
 
