@@ -463,7 +463,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
         \item Użytkownik jest zalogowany w aplikacji.
         \item Użytkownik dysponuje stabilnym połączeniem internetowym.
     \end{itemize}
-    \subsection{Czynności}
+    \subsection{Czynności}\label{r:czynnosci-link2}
     \subsubsection{Czynności podstawowe}
     \begin{enumerate}
         \item Użytkownik naciska oznaczony przycisk, który rozwija szufladkowe menu.
@@ -557,7 +557,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
         \item Użytkownik jest zalogowany w aplikacji.
         \item Użytkownik dysponuje stabilnym połączeniem internetowym.
     \end{itemize}
-    \subsection{Czynności}
+    \subsection{Czynności}\label{r:czynnosci-link}
     \subsubsection{Czynności podstawowe}
     \begin{enumerate}
         \item Użytkownik A otwiera ekran czatu z użytkownikiem B. Może to zrobić na kilka sposobów:
@@ -582,7 +582,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \end{enumerate}
     \subsection{Możliwe rozwinięcia}
     \subsubsection{Przesyłanie obrazów}
-    Umożliwienie przesyłania wiadomości w formie zdjęć. W tym celu użytkownik wysyłający wiadomość mógłby wybrać piktogram ``prześlij obraz''. Dalszy scenariusz byłby analogiczny do opisanego w \textit{Czynnościach alternatywnych} z punktu 3.2.4.
+    Umożliwienie przesyłania wiadomości w formie zdjęć. W tym celu użytkownik wysyłający wiadomość mógłby wybrać piktogram ``prześlij obraz''. Dalszy scenariusz byłby analogiczny do opisanego w \textit{Czynnościach alternatywnych} z punktu \ref{r:czynnosci-link2}.
 
 \newpage
 \begin{figure}[H]
@@ -697,7 +697,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     Jeżeli użytkownik chciałby wycofać ogłoszenie z listy, może nacisnąć przycisk \textit{``Usuń ogłoszenie''}.
     \subsubsection{Czynności niepoprawne}
     \begin{enumerate}
-        \item Czynności niepoprawne z podpunktu 3.3.4 dotyczące funkcjonalności czatu.
+        \item Czynności niepoprawne z podpunktu \ref{r:czynnosci-link} dotyczące funkcjonalności czatu.
         \item Nastąpił błąd komunikacji z serwerem --- prośba o oznaczenie ogłoszenia jako oddane nie została rozpatrzona.
         \item Serwer zasygnalizował błąd podczas operacji związanej z oznaczeniem ogłoszenia jako oddane.
     \end{enumerate}
@@ -746,43 +746,43 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
 \subsection{Kamil Ćwintal}
 \begin{itemize}
 \setlength\itemsep{-0.2em}
-    \item Widok listy ogłoszeń,
-    \item Zdjęcia ogłoszeń,
-    \item Zdjęcia profilowe użytkowników,
-    \item Kategorie i hasztagi w ogłoszeniach,
-    \item Dopracowanie interfejsu graficznego aplikacji.
+    \item widok listy ogłoszeń,
+    \item zdjęcia ogłoszeń,
+    \item zdjęcia profilowe użytkowników,
+    \item kategorie i hasztagi w ogłoszeniach,
+    \item dopracowanie interfejsu graficznego aplikacji.
 \end{itemize}{}
 
 \subsection{Szymon Gajda}
 \begin{itemize}
 \setlength\itemsep{-0.2em}
-    \item Dodawanie ogłoszeń,
-    \item Dodanie lokalizacji do ogłoszeń,
-    \item Wyświetlanie mapy w ogłoszeniach,
-    \item Filtrowanie i sortowanie ogłoszeń po odległości między użytkownikiem a ogłoszeniem,
-    \item Logowanie z Facebookiem,
-    \item Zgłaszanie nieodpowiednich ogłoszeń.
+    \item dodawanie ogłoszeń,
+    \item dodawanie lokalizacji do ogłoszeń,
+    \item wyświetlanie mapy w ogłoszeniach,
+    \item filtrowanie i sortowanie ogłoszeń po odległości między użytkownikiem a ogłoszeniem,
+    \item logowanie z Facebookiem,
+    \item zgłaszanie nieodpowiednich ogłoszeń.
 \end{itemize}{}
 
 \subsection{Paweł Giżka}
 \begin{itemize}
 \setlength\itemsep{-0.2em}
-    \item Logowanie i rejestracja,
-    \item Czat między użytkownikami,
-    \item Powiadomienia,
-    \item Sortowanie ogłoszeń,
-    \item Możliwość obserwacji wybranych użytkowników,
-    \item Konfiguracja serwera aplikacji.
+    \item logowanie i rejestracja,
+    \item czat między użytkownikami,
+    \item powiadomienia,
+    \item sortowanie ogłoszeń,
+    \item możliwość obserwacji wybranych użytkowników,
+    \item konfiguracja serwera aplikacji.
 \end{itemize}{}
 
 \subsection{Tomasz Kanas}
 \begin{itemize}
 \setlength\itemsep{-0.2em}
-    \item Widok szczegółów ogłoszenia,
-    \item Widok własnych ogłoszeń,
-    \item Widok profilu innych użytkowników,
-    \item Ocenianie użytkowników,
-    \item Widok i możliwość edycji własnego profilu.
+    \item widok szczegółów ogłoszenia,
+    \item widok własnych ogłoszeń,
+    \item widok profilu innych użytkowników,
+    \item ocenianie użytkowników,
+    \item widok i możliwość edycji własnego profilu.
 \end{itemize}{}
 
 \chapter{Zawartość płyty}\label{r:build}
@@ -791,7 +791,7 @@ Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojed
     \texttt{/PodzielSieBackend/} \> Kod źródłowy części serwerowej. \\
     \texttt{/PodzielSieBackend/README.md} \> Instrukcja uruchamiania części serwerowej. \\
     \texttt{/PodzielSieMobile/} \> Kod źródłowy części mobilnej. \\
-    \texttt{/PodzielSieModile/README.md} \> Instrukcja uruchamiania części mobilnej. \\
+    \texttt{/PodzielSieMobile/README.md} \> Instrukcja uruchamiania części mobilnej. \\
     \texttt{/PracaLicencjacka.pdf} \> Praca licencjacka. \\
     \texttt{/Prezentacja.pdf} \> Końcowa prezentacja projektu. \\
 \end{tabbing}
