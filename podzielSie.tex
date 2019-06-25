@@ -104,7 +104,7 @@ Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociol
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
 \section*{Kontekst społeczny}
-Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu (\cite{eurostat}), z których wynika, że w Polsce rocznie marnuje się około 9 milionów ton żywności. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie~\cite{millward-brown} wykazało, że do wyrzucania jedzenia przyznaje się 42\% Polaków, podczas gdy wyrzucane produkty mogłyby przyczynić się do zaspokojenia podstawowych potrzeb żywieniowych niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
+Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu (\cite{eurostat}), z których wynika, że w Polsce rocznie marnuje się około 9 milionów ton żywności. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie~\cite{millward-brown} wykazało, że do wyrzucania jedzenia przyznaje się 42\% Polaków, podczas gdy wyrzucane produkty mogłyby zaspokoić podstawowe potrzeby żywieniowe niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
 
 W krajach rozwiniętych około 50\% wyrzucanego jedzenia pochodzi z gospodarstw domowych, w których na skutek nierozważnego planowania zakupów jedzenie ulega zepsuciu i~trafia do śmietnika (\cite{polityka}). Wierzymy, że~możliwe jest przeciwdziałanie temu zjawisku na poziomie lokalnym.
 
@@ -182,7 +182,7 @@ Na przestrzeni ostatnich kilku lat można zaobserwować systematyczny wzrost zai
 \section{\textit{Olio}}
 Spośród wymienionych w tym rozdziale aplikacji \textit{Olio} jest koncepcyjnie najbardziej podobne do \textit{Podziel się}. Aplikacja posiada bardzo prosty interfejs, pozwalający już w kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy też znaleźć na liście ogłoszeń (która może być sortowana po odległości lub czasie dodania ogłoszenia) produkt, na który mamy ochotę. \textit{Olio}, tak samo jak \textit{Podziel się}, jest zintegrowane z Mapami Google oraz wykorzystuje lokalizację telefonu (choć można tę opcję wyłączyć). \textit{Olio} udostępnia też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie daje natomiast możliwości podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.) - w \textit{Olio} specyfikuje się tylko, czy dany produkt jest żywnością, czy nie.
 
-\textit{Olio} jest bardzo popularną aplikacją. Na chwilę obecną posiada ponad milion użytkowników i ponad półtora miliona ogłoszeń (\cite{olio}). Największą popularność zdobyła w~Wielkiej Brytanii, w Polsce praktycznie nie funkcjonuje.
+\textit{Olio} jest bardzo popularną aplikacją. Obecnie ma ponad milion użytkowników i ponad półtora miliona ogłoszeń (\cite{olio}). Największą popularność zdobyła w~Wielkiej Brytanii, w Polsce praktycznie nie funkcjonuje.
 
 \section{\textit{Too Good To Go}}
 Ta aplikacja reprezentuje zupełnie inne podejście niż \textit{Podziel się}. Umożliwia restauracjom i~jadłodajniom zbyt niesprzedanych posiłków po znacznie niższych cenach niedługo przed zamknięciem. Oznacza to, że oferty są zwykle płatne - w przeciwieństwie do \textit{Podziel się}, gdzie wszystkie oferowane produkty są darmowe. \textit{Too Good To Go} ma nieco bardziej skomplikowany interfejs niż \textit{Olio} czy \textit{Podziel się}, jest zintegrowana z Mapami Google, wykorzystuje lokalizację telefonu, umożliwia też przeglądanie mapy z zaznaczonymi wszystkimi dostępnymi jadłodajniami oraz posiada opcję dodawania jadłodajni do listy swoich ulubionych.
@@ -220,14 +220,14 @@ Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyj
 Do przechowywania danych została wykorzystana relacyjna baza danych PostgreSQL z~wtyczką PostGIS, która pozwala na wydajne wykonywanie zapytań przestrzennych. Zdjęcia przechowywane są w zewnętrznej usłudze Amazon S3.
 
 \subsection{Komunikacja klient - serwer}
-Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłane są w formacie JSON, jest on formatem tekstowym i~bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikalnym tokenem przyznawanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token.
+Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłane są w formacie JSON, jest on formatem tekstowym i~bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikatowym tokenem przyznawanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token.
 
 Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast za pośrednictwem usługi Firebase.
 
 \section{PostGIS}
-Jedną z funkcjonalności naszej aplikacji jest prezentowanie użytkownikowi ofert z adresem odbioru położonym w pobliżu jego aktualnej lokalizacji. Aby to osiągnąć, musielibyśmy efektywnie wyznaczać po stronie serwera wszystkie ogłoszenia z bazy danych, które są oddalone od zadanej lokalizacji o nie więcej niż pewną wartość otrzymaną w zapytaniu użytkownika. Pierwszym podejściem do rozwiązania tego problemu było wyznaczanie dla każdego zapytania wszystkich odległości pomiędzy adresem odbioru ogłoszeń a otrzymaną lokalizacją, a~następnie wybranie tych, które są położone bliżej niż maksymalna odległość wskazana przez użytkownika. Byłoby to jednak rozwiązanie skrajnie nieefektywne, ponieważ dla każdego zapytania wymaga przejrzenia wszystkich ofert z bazy, co przy większej ilości użytkowników i ofert spowodowałoby poważne problemy z wydajnością całego systemu.
+Jedną z funkcjonalności naszej aplikacji jest prezentowanie użytkownikowi ofert z adresem odbioru położonym w pobliżu jego aktualnej lokalizacji. Aby to osiągnąć, musielibyśmy efektywnie wyznaczać po stronie serwera wszystkie ogłoszenia z bazy danych, które są oddalone od zadanej lokalizacji o nie więcej niż pewną wartość otrzymaną w zapytaniu użytkownika. Pierwszym podejściem do rozwiązania tego problemu było wyznaczanie dla każdego zapytania wszystkich odległości pomiędzy adresem odbioru ogłoszeń a otrzymaną lokalizacją, a~następnie wybranie tych, które są położone bliżej niż maksymalna odległość wskazana przez użytkownika. Byłoby to jednak rozwiązanie skrajnie nieefektywne, ponieważ dla każdego zapytania wymaga przejrzenia wszystkich ofert z bazy, co przy większej liczbie użytkowników i ofert spowodowałoby poważne problemy z wydajnością całego systemu.
 
-Rozwiązaniem, na które ostatecznie się zdecydowaliśmy, jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS\@. Pozwala ono na wprowadzanie danych geograficznych oraz ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa wykorzystuje R-drzewo, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego powyżej.
+Rozwiązaniem, na które ostatecznie się zdecydowaliśmy, jest skorzystanie z rozszerzenia bazy danych PostgreSQL o nazwie PostGIS\@. Pozwala ono na wprowadzanie danych geograficznych oraz ich odpowiednią obsługę. Dla każdego ogłoszenia w bazie danych zapisujemy współrzędne geograficzne miejsca odbioru, dzięki czemu odpowiednia funkcja rozszerzenia PostGIS pozwala na znalezienie wszystkich ofert w ustalonej odległości od lokalizacji użytkownika. Operacja ta jest efektywna dlatego, że wyżej wspomniane rozszerzenie zmienia sposób przechowywania danych geograficznych w porównaniu do standardowej bazy danych. Zamiast B-drzewa wykorzystuje R-drzewo, które jest strukturą danych wspomagającą wyszukiwanie obiektów w przestrzeni wielowymiarowej. Dla rzeczywistych danych to rozwiązanie jest dużo szybsze od podejścia naiwnego przedstawionego wcześniej.
 
 \section{Przechowywanie zdjęć}
 
@@ -257,7 +257,7 @@ Najprostszym sposobem implementacji tej funkcjonalności jest regularne odpytywa
 
 Z tego powodu zdecydowaliśmy się na użycie zewnętrznych usług, takich jak: Firebase Cloud Messaging (FCM) dla systemu Android oraz dedykowanego Apple Push Notification (APN) w przypadku iOS\@. Umożliwiają one niemalże natychmiastowe dostarczanie wiadomości z serwera do telefonu użytkownika.
 
-Schemat działania systemu powiadomień wygląda następująco: urządzenie mobilne przy pierwszym uruchomieniu pobiera unikalny identyfikator (token) z serwisu FCM bądź APN, dalej jest on wysyłany na serwer aplikacji \textit{``Podziel się''} w trakcie logowania lub rejestracji, a~następnie zapisywany w bazie danych. Jeżeli zajdzie potrzeba dostarczenia powiadomienia na dane urządzenie, serwer aplikacji \textit{``Podziel się''} wyśle do serwera FCM wiadomość zawierającą token danego telefonu oraz zawartość powiadomienia. Usługa FCM przekieruje notyfikację do konkretnego użytkownika na podstawie danego identyfikatora urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika, może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
+Schemat działania systemu powiadomień wygląda następująco: urządzenie mobilne przy pierwszym uruchomieniu pobiera unikatowy identyfikator (token) z serwisu FCM bądź APN, dalej jest on wysyłany na serwer aplikacji \textit{``Podziel się''} w trakcie logowania lub rejestracji, a~następnie zapisywany w bazie danych. Jeżeli zajdzie potrzeba dostarczenia powiadomienia na dane urządzenie, serwer aplikacji \textit{``Podziel się''} wyśle do serwera FCM wiadomość zawierającą token danego telefonu oraz zawartość powiadomienia. Usługa FCM przekieruje notyfikację do konkretnego użytkownika na podstawie danego identyfikatora urządzenia. Zachowanie telefonu lub tabletu po odebraniu nowego powiadomienia zależy od preferencji użytkownika, może to być okienko z wiadomością, sygnał dźwiękowy lub ikonka na ekranie.
 
 Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformie Android. Jeśli chodzi o system iOS, to wymogiem usługi APN było posiadanie konta w programie \textit{Apple Developer Program}. Niestety, ze względów czasowych i formalnych nie byliśmy w stanie przystąpić do tego programu. Jednakże zarówno aplikacja mobilna, jak i część serwerowa są już przystosowane do obsługi APN --- wystarczy jedynie odpowiednio skonfigurować platformę Firebase (wgrać odpowiednie certyfikaty wygenerowane na koncie dewelopera Apple), wtedy powiadomienia do użytkowników systemu firmy Apple będą przekierowywane do APN\@.
 
@@ -265,20 +265,20 @@ Udało nam się zaimplementować w pełni funkcjonalne rozwiązanie na platformi
 
 Oprócz klasycznej możliwości logowania poprzez podanie adresu e-mail i hasła, istnieje także opcja zalogowania się przez powiązanie swojego konta w serwisie Facebook z kontem w aplikacji \textit{Podziel się}. Cały proces z punktu widzenia użytkownika polega na naciśnięciu przycisku logowania z Facebookiem na ekranie powitalnym, udzieleniu odpowiednich zezwoleń oraz zalogowaniu się na swoje konto w serwisie Facebook. Po wykonaniu tych czynności użytkownik może już korzystać z aplikacji, co więcej, jego dane i zdjęcie profilowe zostaną automatycznie pobrane. Taka możliwość pozwala na jeszcze szybsze skorzystanie z aplikacji \textit{Podziel się} niż klasyczne logowanie.
 
-Funkcjonalność ta jest możliwa dzięki modułowi integrującemu konto w serwisie Facebook z aplikacją napisaną z użyciem React Native. Po udzieleniu potrzebnych zezwoleń i zalogowaniu użytkownika na konto Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na identyfikację użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie (a także osobnego klucza specyficznego dla całej aplikacji) pobierane są dane użytkownika, takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator. Kolejnym krokiem jest sprawdzenie, czy ten użytkownik posiada już konto; jeżeli nie, to jego dane są dodawane do bazy, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający --- analogicznie jak przy klasycznym logowaniu.
+Funkcjonalność ta jest możliwa dzięki modułowi integrującemu konto w serwisie Facebook z aplikacją napisaną z użyciem React Native. Po udzieleniu potrzebnych zezwoleń i zalogowaniu użytkownika na konto Facebook, aplikacja \textit{Podziel się} pobiera klucz pozwalający na identyfikację użytkownika. Następnie uzyskany klucz jest przesyłany do serwera, gdzie jest weryfikowany i na jego podstawie (a także osobnego klucza specyficznego dla całej aplikacji) pobierane są dane użytkownika, takie jak: imię, nazwisko, zdjęcie profilowe, identyfikator. Kolejnym krokiem jest sprawdzenie, czy ten użytkownik posiada już konto w naszej aplikacji; jeżeli nie, to jego dane są dodawane do bazy, a następnie do urządzenia mobilnego wysyłany jest token uwierzytelniający --- analogicznie jak przy klasycznym logowaniu.
 
 \section{Działanie aplikacji mobilnej na dwóch systemach operacyjnych}
 
 System operacyjny Android jest niezwykle popularny w naszym kraju. Według IDC 91,5\% sprzedanych smartfonów w 2017 roku stanowiły urządzenia działające pod kontrolą systemu firmy Google (patrz~\cite{popularnoscAndroid}).
 
-Z tego powodu postanowiliśmy, że w pierwszej kolejności stworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem iOS\@. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie deklarowali kompatybilność z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone.
+Z tego powodu postanowiliśmy, że w pierwszej kolejności stworzymy aplikację na platformę Android, a dopiero później zajmiemy się systemem iOS\@. W trakcie pracy nad wersją androidową używaliśmy tylko i wyłącznie bibliotek, których twórcy wyraźnie deklarowali zgodność z obydwoma systemami. Pozwoliło nam to dosyć bezboleśnie uruchomić aplikację na symulatorze iPhone.
 
 Nie udało nam się jedynie zaimplementować dwóch funkcjonalności:
 \begin{itemize}
 \item Pierwszą z nich jest logowanie z Facebookiem. Pomimo zapewnień twórców biblioteki o~bezproblemowym działaniu na platformie iOS nie udało nam się odpowiednio jej skonfigurować do działania z naszą aplikacją.
 \item Drugą są powiadomienia. Tak jak wspomnieliśmy we wcześniejszym podrozdziale, wymogiem było posiadanie konta w programie \textit{Apple Developer Program}.
 \end{itemize}
-Wszystkie pozostałe funkcjonalności działają dokładnie tak, jak na systemie firmy Google. W szczególności obie wersje mają identyczny interfejs użytkownika. Różnice są widoczne jedynie w szczegółach charakterystycznych dla danej platformy, na przykład komponentach wyboru daty lub zdjęć z galerii. Poniżej prezentujemy zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone:
+Wszystkie pozostałe funkcjonalności działają dokładnie tak, jak na systemie firmy Google. W szczególności obie wersje mają identyczny interfejs użytkownika. Różnice są widoczne jedynie w szczegółach charakterystycznych dla danej platformy, na przykład komponentach wyboru daty lub zdjęć z galerii. Na rysunkach: 3.2, 3.3 oraz 3.4 prezentujemy zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone. Różnią się one jedynie: wielkością ekranu urządzeń mobilnych oraz godziną i kolejnością ogłoszeń.
 
 \newpage
 \begin{figure}[h!]
@@ -363,7 +363,7 @@ Administracja jest możliwa za pomocą witryny internetowej. Możliwe jest międ
 
 \section{Oprogramowanie serwera}
 
-Część serwerowa aplikacji działa pod kontrolą serwera HTTP Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
+Część serwerowa aplikacji działa pod kontrolą serwera Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
 
 Baza danych PostgreSQL wraz z wtyczką PostGIS uruchomiona jest w kontenerze Docker.
 
@@ -459,7 +459,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \subsection{Warunki wstępne}
     \begin{itemize}
         \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
-        \item Użytkownik posiada poprawnie założone konto.
+        \item Użytkownik ma poprawnie założone konto.
         \item Użytkownik jest zalogowany w aplikacji.
         \item Użytkownik dysponuje stabilnym połączeniem internetowym.
     \end{itemize}
@@ -553,7 +553,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \subsection{Warunki wstępne}
     \begin{itemize}
         \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
-        \item Użytkownik posiada poprawnie założone konto.
+        \item Użytkownik ma poprawnie założone konto.
         \item Użytkownik jest zalogowany w aplikacji.
         \item Użytkownik dysponuje stabilnym połączeniem internetowym.
     \end{itemize}
@@ -604,7 +604,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \subsection{Warunki wstępne}
     \begin{itemize}
         \item Aplikacja jest zainstalowana na urządzeniu użytkownika.
-        \item Użytkownik posiada poprawnie założone konto.
+        \item Użytkownik ma poprawnie założone konto.
         \item Użytkownik jest zalogowany w aplikacji.
         \item Użytkownik dysponuje stabilnym połączeniem internetowym.
     \end{itemize}
@@ -632,8 +632,8 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     Użytkownik A może co najwyżej raz ocenić użytkownika B. Jeśli miało już to miejsce, użytkownik A może edytować swoją ocenę na sześciostopniowej skali. Istnieje jednak możliwość wielokrotnego wystawiania komentarzy (np.\ dla każdego ogłoszenia B oddzielnie).
     \subsubsection{Czynności niepoprawne}
     \begin{enumerate}
-        \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie / edycję opinii nie została rozpatrzona.
-        \item Serwer zasygnalizował błąd podczas operacji dodawania / edycji opinii w bazie danych.
+        \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie/edycję opinii nie została rozpatrzona.
+        \item Serwer zasygnalizował błąd podczas operacji dodawania/edycji opinii w bazie danych.
     \end{enumerate}
     \subsection{Możliwe rozwinięcia}
     Blokada możliwości oceny danego użytkownika do momentu, w którym odbierzemy od niego (lub on od nas) produkt z przynajmniej jednego ogłoszenia.
@@ -658,7 +658,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
 
 \section{Odbiór produktów oferowanych na liście ogłoszeń}
     \subsection{Krótki opis}
-    Umożliwienie użytkownikowi, który jest zainteresowany odbiorem przedmiotu z ogłoszenia (A) oraz użytkownikowi, który wystawił ogłoszenie (B) wspólnego ustalenia szczegółów odbioru.
+    Umożliwienie użytkownikowi, który jest zainteresowany odbiorem przedmiotu z ogłoszenia (A), oraz użytkownikowi, który wystawił ogłoszenie (B), wspólnego ustalenia szczegółów odbioru.
     \subsection{Cele}
     \begin{itemize}
         \item Umożliwienie użytkownikom ustalenia szczegółów odbioru produktu (takich jak termin odbioru czy miejsce odbioru).
@@ -667,7 +667,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     \subsection{Warunki wstępne}
     \begin{itemize}
         \item Aplikacja jest zainstalowana na urządzeniach użytkowników A i B.
-        \item Użytkownicy posiadają poprawnie założone konta.
+        \item Użytkownicy mają poprawnie założone konta.
         \item Użytkownicy są zalogowani w aplikacji.
         \item Użytkownik B dodał ogłoszenie.
         \item Użytkownicy dysponują stabilnym połączeniem internetowym.
@@ -733,7 +733,7 @@ W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. W
 Kod źródłowy programu oraz tekst pracy licencjackiej przechowywane były w serwisie \mbox{GitHub}, który pozwalał także w prosty sposób spisywać i aktualizować listę zadań do zrobienia.
 
 \section{Współpraca z zamawiającą}
-Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie ma doświadczenia w wytwarzaniu oprogramowania, nie wiedziała więc, jakich informacji potrzebujemy. Aby wzajemnie dobrze się porozumieć, często komunikowaliśmy się, szczególnie na początku procesu tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co znacząco utrudniło spotkania twarzą w twarz. Udało nam się zorganizować tylko jedno takie spotkanie (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas staraliśmy się na bieżąco informować zamawiającą o postępach dokonywanych w projekcie, w szczególności udostępnialiśmy aktualne wersje aplikacji, aby upewnić się, że się dobrze rozumiemy. Dzięki temu, pomimo trudności związanych z komunikacją na odległość, udało nam się stworzyć aplikację zgodną z oczekiwaniami zamawiającej.
+Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie ma doświadczenia w wytwarzaniu oprogramowania, nie wiedziała więc, jakich informacji potrzebujemy. Aby wzajemnie dobrze się porozumieć, często komunikowaliśmy się, szczególniena początku procesu tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co znacząco utrudniło spotkania twarzą w twarz. Udało nam się zorganizować tylko jedno takie spotkanie (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas staraliśmy się na bieżąco informować zamawiającą o postępach dokonywanych w projekcie, w szczególności udostępnialiśmy aktualne wersje aplikacji, aby upewnić się, że się dobrze rozumiemy. Niestety, w końcowej fazie projektu komunikacja nie była już tak częsta, pomimo wielu próśb, nie dostawaliśmy regularnie opini dotyczących działania aplikacji. Jednakże pomimo trudności związanych z komunikacją, udało nam się stworzyć aplikację zgodną z oczekiwaniami zamawiającej.
 
 \section{Organizacja pracy}
 
