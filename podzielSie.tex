@@ -171,7 +171,7 @@ aplikacji jednocześnie na systemy Android oraz iOS.
 
 \item \textbf{Gunicorn} --- serwer pozwalający na uruchomienie aplikacji napisanej z wykorzystaniem frameworka Django.
 
-\item \textbf{nginx} --- serwer HTTP, wykorzystywany również jako serwer proxy.
+\item \textbf{Nginx} --- serwer HTTP, wykorzystywany również jako serwer proxy.
 
 
 \end{itemize}
@@ -366,7 +366,7 @@ Administracja jest możliwa za pomocą witryny internetowej. Możliwe jest międ
 
 \section{Oprogramowanie serwera}
 
-Część serwerowa aplikacji działa pod kontrolą serwera Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym nginx. nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
+Część serwerowa aplikacji działa pod kontrolą serwera Gunicorn. Gunicorn odpowiada za wykonanie odpowiedniego kodu języka Python oraz współpracę z serwerem pośredniczącym Nginx. Nginx odbiera połączenia od klientów oraz obsługuje statyczne zapytania HTTP, zaś dynamiczne przekierowuje do Gunicorna i Django z wykorzystaniem standardu WSGI (Web Server Gateway Interface). Po otrzymaniu odpowiedzi Nginx odsyła klientowi wynik zapytania. Wprowadzenie serwera proxy pozwala na łatwiejszą regulację obciążenia oraz zapobieganie opóźnieniom wynikającym z konieczności obsługi klientów dysponującym powolnym połączeniem internetowym.
 
 Baza danych PostgreSQL wraz z wtyczką PostGIS uruchomiona jest w kontenerze Docker.
 
@@ -850,7 +850,7 @@ Obecnie czekamy na informacje od zamawiającej dotyczące wdrożenia aplikacji d
 
 \bibitem[Gunicorn]{gunicorn} \href{https://gunicorn.org/}{\texttt{gunicorn.org}}
 
-\bibitem[nginx]{nginx} \href{https://www.nginx.com/}{\texttt{nginx.com}}
+\bibitem[Nginx]{nginx} \href{https://www.nginx.com/}{\texttt{nginx.com}}
 
 \bibitem[PostgreSQL]{postgresql} \href{https://www.postgresql.org/}{\texttt{postgresql.org}}
 
