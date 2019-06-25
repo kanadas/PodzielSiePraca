@@ -84,6 +84,7 @@ Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociol
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{framed}
+\usepackage{caption}
 \FrameSep0pt
 
 % koniec definicji
@@ -94,7 +95,7 @@ Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociol
 
 %tu idzie streszczenie na strone poczatkowa
 \begin{abstract}
-\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS\@. Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W pracy przedstawiono szczegółowy opis aplikacji oraz całościowej architektury projektu, a także przybliżono proces jego powstawania.
+\textit{``Podziel się''} to aplikacja mobilna przeznaczona do wzajemnego dzielenia się żywnością dla użytkowników systemów operacyjnych Android oraz iOS\@. Celem projektu było stworzenie platformy, która umożliwi łatwe i bezpłatne dzielenie się jedzeniem z innymi mieszkańcami w~okolicy: osoby posiadające nadwyżkę artykułów żywnościowych lub gotowych potraw mogą przekazać je użytkownikom, którzy zadeklarują chęć ich odbioru. W pracy przedstawiono szczegółowy opis aplikacji oraz całościowej architektury projektu, a także przybliżono proces jego powstawania.
 \end{abstract}
 
 \tableofcontents
@@ -104,7 +105,7 @@ Applied computing $\,\to\,$ Law, social and behavioral sciences $\,\to\,$ Sociol
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
 \section*{Kontekst społeczny}
-Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu (\cite{eurostat}), z których wynika, że w Polsce rocznie marnuje się około 9 milionów ton żywności. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie~\cite{millward-brown} wykazało, że do wyrzucania jedzenia przyznaje się 42\% Polaków, podczas gdy wyrzucane produkty mogłyby zaspokoić podstawowe potrzeby żywieniowe niemal 3 mln osób żyjących w skrajnym ubóstwie. Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
+Według współczesnych szacunków (\cite{fao}), około 1/3 wytworzonej na świecie żywności nigdy nie zostanie zjedzona. Skala problemu jest szczególnie widoczna w danych Eurostatu (\cite{eurostat}), z których wynika, że w Polsce rocznie marnuje się około 9 milionów ton żywności. Jej wartość sięga około 50 złotych miesięcznie w przeliczeniu na~jednego mieszkańca Polski. Badanie~\cite{millward-brown} wykazało, że do wyrzucania jedzenia przyznaje się 42\% Polaków, podczas gdy produkty te mogłyby zaspokoić podstawowe potrzeby żywieniowe niemal 2 mln osób żyjących w tzw. skrajnym ubóstwie (\cite{gus}). Nasz kraj jest piątym wśród państw Unii Europejskiej, w których marnuje się najwięcej żywności.
 
 W krajach rozwiniętych około 50\% wyrzucanego jedzenia pochodzi z gospodarstw domowych, w których na skutek nierozważnego planowania zakupów jedzenie ulega zepsuciu i~trafia do śmietnika (\cite{polityka}). Wierzymy, że~możliwe jest przeciwdziałanie temu zjawisku na poziomie lokalnym.
 
@@ -177,7 +178,7 @@ aplikacji jednocześnie na systemy Android oraz iOS.
 
 \chapter{Przegląd konkurencyjnych rozwiązań}\label{r:konkurencja}
 
-Na przestrzeni ostatnich kilku lat można zaobserwować systematyczny wzrost zainteresowania tematyką marnowania żywności. Przyczyn tego zjawiska należy upatrywać w coraz wyższym poziomie świadomości ekologicznej polskiego społeczeństwa, bardziej intensywnych działaniach władz i rozmaitych instytucji (w tym Komisji Europejskiej - patrz~\cite{ec}), a~także w licznych publikacjach naukowych na ten temat. Trend ``zero waste'' przejawia się w~bogatej ofercie aplikacji mobilnych pomagających wymieniać się jedzeniem, które inaczej by się zmarnowało. Co ciekawe, w różnych państwach popularność zyskały różne aplikacje. Na przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Europie Zachodniej - \textit{Too Good To Go}, a w Stanach Zjednoczonych - \textit{Unsung}. W Polsce nie ma jeszcze żadnej rozpoznawalnej aplikacji, chociaż na portalach społecznościowych istnieją grupy spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione niektóre konkurencyjne rozwiązania.
+Na przestrzeni ostatnich kilku lat można zaobserwować systematyczny wzrost zainteresowania tematyką marnowania żywności. Przyczyn tego zjawiska należy upatrywać w coraz wyższym poziomie świadomości ekologicznej polskiego społeczeństwa, bardziej intensywnych działaniach władz i rozmaitych instytucji (w tym Komisji Europejskiej - patrz~\cite{ec}), a~także w licznych publikacjach naukowych na ten temat. Trend ``zero waste'' przejawia się w~bogatej ofercie aplikacji mobilnych pomagających wymieniać się jedzeniem, które inaczej by się zmarnowało. Co ciekawe, w różnych państwach popularność zyskały różne aplikacje. Na~przykład w Wielkiej Brytanii najpopularniejsze jest \textit{Olio}, w Europie Zachodniej - \textit{Too Good To Go}, a w Stanach Zjednoczonych - \textit{Unsung}. W Polsce nie ma jeszcze żadnej rozpoznawalnej aplikacji, chociaż na portalach społecznościowych istnieją grupy spełniające podobną funkcję. W dalszej części tego rozdziału zostaną dokładniej omówione niektóre konkurencyjne rozwiązania.
 
 \section{\textit{Olio}}
 Spośród wymienionych w tym rozdziale aplikacji \textit{Olio} jest koncepcyjnie najbardziej podobne do \textit{Podziel się}. Aplikacja posiada bardzo prosty interfejs, pozwalający już w kilka chwil po zainstalowaniu dodać swoje pierwsze ogłoszenie, czy też znaleźć na liście ogłoszeń (która może być sortowana po odległości lub czasie dodania ogłoszenia) produkt, na który mamy ochotę. \textit{Olio}, tak samo jak \textit{Podziel się}, jest zintegrowane z Mapami Google oraz wykorzystuje lokalizację telefonu (choć można tę opcję wyłączyć). \textit{Olio} udostępnia też proste forum, które uznaliśmy za zbędne w takiej aplikacji, nie daje natomiast możliwości podziału ogłoszeń na kategorie (np.\ wegańskie, bezglutenowe itp.) - w \textit{Olio} specyfikuje się tylko, czy dany produkt jest żywnością, czy nie.
@@ -220,7 +221,7 @@ Jednym z głównych wymogów zamawiającej było stworzenie panelu administracyj
 Do przechowywania danych została wykorzystana relacyjna baza danych PostgreSQL z~wtyczką PostGIS, która pozwala na wydajne wykonywanie zapytań przestrzennych. Zdjęcia przechowywane są w zewnętrznej usłudze Amazon S3.
 
 \subsection{Komunikacja klient - serwer}
-Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłane są w formacie JSON, jest on formatem tekstowym i~bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikatowym tokenem przyznawanym w momencie logowania bądź rejestracji, w związku z tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token.
+Wymiana danych pomiędzy aplikacją mobilną a serwerem odbywa się za pomocą bezstanowego protokołu HTTP. Dane przesyłane są w formacie JSON, jest on formatem tekstowym i~bazuje na podzbiorze języka JavaScript. Każde zapytanie do serwera uwierzytelniane jest unikatowym tokenem przyznawanym w momencie logowania bądź rejestracji, w związku z~tym hasło użytkownika nie jest przechowywane w pamięci telefonu. Przy każdym ponownym logowaniu generowany jest nowy token.
 
 Dane z serwera do urządzenia mobilnego (powiadomienia) wysyłane są natomiast za pośrednictwem usługi Firebase.
 
@@ -278,7 +279,7 @@ Nie udało nam się jedynie zaimplementować dwóch funkcjonalności:
 \item Pierwszą z nich jest logowanie z Facebookiem. Pomimo zapewnień twórców biblioteki o~bezproblemowym działaniu na platformie iOS nie udało nam się odpowiednio jej skonfigurować do działania z naszą aplikacją.
 \item Drugą są powiadomienia. Tak jak wspomnieliśmy we wcześniejszym podrozdziale, wymogiem było posiadanie konta w programie \textit{Apple Developer Program}.
 \end{itemize}
-Wszystkie pozostałe funkcjonalności działają dokładnie tak, jak na systemie firmy Google. W szczególności obie wersje mają identyczny interfejs użytkownika. Różnice są widoczne jedynie w szczegółach charakterystycznych dla danej platformy, na przykład komponentach wyboru daty lub zdjęć z galerii. Na rysunkach: 3.2, 3.3 oraz 3.4 prezentujemy zrzuty tych samych ekranów aplikacji, wykonane odpowiednio na emulatorze Android i symulatorze iPhone. Różnią się one jedynie: wielkością ekranu urządzeń mobilnych oraz godziną i kolejnością ogłoszeń.
+Wszystkie pozostałe funkcjonalności działają dokładnie tak, jak na systemie firmy Google. W~szczególności obie wersje mają identyczny interfejs użytkownika. Różnice są widoczne jedynie w szczegółach charakterystycznych dla danej platformy, na przykład komponentach wyboru daty lub zdjęć z galerii. Na rysunkach: 3.2, 3.3 oraz 3.4 prezentujemy zrzuty tych samych ekranów aplikacji, wykonanych odpowiednio na emulatorze Android i symulatorze iPhone. Różnią się między sobą jedynie wielkością i proporcjami ekranów urządzeń mobilnych oraz wyświetlaną godziną systemową.
 
 \newpage
 \begin{figure}[h!]
@@ -295,7 +296,9 @@ Wszystkie pozostałe funkcjonalności działają dokładnie tak, jak na systemie
     \end{framed}
     \caption{iPhone.}
   \end{subfigure}
-  \caption{Lista ogłoszeń.}
+  \captionsetup{justification=centering}
+  \caption{Lista ogłoszeń.\\
+  Różnice w kolejności prezentowanych ogłoszeń wynikają z odmiennych kryteriów sortowania.}
   \label{fig:offers}
 \end{figure}
 
@@ -515,7 +518,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
     We wszystkich wymienionych poniżej przypadkach na ekranie wyświetla się okienko ze stosownym komunikatem. Użytkownik zostaje przekierowany z powrotem do ekranu edycji formularza, aby mógł wprowadzić zmiany.
     \begin{enumerate}
         \item Użytkownik nie wprowadził kompletu wymaganych informacji.
-        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji (np.\ zbyt mała liczba wskazanych hasztagów)
+        \item Wartości niektórych pól formularza nie spełniają kryteriów akceptacji wskazanych przez zamawiającą (np.\ zbyt mała liczba wybranych hasztagów)
         \item Nastąpił błąd komunikacji z serwerem --- prośba o dodanie ogłoszenia nie została rozpatrzona.
         \item Serwer zasygnalizował błąd podczas operacji dodawania ogłoszenia do bazy danych.
     \end{enumerate}
@@ -617,7 +620,7 @@ Niniejszy rozdział prezentuje kluczowe przypadki użycia aplikacji, ze szczegó
             \item Imię oraz nazwisko użytkownika.
             \item Zdjęcie profilowe.
             \item Licznik osób obserwujących.
-            \item Przycisk ``Obserwuj'' / ``Przestań obserwować''.
+            \item Przycisk ``Obserwuj''/ ``Przestań obserwować''.
             \item Zbiorcza ocena innych użytkowników w skali od 1 do 6.
             \item Sześciogwiazdkowa skala własnej oceny.
             \item Pole tekstowe przeznaczone na wpisanie komentarza.
@@ -733,11 +736,11 @@ W trakcie prac nad projektem głównym kanałem komunikacji był portal Slack. W
 Kod źródłowy programu oraz tekst pracy licencjackiej przechowywane były w serwisie \mbox{GitHub}, który pozwalał także w prosty sposób spisywać i aktualizować listę zadań do zrobienia.
 
 \section{Współpraca z zamawiającą}
-Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie ma doświadczenia w wytwarzaniu oprogramowania, nie wiedziała więc, jakich informacji potrzebujemy. Aby wzajemnie dobrze się porozumieć, często komunikowaliśmy się, szczególniena początku procesu tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co znacząco utrudniło spotkania twarzą w twarz. Udało nam się zorganizować tylko jedno takie spotkanie (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez większych wątpliwości. Przez cały czas staraliśmy się na bieżąco informować zamawiającą o postępach dokonywanych w projekcie, w szczególności udostępnialiśmy aktualne wersje aplikacji, aby upewnić się, że się dobrze rozumiemy. Niestety, w końcowej fazie projektu komunikacja nie była już tak częsta, pomimo wielu próśb, nie dostawaliśmy regularnie opini dotyczących działania aplikacji. Jednakże pomimo trudności związanych z komunikacją, udało nam się stworzyć aplikację zgodną z oczekiwaniami zamawiającej.
+Współpraca z zamawiającą była istotną częścią tego projektu. Pani Maria nie ma doświadczenia w wytwarzaniu oprogramowania, nie wiedziała więc, jakich informacji potrzebujemy. Aby wzajemnie dobrze się porozumieć, prowadziliśmy częste rozmowy, zwłaszcza na początku procesu tworzenia aplikacji. Pani Maria na co dzień mieszka w Londynie, co znacząco utrudniło spotkania ``twarzą w twarz''. Udało nam się zorganizować tylko jedno takie spotkanie (na początku współpracy), ale zaowocowało ono dość dokładnym spisem oczekiwanych funkcjonalności, dzięki któremu dalsza praca przebiegała bez żadnych nieporozumień. Przez cały czas staraliśmy się na bieżąco informować zamawiającą o postępach dokonywanych w projekcie, w szczególności udostępnialiśmy aktualne wersje aplikacji, aby upewnić się, że spełnia oczekiwania pani Marii. Niestety, w końcowej fazie projektu komunikacja nie była już tak częsta: pomimo wielu próśb, przestaliśmy regularnie otrzymywać informację zwrotną dotyczącą działania aplikacji. Jednakże pomimo trudności związanych z komunikacją, udało nam się stworzyć aplikację zgodną z oczekiwaniami zamawiającej.
 
 \section{Organizacja pracy}
 
-Nie korzystaliśmy w bezpośredni sposób z żadnej ze znanych metodyk zarządzania projektami programistycznymi, jednakże trzymaliśmy się kilku istotnych zasad i dobrych praktyk. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się również, aby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu Zespołowy Projekt Programistyczny. Każdy z nas samodzielnie decydował, które zadanie w~danej chwili chce wykonać. Wspólnie zaprojektowaliśmy architekturę aplikacji oraz podejmowaliśmy najważniejsze decyzje dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy, które napotkaliśmy.
+Nie korzystaliśmy w bezpośredni sposób z żadnej ze znanych metodyk zarządzania projektami programistycznymi, jednakże trzymaliśmy się kilku istotnych zasad i dobrych praktyk. Przede wszystkim na bieżąco spisywaliśmy listę rzeczy do zrobienia. Staraliśmy się również, aby zadania były jak najmniejsze. Lista była aktualizowana co tydzień na zajęciach z przedmiotu Zespołowy Projekt Programistyczny. Każdy z nas samodzielnie decydował, które zadanie zechce wykonać jako następne. Wspólnie zaprojektowaliśmy architekturę aplikacji oraz podejmowaliśmy najważniejsze decyzje dotyczące projektu. Na każdych zajęciach staraliśmy się na bieżąco omawiać problemy, które napotkaliśmy.
 
 Co ważne, nie dzieliliśmy zadań na te z części mobilnej i serwerowej. Pojedyncze zadanie dotyczyło najczęściej zaimplementowania jakiejś funkcjonalności, na przykład dodawania zdjęć do ogłoszenia. Osoba odpowiedzialna za zadanie implementowała zarówno część dotyczącą aplikacji mobilnej, jak i serwerowej. W ten sposób mogliśmy znacznie zrównoleglić prace nad projektem (przykładowo, osoba rozwijająca aplikację mobilną nie musiała czekać, aż ktoś inny zrealizuje niezbędną pracę po stronie serwera). Ponadto uniknęliśmy w ten sposób nieporozumień związanych z działaniem nowo napisanego kodu. Co więcej --- każdy z nas, w równym stopniu, nauczył się zarówno tworzenia aplikacji mobilnej we frameworku React Native, jak i realizacji części serwerowej z wykorzystaniem frameworka Django.
 
@@ -801,7 +804,7 @@ W trakcie ostatnich siedmiu miesięcy powstała w pełni funkcjonalna aplikacja 
 
 W trakcie prac nad projektem nauczyliśmy się wielu zagadnień związanych z inżynierią oprogramowania, tworzenia aplikacji mobilnych z wykorzystaniem React Native, implementacji części serwerowej we frameworku Django, integracji ze zewnętrznymi usługami oraz administrowania serwerem aplikacyjnym. Była to dla nas również okazja do rozwinięcia tak zwanych umiejętności miękkich --- pracy w zespole, utrzymywania kontaktu z zamawiającym.
 
-W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia aplikacji do użytku. Niezależnie od tego, czy aplikacja zostanie wdrożona, jesteśmy z niej bardzo zadowoleni. Realizacja tego projektu dała nam wiele satysfakcji.
+Obecnie czekamy na informacje od zamawiającej dotyczące wdrożenia aplikacji do użytku. Niezależnie od tego, czy aplikacja zostanie wdrożona, jesteśmy z niej bardzo zadowoleni. Realizacja tego projektu dała nam wiele satysfakcji.
 
 
 \begin{thebibliography}{99}
@@ -812,6 +815,8 @@ W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia ap
 \bibitem[Eurostat]{eurostat} raport techniczny Komisji Europejskiej z 2010 roku\\\textit{``Preparatory Study on Food Waste Across EU 27''},\\\href{http://ec.europa.eu/environment/eussd/pdf/bio\_foodwaste\_report.pdf}{\texttt{ec.europa.eu/environment/eussd/pdf/bio\_foodwaste\_report.pdf}}
 
 \bibitem[Kantar Millward Brown]{millward-brown}raport Federacji Polskich Banków Żywności \textit{``Nie marnuję jedzenia 2018''} z wynikami badań zrealizowanych przez Kantar Millward Brown,\\\href{http://bzsos.pl/2018/raportu-nie-marnuj-jedzenia-2018}{\texttt{bzsos.pl/2018/raportu-nie-marnuj-jedzenia-2018}}
+
+\bibitem[Główny Urząd Statystyczny]{gus}badanie Głównego Urzędu Statystycznego \textit{``Ubóstwo w Polsce w latach 2015 i 2016''}\\\href{https://stat.gov.pl/obszary-tematyczne/warunki-zycia/ubostwo-pomoc-spoleczna/ubostwo-w-polsce-w-latach-2015-i-2016,1,8.html}{\texttt{stat.gov.pl/obszary-tematyczne/warunki-zycia/ubostwo-pomoc-spoleczna}}
 
 \bibitem[Polityka]{polityka}opracowanie \textit{``Zgubione kalorie. Jak skutecznie walczyć z marnotrawieniem żywności''} dla magazynu Polityka Insight,\\\href{http://politykainsight.pl/gospodarka/ryzykaitrendy/\_resource/multimedium/20145149}{\texttt{politykainsight.pl/gospodarka/ryzykaitrendy/\_resource/multimedium/20145149}}
 
@@ -841,7 +846,7 @@ W chwili obecnej czekamy na informacje od zamawiającej dotyczące wdrożenia ap
 
 \bibitem[Amazon Web Services]{amazonaws} \href{https://aws.amazon.com/}{\texttt{aws.amazon.com}}
 
-\bibitem[Django]{django} \href{https://www.djangoproject.com/}{\texttt{djangoproject.com}}
+\bibitem[Django]{django} oficjalny samouczek Django dostępny na stronie \href{https://www.djangoproject.com/}{\texttt{djangoproject.com}}
 
 \bibitem[Gunicorn]{gunicorn} \href{https://gunicorn.org/}{\texttt{gunicorn.org}}
 
